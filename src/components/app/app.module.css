@@ -5,14 +5,12 @@ html {
 .page {
   box-sizing: border-box;
   background-color: #131316;
-  margin: 0 auto;
-  max-width: 1280px;
   min-height: 100vh;
+  margin: 0 auto;
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
   -moz-text-size-adjust: 100%;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
-  border: 1px solid green;
 }

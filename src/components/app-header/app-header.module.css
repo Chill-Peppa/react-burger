@@ -1,6 +1,12 @@
 .header {
+  width: 100%;
+  background-color: #1c1c21;
+}
+
+.content {
+  max-width: 1280px;
+  margin: 0 auto;
   padding: 16px 0;
-  border: 1px solid red;
   display: flex;
   justify-content: space-between;
   align-items: center;
