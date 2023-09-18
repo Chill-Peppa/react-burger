@@ -1,8 +1,14 @@
 import React from 'react';
-//import appStyles from './app.modules.css';
+import appStyles from './app.module.css';
+
+import AppHeader from '../app-header/app-header';
 
 function App() {
-  return <div className="App"></div>;
+  return (
+    <div className={appStyles.page}>
+      <AppHeader />
+    </div>
+  );
 }
 
 export default App;

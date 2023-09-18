@@ -1,5 +1,5 @@
 import React from 'react';
-//import ingredientsStyle from './burger-ingredients.modules.css';
+//import ingredientsStyles from './burger-ingredients.module.css';
 
 const BurgerIngredients = () => {
   return <div>burger-ingredients</div>;
