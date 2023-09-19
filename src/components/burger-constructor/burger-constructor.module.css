@@ -1,2 +1,44 @@
 .section {
+  border: 1px solid green;
+  max-width: 600px;
+  width: 100%;
+}
+
+/*----------- Тут блок с инфой про ингредиенты --------------*/
+.ingredientContainer {
+  border: 1px solid green;
+  margin-top: 100px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.top {
+  margin-left: 48px;
+}
+
+.main {
+  border: 1px solid blue;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.item {
+  list-style: none;
+  margin-left: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.bottom {
+  border: 1px solid red;
+  margin-left: 48px;
+}
+
+/*--------- Тут блок с итоговым прайсом -----------*/
+.totalContainer {
 }

@@ -1,5 +1,5 @@
 .section {
-  border: 1px solid red;
+  border: 1px solid green;
   max-width: 600px;
   width: 100%;
 }
@@ -15,7 +15,6 @@
 .ingredientsContainer {
   overflow-y: scroll;
   scrollbar-width: 8px;
-  border: 1px solid blue;
   margin-top: 40px;
   max-height: 872px;
 }
@@ -49,7 +48,6 @@
 }
 
 .subtitle {
-  border: 1px solid red;
   margin: 40px 0 24px 0;
 }
 

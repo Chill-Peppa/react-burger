@@ -1,7 +1,7 @@
 .main {
-  border: 1px solid orange;
-  max-width: 1280px;
+  max-width: 1240px;
   margin: 0 auto;
   display: flex;
+  gap: 40px;
   padding-bottom: 40px;
 }

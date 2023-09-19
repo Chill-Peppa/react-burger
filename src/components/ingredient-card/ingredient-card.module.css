@@ -1,9 +1,9 @@
 .card {
-  border: 1px solid green;
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 265px; /*272px*/
+  max-width: 268px;
+  width: 100%;
   row-gap: 8px;
   margin: 0;
   position: relative;

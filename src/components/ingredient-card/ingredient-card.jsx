@@ -5,7 +5,6 @@ import {
   CurrencyIcon,
   Counter,
 } from '@ya.praktikum/react-developer-burger-ui-components';
-//import { burgerData } from '../../utils/data';
 
 const IngredientCard = ({ ingredientData }) => {
   return (
