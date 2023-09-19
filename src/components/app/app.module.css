@@ -1,5 +1,6 @@
 html {
   background-color: #131316;
+  scroll-behavior: smooth;
 }
 
 .page {

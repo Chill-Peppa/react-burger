@@ -1,6 +1,58 @@
 .section {
   border: 1px solid red;
+  max-width: 600px;
+  width: 100%;
 }
 
 .title {
+  margin: 40px 0 20px 0;
+}
+
+.tabContainer {
+  display: flex;
+}
+
+.ingredientsContainer {
+  overflow-y: scroll;
+  scrollbar-width: 8px;
+  border: 1px solid blue;
+  margin-top: 40px;
+  max-height: 872px;
+}
+
+/*------ Тут настройки скролл-бара ---------*/
+
+.ingredientsContainer::-webkit-scrollbar {
+  width: 8px;
+  height: 664px;
+}
+
+.ingredientsContainer::-webkit-scrollbar-thumb {
+  height: 492px;
+  background: #8585ad;
+}
+
+.ingredientsContainer::-webkit-scrollbar-track {
+  height: 664px;
+  background: #2f2f37;
+}
+
+/*-------------------------------------------*/
+
+.ingredientsList {
+  list-style: none;
+  padding: 0 16px 0 16px;
+  margin: 0;
+  display: flex;
+  gap: 32px 24px;
+  flex-wrap: wrap;
+}
+
+.subtitle {
+  border: 1px solid red;
+  margin: 40px 0 24px 0;
+}
+
+.subtitle:first-of-type {
+  margin: 0 0 24px 0;
 }
