@@ -4,6 +4,8 @@ import constructorStyles from './burger-constructor.module.css';
 import {
   ConstructorElement,
   DragIcon,
+  CurrencyIcon,
+  Button,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import { burgerData } from '../../utils/data';
 
@@ -21,7 +23,6 @@ const BurgerConstructor = () => {
           />
         </div>
 
-        {/* тут надо начинку вставить */}
         <ul className={constructorStyles.main}>
           {burgerData.map((ingredient) => (
             <li key={ingredient._id} className={constructorStyles.item}>
@@ -46,7 +47,15 @@ const BurgerConstructor = () => {
         </div>
       </div>
 
-      <div className={constructorStyles.totalContainer}></div>
+      <div className={constructorStyles.total}>
+        <div className={constructorStyles.totalContainer}>
+          <span className="text text_type_main-large">123</span>
+          <CurrencyIcon type="primary" />
+        </div>
+        <Button htmlType="button" type="primary" size="medium">
+          Оформить заказ
+        </Button>
+      </div>
     </section>
   );
 };

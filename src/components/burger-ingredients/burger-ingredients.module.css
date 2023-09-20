@@ -1,5 +1,4 @@
 .section {
-  border: 1px solid green;
   max-width: 600px;
   width: 100%;
 }
@@ -16,7 +15,24 @@
   overflow-y: scroll;
   scrollbar-width: 8px;
   margin-top: 40px;
-  max-height: 872px;
+  max-height: 716px;
+}
+
+.ingredientsList {
+  list-style: none;
+  padding: 0 16px 0 16px;
+  margin: 0;
+  display: flex;
+  gap: 32px 24px;
+  flex-wrap: wrap;
+}
+
+.subtitle {
+  margin: 40px 0 24px 0;
+}
+
+.subtitle:first-of-type {
+  margin: 0 0 24px 0;
 }
 
 /*------ Тут настройки скролл-бара ---------*/
@@ -34,23 +50,4 @@
 .ingredientsContainer::-webkit-scrollbar-track {
   height: 664px;
   background: #2f2f37;
-}
-
-/*-------------------------------------------*/
-
-.ingredientsList {
-  list-style: none;
-  padding: 0 16px 0 16px;
-  margin: 0;
-  display: flex;
-  gap: 32px 24px;
-  flex-wrap: wrap;
-}
-
-.subtitle {
-  margin: 40px 0 24px 0;
-}
-
-.subtitle:first-of-type {
-  margin: 0 0 24px 0;
 }
