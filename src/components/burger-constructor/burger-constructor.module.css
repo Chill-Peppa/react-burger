@@ -51,11 +51,7 @@
   gap: 8px;
 }
 
-.totalPrice {
-}
-
 /*------ Тут настройки скролл-бара ---------*/
-
 .main::-webkit-scrollbar {
   width: 8px;
   height: 464px;

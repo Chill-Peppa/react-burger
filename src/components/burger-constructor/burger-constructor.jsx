@@ -10,6 +10,10 @@ import {
 import { burgerData } from '../../utils/data';
 
 const BurgerConstructor = () => {
+  const totalPrice = burgerData.reduce((prevItem, item) => {
+    return prevItem + item.price;
+  }, 0);
+
   return (
     <section className={constructorStyles.section}>
       <div className={constructorStyles.ingredientContainer}>
@@ -49,7 +53,7 @@ const BurgerConstructor = () => {
 
       <div className={constructorStyles.total}>
         <div className={constructorStyles.totalContainer}>
-          <span className="text text_type_main-large">123</span>
+          <span className="text text_type_main-large">{totalPrice}</span>
           <CurrencyIcon type="primary" />
         </div>
         <Button htmlType="button" type="primary" size="medium">
