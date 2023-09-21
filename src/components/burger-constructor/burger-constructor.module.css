@@ -1,0 +1,68 @@
+.section {
+  max-width: 600px;
+  width: 100%;
+}
+
+/*----------- Ингредиенты --------------*/
+.ingredientContainer {
+  margin-top: 100px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.top {
+  margin-left: 48px;
+}
+
+.main {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-height: 464px;
+  overflow-y: scroll;
+}
+
+.item {
+  list-style: none;
+  margin-left: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.bottom {
+  margin-left: 48px;
+}
+
+/*--------- Итоговый прайс -----------*/
+.total {
+  margin-top: 40px;
+  display: flex;
+  gap: 40px;
+  justify-content: flex-end;
+}
+
+.totalContainer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/*------ Тут настройки скролл-бара ---------*/
+.main::-webkit-scrollbar {
+  width: 8px;
+  height: 464px;
+}
+
+.main::-webkit-scrollbar-thumb {
+  height: 292px;
+  background: #8585ad;
+}
+
+.main::-webkit-scrollbar-track {
+  height: 464px;
+  background: #2f2f37;
+}

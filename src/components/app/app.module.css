@@ -1,0 +1,17 @@
+html {
+  background-color: #131316;
+  scroll-behavior: smooth;
+}
+
+.page {
+  box-sizing: border-box;
+  background-color: #131316;
+  min-height: 100vh;
+  margin: 0 auto;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
