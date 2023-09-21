@@ -4,9 +4,20 @@ import IngredientCard from '../ingredient-card/ingredient-card';
 
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import { burgerData } from '../../utils/data';
+import { tabs } from '../../utils/constants';
 
 const BurgerIngredients = () => {
-  const [current, setCurrent] = React.useState('one');
+  const [current, setCurrent] = React.useState('bun');
+
+  const bunArray = burgerData.filter((ingredient) => ingredient.type === 'bun');
+
+  const sauceArray = burgerData.filter(
+    (ingredient) => ingredient.type === 'sauce',
+  );
+
+  const mainIngredientsArray = burgerData.filter(
+    (ingredient) => ingredient.type === 'main',
+  );
 
   return (
     <section className={ingredientsStyles.section}>
@@ -15,13 +26,22 @@ const BurgerIngredients = () => {
       </h1>
 
       <div className={ingredientsStyles.tabContainer}>
-        <Tab value="one" active={current === 'one'} onClick={setCurrent}>
+        <Tab
+          value="bun"
+          active={current === `${tabs.BUN}`}
+          onClick={setCurrent}>
           Булки
         </Tab>
-        <Tab value="two" active={current === 'two'} onClick={setCurrent}>
+        <Tab
+          value="sauce"
+          active={current === `${tabs.SAUCE}`}
+          onClick={setCurrent}>
           Соусы
         </Tab>
-        <Tab value="three" active={current === 'three'} onClick={setCurrent}>
+        <Tab
+          value="main"
+          active={current === `${tabs.MAIN}`}
+          onClick={setCurrent}>
           Начинки
         </Tab>
       </div>
@@ -32,7 +52,7 @@ const BurgerIngredients = () => {
           Булки
         </h2>
         <ul className={ingredientsStyles.ingredientsList}>
-          {burgerData.map(
+          {bunArray.map(
             (ingredient) =>
               ingredient.type === 'bun' && (
                 <IngredientCard
@@ -48,7 +68,7 @@ const BurgerIngredients = () => {
           Соусы
         </h2>
         <ul className={ingredientsStyles.ingredientsList}>
-          {burgerData.map(
+          {sauceArray.map(
             (ingredient) =>
               ingredient.type === 'sauce' && (
                 <IngredientCard
@@ -64,7 +84,7 @@ const BurgerIngredients = () => {
           Начинки
         </h2>
         <ul className={ingredientsStyles.ingredientsList}>
-          {burgerData.map(
+          {mainIngredientsArray.map(
             (ingredient) =>
               ingredient.type === 'main' && (
                 <IngredientCard
