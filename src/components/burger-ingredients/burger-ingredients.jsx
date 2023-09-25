@@ -1,5 +1,5 @@
 import React from 'react';
-import ingredientsStyles from './burger-ingredients.module.css';
+import styles from './burger-ingredients.module.css';
 import IngredientCard from '../ingredient-card/ingredient-card';
 
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
@@ -9,52 +9,53 @@ import { tabs } from '../../utils/constants';
 const BurgerIngredients = () => {
   const [current, setCurrent] = React.useState('bun');
 
-  const bunArray = burgerData.filter((ingredient) => ingredient.type === 'bun');
+  const bunArray = burgerData.filter(
+    (ingredient) => ingredient.type === `${tabs.BUN}`,
+  );
 
   const sauceArray = burgerData.filter(
-    (ingredient) => ingredient.type === 'sauce',
+    (ingredient) => ingredient.type === `${tabs.SAUCE}`,
   );
 
   const mainIngredientsArray = burgerData.filter(
-    (ingredient) => ingredient.type === 'main',
+    (ingredient) => ingredient.type === `${tabs.MAIN}`,
   );
 
   return (
-    <section className={ingredientsStyles.section}>
-      <h1 className={`${ingredientsStyles.title} text text_type_main-large`}>
+    <section className={styles.section}>
+      <h1 className={`${styles.title} text text_type_main-large`}>
         Соберите бургер
       </h1>
 
-      <div className={ingredientsStyles.tabContainer}>
+      <div className={styles.tabContainer}>
         <Tab
-          value="bun"
+          value={tabs.BUN}
           active={current === `${tabs.BUN}`}
           onClick={setCurrent}>
           Булки
         </Tab>
         <Tab
-          value="sauce"
+          value={tabs.SAUCE}
           active={current === `${tabs.SAUCE}`}
           onClick={setCurrent}>
           Соусы
         </Tab>
         <Tab
-          value="main"
+          value={tabs.MAIN}
           active={current === `${tabs.MAIN}`}
           onClick={setCurrent}>
           Начинки
         </Tab>
       </div>
 
-      <div className={ingredientsStyles.ingredientsContainer}>
-        <h2
-          className={`${ingredientsStyles.subtitle} text text_type_main-medium`}>
+      <div className={styles.ingredientsContainer}>
+        <h2 className={`${styles.subtitle} text text_type_main-medium`}>
           Булки
         </h2>
-        <ul className={ingredientsStyles.ingredientsList}>
+        <ul className={styles.ingredientsList}>
           {bunArray.map(
             (ingredient) =>
-              ingredient.type === 'bun' && (
+              ingredient.type === `${tabs.BUN}` && (
                 <IngredientCard
                   key={ingredient._id}
                   ingredientData={ingredient}
@@ -63,14 +64,13 @@ const BurgerIngredients = () => {
           )}
         </ul>
 
-        <h2
-          className={`${ingredientsStyles.subtitle} text text_type_main-medium`}>
+        <h2 className={`${styles.subtitle} text text_type_main-medium`}>
           Соусы
         </h2>
-        <ul className={ingredientsStyles.ingredientsList}>
+        <ul className={styles.ingredientsList}>
           {sauceArray.map(
             (ingredient) =>
-              ingredient.type === 'sauce' && (
+              ingredient.type === `${tabs.SAUCE}` && (
                 <IngredientCard
                   key={ingredient._id}
                   ingredientData={ingredient}
@@ -79,14 +79,13 @@ const BurgerIngredients = () => {
           )}
         </ul>
 
-        <h2
-          className={`${ingredientsStyles.subtitle} text text_type_main-medium`}>
+        <h2 className={`${styles.subtitle} text text_type_main-medium`}>
           Начинки
         </h2>
-        <ul className={ingredientsStyles.ingredientsList}>
+        <ul className={styles.ingredientsList}>
           {mainIngredientsArray.map(
             (ingredient) =>
-              ingredient.type === 'main' && (
+              ingredient.type === `${tabs.MAIN}` && (
                 <IngredientCard
                   key={ingredient._id}
                   ingredientData={ingredient}

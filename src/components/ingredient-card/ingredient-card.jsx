@@ -1,5 +1,5 @@
 import React from 'react';
-import cardStyles from './ingredient-card.module.css';
+import styles from './ingredient-card.module.css';
 
 import {
   CurrencyIcon,
@@ -9,19 +9,19 @@ import PropTypes from 'prop-types';
 
 const IngredientCard = ({ ingredientData }) => {
   return (
-    <li className={cardStyles.card}>
+    <li className={styles.card}>
       <img
-        className={cardStyles.image}
+        className={styles.image}
         src={ingredientData.image}
         alt={ingredientData.name}
       />
-      <div className={cardStyles.priceContainer}>
+      <div className={styles.priceContainer}>
         <span className="text text_type_digits-default">
           {ingredientData.price}
         </span>
         <CurrencyIcon type="primary" />
       </div>
-      <p className={`${cardStyles.name} text text_type_main-default`}>
+      <p className={`${styles.name} text text_type_main-default`}>
         {ingredientData.name}
       </p>
       <Counter count={3} size="default" />

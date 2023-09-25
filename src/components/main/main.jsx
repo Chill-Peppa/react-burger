@@ -1,12 +1,12 @@
 import React from 'react';
-import mainStyles from './main.module.css';
+import styles from './main.module.css';
 
 import BurgerIngredients from '../burger-ingredients/burger-ingredients';
 import BurgerConstructor from '../burger-constructor/burger-constructor';
 
 const Main = () => {
   return (
-    <main className={mainStyles.main}>
+    <main className={styles.main}>
       <BurgerIngredients />
       <BurgerConstructor />
     </main>
