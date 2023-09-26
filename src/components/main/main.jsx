@@ -4,11 +4,11 @@ import styles from './main.module.css';
 import BurgerIngredients from '../burger-ingredients/burger-ingredients';
 import BurgerConstructor from '../burger-constructor/burger-constructor';
 
-const Main = () => {
+const Main = ({ onIngredientOpen, onOrderOpen }) => {
   return (
     <main className={styles.main}>
-      <BurgerIngredients />
-      <BurgerConstructor />
+      <BurgerIngredients onIngredientOpen={onIngredientOpen} />
+      <BurgerConstructor onOrderOpen={onOrderOpen} />
     </main>
   );
 };

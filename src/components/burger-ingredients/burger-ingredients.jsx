@@ -6,7 +6,7 @@ import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import { burgerData } from '../../utils/data';
 import { tabs } from '../../utils/constants';
 
-const BurgerIngredients = () => {
+const BurgerIngredients = ({ onIngredientOpen }) => {
   const [current, setCurrent] = React.useState('bun');
 
   const bunArray = burgerData.filter(
@@ -59,6 +59,7 @@ const BurgerIngredients = () => {
                 <IngredientCard
                   key={ingredient._id}
                   ingredientData={ingredient}
+                  onIngredientOpen={onIngredientOpen}
                 />
               ),
           )}
