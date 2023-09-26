@@ -9,7 +9,7 @@ const Modal = ({ title, children }) => {
     <ModalOverlay>
       <div className={styles.container}>
         <div className={styles.headerContainer}>
-          <h2 className="text text_type_main-large">Заголовок</h2>
+          <h2 className="text text_type_main-large">{title}</h2>
           <button type="button" className={styles.close}>
             <CloseIcon type="primary" />
           </button>
