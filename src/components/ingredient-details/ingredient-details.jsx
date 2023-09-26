@@ -4,9 +4,9 @@ import styles from './ingredient-details.module.css';
 import Modal from '../modal/modal';
 import logo from '../../images/done.svg';
 
-const IngredientDetails = () => {
+const IngredientDetails = ({ setOpen }) => {
   return (
-    <Modal title="Детали ингредиента">
+    <Modal setOpen={setOpen} title="Детали ингредиента">
       <div className={styles.ingredientDetails}>
         <img className={styles.image} src={logo} alt="Ингредиент" />
         <p className="text text_type_main-medium mt-4 mb-8">

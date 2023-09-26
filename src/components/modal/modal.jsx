@@ -5,15 +5,31 @@ import styles from './modal.module.css';
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import ModalOverlay from '../modal-overlay/modal-overlay';
 
-const Modal = ({ title, children }) => {
+const Modal = ({ title, children, setOpen }) => {
   const modalRoot = document.getElementById('react-modals');
+
+  const onClose = React.useCallback(() => {
+    setOpen(false);
+  }, [setOpen]);
+
+  //для закрытия по esc
+  React.useEffect(() => {
+    const closeByEsc = (e) => {
+      if (e.keyCode === 27) {
+        onClose();
+      }
+    };
+
+    window.addEventListener('keydown', closeByEsc);
+    return () => window.removeEventListener('keydown', closeByEsc);
+  }, [onClose]);
 
   return ReactDOM.createPortal(
     <ModalOverlay>
       <div className={styles.container}>
         <div className={styles.headerContainer}>
           <h2 className="text text_type_main-large">{title}</h2>
-          <button type="button" className={styles.close}>
+          <button type="button" className={styles.close} onClick={onClose}>
             <CloseIcon type="primary" />
           </button>
         </div>

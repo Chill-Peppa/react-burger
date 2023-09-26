@@ -9,7 +9,7 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import { burgerData } from '../../utils/data';
 
-const BurgerConstructor = () => {
+const BurgerConstructor = ({ onOrderOpen }) => {
   const totalPrice = burgerData.reduce((prevItem, item) => {
     return prevItem + item.price;
   }, 0);
@@ -56,7 +56,11 @@ const BurgerConstructor = () => {
           <span className="text text_type_main-large">{totalPrice}</span>
           <CurrencyIcon type="primary" />
         </div>
-        <Button htmlType="button" type="primary" size="medium">
+        <Button
+          htmlType="button"
+          type="primary"
+          size="medium"
+          onClick={onOrderOpen}>
           Оформить заказ
         </Button>
       </div>

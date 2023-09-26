@@ -29,8 +29,10 @@ function App() {
         onIngredientOpen={onOpenIngredientModal}
       />
 
-      {isOpenOrderModal && <OrderDetails />}
-      {isOpenIngredientModal && <IngredientDetails />}
+      {isOpenIngredientModal && (
+        <IngredientDetails setOpen={setIsOpenIngredientModal} />
+      )}
+      {isOpenOrderModal && <OrderDetails setOpen={setIsOpenOrderModal} />}
     </div>
   );
 }
