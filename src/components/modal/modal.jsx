@@ -25,7 +25,7 @@ const Modal = ({ title, children, setOpen }) => {
   }, [onClose]);
 
   return ReactDOM.createPortal(
-    <ModalOverlay>
+    <ModalOverlay onCloseOverlay={onClose}>
       <div className={styles.container}>
         <div className={styles.headerContainer}>
           <h2 className="text text_type_main-large">{title}</h2>
