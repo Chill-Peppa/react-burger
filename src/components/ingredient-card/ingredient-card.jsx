@@ -7,9 +7,9 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import PropTypes from 'prop-types';
 
-const IngredientCard = ({ ingredientData }) => {
+const IngredientCard = ({ ingredientData, onIngredientOpen }) => {
   return (
-    <li className={styles.card}>
+    <li className={styles.card} onClick={onIngredientOpen}>
       <img
         className={styles.image}
         src={ingredientData.image}

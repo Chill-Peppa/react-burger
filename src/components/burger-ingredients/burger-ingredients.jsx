@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './burger-ingredients.module.css';
-import IngredientCard from '../ingredient-card/ingredient-card';
+import IngredientCardList from '../ingredient-card-list/ingredient-card-list';
 
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import { burgerData } from '../../utils/data';
@@ -49,51 +49,24 @@ const BurgerIngredients = ({ onIngredientOpen }) => {
       </div>
 
       <div className={styles.ingredientsContainer}>
-        <h2 className={`${styles.subtitle} text text_type_main-medium`}>
-          Булки
-        </h2>
-        <ul className={styles.ingredientsList}>
-          {bunArray.map(
-            (ingredient) =>
-              ingredient.type === `${tabs.BUN}` && (
-                <IngredientCard
-                  key={ingredient._id}
-                  ingredientData={ingredient}
-                  onIngredientOpen={onIngredientOpen}
-                />
-              ),
-          )}
-        </ul>
-
-        <h2 className={`${styles.subtitle} text text_type_main-medium`}>
-          Соусы
-        </h2>
-        <ul className={styles.ingredientsList}>
-          {sauceArray.map(
-            (ingredient) =>
-              ingredient.type === `${tabs.SAUCE}` && (
-                <IngredientCard
-                  key={ingredient._id}
-                  ingredientData={ingredient}
-                />
-              ),
-          )}
-        </ul>
-
-        <h2 className={`${styles.subtitle} text text_type_main-medium`}>
-          Начинки
-        </h2>
-        <ul className={styles.ingredientsList}>
-          {mainIngredientsArray.map(
-            (ingredient) =>
-              ingredient.type === `${tabs.MAIN}` && (
-                <IngredientCard
-                  key={ingredient._id}
-                  ingredientData={ingredient}
-                />
-              ),
-          )}
-        </ul>
+        <IngredientCardList
+          title="Булки"
+          ingredientsArray={bunArray}
+          typeIngredient={`${tabs.BUN}`}
+          onIngredientOpen={onIngredientOpen}
+        />
+        <IngredientCardList
+          title="Соусы"
+          ingredientsArray={sauceArray}
+          typeIngredient={`${tabs.SAUCE}`}
+          onIngredientOpen={onIngredientOpen}
+        />
+        <IngredientCardList
+          title="Начинки"
+          ingredientsArray={mainIngredientsArray}
+          typeIngredient={`${tabs.MAIN}`}
+          onIngredientOpen={onIngredientOpen}
+        />
       </div>
     </section>
   );
