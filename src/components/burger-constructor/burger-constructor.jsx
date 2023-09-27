@@ -7,10 +7,12 @@ import {
   CurrencyIcon,
   Button,
 } from '@ya.praktikum/react-developer-burger-ui-components';
-import { burgerData } from '../../utils/data';
+// import { burgerData } from '../../utils/data';
 
-const BurgerConstructor = ({ onOrderOpen }) => {
-  const totalPrice = burgerData.reduce((prevItem, item) => {
+const BurgerConstructor = ({ onOrderOpen, ingredientsData }) => {
+  console.log(ingredientsData);
+
+  const totalPrice = ingredientsData.reduce((prevItem, item) => {
     return prevItem + item.price;
   }, 0);
 
@@ -21,14 +23,14 @@ const BurgerConstructor = ({ onOrderOpen }) => {
           <ConstructorElement
             type="top"
             isLocked={true}
-            text={`${burgerData[0].name} (верх)`}
-            price={burgerData[0].price}
-            thumbnail={burgerData[0].image}
+            text={`${ingredientsData[0].name} (верх)`}
+            price={ingredientsData[0].price}
+            thumbnail={ingredientsData[0].image}
           />
         </div>
 
         <ul className={styles.main}>
-          {burgerData.map((ingredient) => (
+          {ingredientsData.map((ingredient) => (
             <li key={ingredient._id} className={styles.item}>
               <DragIcon type="primary" />
               <ConstructorElement
@@ -44,9 +46,9 @@ const BurgerConstructor = ({ onOrderOpen }) => {
           <ConstructorElement
             type="bottom"
             isLocked={true}
-            text={`${burgerData[burgerData.length - 1].name} (низ)`}
-            price={burgerData[burgerData.length - 1].price}
-            thumbnail={burgerData[burgerData.length - 1].image}
+            text={`${ingredientsData[ingredientsData.length - 1].name} (низ)`}
+            price={ingredientsData[ingredientsData.length - 1].price}
+            thumbnail={ingredientsData[ingredientsData.length - 1].image}
           />
         </div>
       </div>

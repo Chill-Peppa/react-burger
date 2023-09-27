@@ -47,11 +47,13 @@ function App() {
   return (
     <div className={styles.page}>
       <AppHeader />
-      <Main
-        ingredientsData={ingredients}
-        onOrderOpen={onOpenOrderModal}
-        onIngredientOpen={onOpenIngredientModal}
-      />
+      {ingredients.length > 0 && (
+        <Main
+          ingredientsData={ingredients}
+          onOrderOpen={onOpenOrderModal}
+          onIngredientOpen={onOpenIngredientModal}
+        />
+      )}
 
       {isOpenIngredientModal && (
         <IngredientDetails setOpen={setIsOpenIngredientModal} />
