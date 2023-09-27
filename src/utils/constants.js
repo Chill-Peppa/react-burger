@@ -4,3 +4,5 @@ export const tabs = {
   SAUCE: 'sauce',
   MAIN: 'main',
 };
+
+export const BASE_URL = 'https://norma.nomoreparties.space';

@@ -3,21 +3,20 @@ import styles from './burger-ingredients.module.css';
 import IngredientCardList from '../ingredient-card-list/ingredient-card-list';
 
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
-import { burgerData } from '../../utils/data';
 import { tabs } from '../../utils/constants';
 
-const BurgerIngredients = ({ onIngredientOpen }) => {
+const BurgerIngredients = ({ onIngredientOpen, ingredientsData }) => {
   const [current, setCurrent] = React.useState('bun');
 
-  const bunArray = burgerData.filter(
+  const bunArray = ingredientsData.filter(
     (ingredient) => ingredient.type === `${tabs.BUN}`,
   );
 
-  const sauceArray = burgerData.filter(
+  const sauceArray = ingredientsData.filter(
     (ingredient) => ingredient.type === `${tabs.SAUCE}`,
   );
 
-  const mainIngredientsArray = burgerData.filter(
+  const mainIngredientsArray = ingredientsData.filter(
     (ingredient) => ingredient.type === `${tabs.MAIN}`,
   );
 
