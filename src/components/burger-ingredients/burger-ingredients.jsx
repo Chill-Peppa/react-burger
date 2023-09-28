@@ -1,9 +1,10 @@
 import React from 'react';
 import styles from './burger-ingredients.module.css';
-import IngredientCardList from '../ingredient-card-list/ingredient-card-list';
-
+import PropTypes from 'prop-types';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
-import { tabs } from '../../utils/constants';
+import { tabs, ingredientsDataType } from '../../utils/constants';
+
+import IngredientCardList from '../ingredient-card-list/ingredient-card-list';
 
 const BurgerIngredients = ({
   onIngredientOpen,
@@ -76,6 +77,12 @@ const BurgerIngredients = ({
       </div>
     </section>
   );
+};
+
+BurgerIngredients.propTypes = {
+  onIngredientOpen: PropTypes.func.isRequired,
+  onIngredientClick: PropTypes.func.isRequired,
+  ingredientsData: PropTypes.arrayOf(ingredientsDataType.isRequired).isRequired,
 };
 
 export default BurgerIngredients;

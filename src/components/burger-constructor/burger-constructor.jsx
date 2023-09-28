@@ -1,5 +1,7 @@
 import React from 'react';
 import styles from './burger-constructor.module.css';
+import PropTypes from 'prop-types';
+import { ingredientsDataType } from '../../utils/constants';
 
 import {
   ConstructorElement,
@@ -7,7 +9,6 @@ import {
   CurrencyIcon,
   Button,
 } from '@ya.praktikum/react-developer-burger-ui-components';
-// import { burgerData } from '../../utils/data';
 
 const BurgerConstructor = ({ onOrderOpen, ingredientsData }) => {
   console.log(ingredientsData);
@@ -46,9 +47,9 @@ const BurgerConstructor = ({ onOrderOpen, ingredientsData }) => {
           <ConstructorElement
             type="bottom"
             isLocked={true}
-            text={`${ingredientsData[ingredientsData.length - 1].name} (низ)`}
-            price={ingredientsData[ingredientsData.length - 1].price}
-            thumbnail={ingredientsData[ingredientsData.length - 1].image}
+            text={`${ingredientsData[7].name} (низ)`}
+            price={ingredientsData[7].price}
+            thumbnail={ingredientsData[7].image}
           />
         </div>
       </div>
@@ -68,6 +69,11 @@ const BurgerConstructor = ({ onOrderOpen, ingredientsData }) => {
       </div>
     </section>
   );
+};
+
+BurgerConstructor.propTypes = {
+  onOrderOpen: PropTypes.func.isRequired,
+  ingredientsData: PropTypes.arrayOf(ingredientsDataType.isRequired).isRequired,
 };
 
 export default BurgerConstructor;

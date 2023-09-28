@@ -14,7 +14,6 @@ function App() {
   const [isOpenIngredientModal, setIsOpenIngredientModal] =
     React.useState(false);
   const [isOpenOrderModal, setIsOpenOrderModal] = React.useState(false);
-  //выбрали ингредиент
   const [selectedIngredient, setSelectedIngredient] = React.useState({});
 
   /*------------------ API --------------------*/
@@ -35,22 +34,20 @@ function App() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const handleOpenIngredientModal = () => {
+    setIsOpenIngredientModal(true);
+  };
+
+  const handleOpenOrderModal = () => {
+    setIsOpenOrderModal(true);
+  };
+
   const handleIngredientClick = (ingredient) => {
     setIsOpenIngredientModal(true);
     setSelectedIngredient(ingredient);
   };
 
-  //Открытие попапа IngredientDetails
-  const handleOpenIngredientModal = () => {
-    setIsOpenIngredientModal(true);
-  };
-
-  //Открытие попапа OrderDetails
-  const handleOpenOrderModal = () => {
-    setIsOpenOrderModal(true);
-  };
-
-  //закрытие всех модалок
+  //Закрытие всех модалок
   const handleCloseAllModals = () => {
     setIsOpenIngredientModal(false);
     setIsOpenOrderModal(false);

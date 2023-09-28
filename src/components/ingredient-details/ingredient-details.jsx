@@ -1,5 +1,7 @@
 import React from 'react';
 import styles from './ingredient-details.module.css';
+import PropTypes from 'prop-types';
+import { ingredientsDataType } from '../../utils/constants';
 
 import Modal from '../modal/modal';
 
@@ -53,6 +55,11 @@ const IngredientDetails = ({ onClose, ingredient }) => {
       </div>
     </Modal>
   );
+};
+
+IngredientDetails.propTypes = {
+  onClose: PropTypes.func.isRequired,
+  ingredient: ingredientsDataType.isRequired,
 };
 
 export default IngredientDetails;

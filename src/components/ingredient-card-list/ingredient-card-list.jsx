@@ -1,5 +1,7 @@
 import React from 'react';
 import styles from './ingredient-card-list.module.css';
+import PropTypes from 'prop-types';
+import { ingredientsDataType } from '../../utils/constants';
 
 import IngredientCard from '../ingredient-card/ingredient-card';
 
@@ -22,7 +24,6 @@ const IngredientCardList = ({
               <IngredientCard
                 key={ingredient._id}
                 ingredient={ingredient}
-                ingredientData={ingredient}
                 onIngredientOpen={onIngredientOpen}
                 onIngredientClick={onIngredientClick}
               />
@@ -31,6 +32,15 @@ const IngredientCardList = ({
       </ul>
     </>
   );
+};
+
+IngredientCardList.propTypes = {
+  title: PropTypes.string.isRequired,
+  typeIngredient: PropTypes.string.isRequired,
+  onIngredientOpen: PropTypes.func.isRequired,
+  onIngredientClick: PropTypes.func.isRequired,
+  ingredientsArray: PropTypes.arrayOf(ingredientsDataType.isRequired)
+    .isRequired,
 };
 
 export default IngredientCardList;

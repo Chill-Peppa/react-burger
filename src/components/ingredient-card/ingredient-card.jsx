@@ -1,11 +1,12 @@
 import React from 'react';
 import styles from './ingredient-card.module.css';
+import PropTypes from 'prop-types';
+import { ingredientsDataType } from '../../utils/constants';
 
 import {
   CurrencyIcon,
   Counter,
 } from '@ya.praktikum/react-developer-burger-ui-components';
-import PropTypes from 'prop-types';
 
 const IngredientCard = ({
   onIngredientOpen,
@@ -40,11 +41,9 @@ const IngredientCard = ({
 };
 
 IngredientCard.propTypes = {
-  ingredientData: PropTypes.shape({
-    image: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-  }),
+  ingredient: ingredientsDataType.isRequired,
+  onIngredientOpen: PropTypes.func.isRequired,
+  onIngredientClick: PropTypes.func.isRequired,
 };
 
 export default IngredientCard;

@@ -1,7 +1,8 @@
 import React from 'react';
 import styles from './order-details.module.css';
-
 import done from '../../images/done.svg';
+import PropTypes from 'prop-types';
+
 import Modal from '../modal/modal';
 
 const OrderDetails = ({ onClose }) => {
@@ -22,6 +23,10 @@ const OrderDetails = ({ onClose }) => {
       </div>
     </Modal>
   );
+};
+
+OrderDetails.propTypes = {
+  onClose: PropTypes.func.isRequired,
 };
 
 export default OrderDetails;
