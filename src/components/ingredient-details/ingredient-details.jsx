@@ -2,15 +2,18 @@ import React from 'react';
 import styles from './ingredient-details.module.css';
 
 import Modal from '../modal/modal';
-import logo from '../../images/done.svg';
 
-const IngredientDetails = ({ setOpen }) => {
+const IngredientDetails = ({ onClose, ingredient }) => {
   return (
-    <Modal setOpen={setOpen} title="Детали ингредиента">
+    <Modal onClose={onClose} title="Детали ингредиента">
       <div className={styles.ingredientDetails}>
-        <img className={styles.image} src={logo} alt="Ингредиент" />
+        <img
+          className={styles.image}
+          src={ingredient.image_large}
+          alt="Ингредиент"
+        />
         <p className="text text_type_main-medium mt-4 mb-8">
-          Биокотлета из марсианской магнолии
+          {ingredient.name}
         </p>
 
         <ul className={styles.propertiesContainer}>
@@ -19,7 +22,7 @@ const IngredientDetails = ({ setOpen }) => {
               Калории,ккал
             </span>
             <span className="text text_type_digits-default text_color_inactive">
-              244,4
+              {ingredient.calories}
             </span>
           </li>
           <li className={styles.property}>
@@ -27,7 +30,7 @@ const IngredientDetails = ({ setOpen }) => {
               Белки,г
             </span>
             <span className="text text_type_digits-default text_color_inactive">
-              12,2
+              {ingredient.proteins}
             </span>
           </li>
           <li className={styles.property}>
@@ -35,7 +38,7 @@ const IngredientDetails = ({ setOpen }) => {
               Жиры,г
             </span>
             <span className="text text_type_digits-default text_color_inactive">
-              17,2
+              {ingredient.fat}
             </span>
           </li>
           <li className={styles.property}>
@@ -43,7 +46,7 @@ const IngredientDetails = ({ setOpen }) => {
               Углеводы,г
             </span>
             <span className="text text_type_digits-default text_color_inactive">
-              10,2
+              {ingredient.carbohydrates}
             </span>
           </li>
         </ul>

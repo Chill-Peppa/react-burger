@@ -5,7 +5,11 @@ import IngredientCardList from '../ingredient-card-list/ingredient-card-list';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import { tabs } from '../../utils/constants';
 
-const BurgerIngredients = ({ onIngredientOpen, ingredientsData }) => {
+const BurgerIngredients = ({
+  onIngredientOpen,
+  ingredientsData,
+  onIngredientClick,
+}) => {
   const [current, setCurrent] = React.useState('bun');
 
   const bunArray = ingredientsData.filter(
@@ -53,18 +57,21 @@ const BurgerIngredients = ({ onIngredientOpen, ingredientsData }) => {
           ingredientsArray={bunArray}
           typeIngredient={`${tabs.BUN}`}
           onIngredientOpen={onIngredientOpen}
+          onIngredientClick={onIngredientClick}
         />
         <IngredientCardList
           title="Соусы"
           ingredientsArray={sauceArray}
           typeIngredient={`${tabs.SAUCE}`}
           onIngredientOpen={onIngredientOpen}
+          onIngredientClick={onIngredientClick}
         />
         <IngredientCardList
           title="Начинки"
           ingredientsArray={mainIngredientsArray}
           typeIngredient={`${tabs.MAIN}`}
           onIngredientOpen={onIngredientOpen}
+          onIngredientClick={onIngredientClick}
         />
       </div>
     </section>

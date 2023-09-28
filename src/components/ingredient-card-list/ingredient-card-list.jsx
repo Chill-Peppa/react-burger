@@ -8,6 +8,7 @@ const IngredientCardList = ({
   ingredientsArray,
   typeIngredient,
   onIngredientOpen,
+  onIngredientClick,
 }) => {
   return (
     <>
@@ -20,8 +21,10 @@ const IngredientCardList = ({
             ingredient.type === typeIngredient && (
               <IngredientCard
                 key={ingredient._id}
+                ingredient={ingredient}
                 ingredientData={ingredient}
                 onIngredientOpen={onIngredientOpen}
+                onIngredientClick={onIngredientClick}
               />
             ),
         )}

@@ -14,7 +14,8 @@ function App() {
   const [isOpenIngredientModal, setIsOpenIngredientModal] =
     React.useState(false);
   const [isOpenOrderModal, setIsOpenOrderModal] = React.useState(false);
-  // const [currentIngredient, setCurrentIngredient] = React.useState({});
+  //выбрали ингредиент
+  const [selectedIngredient, setSelectedIngredient] = React.useState({});
 
   /*------------------ API --------------------*/
   const api = new Api({
@@ -34,14 +35,26 @@ function App() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const handleIngredientClick = (ingredient) => {
+    setIsOpenIngredientModal(true);
+    setSelectedIngredient(ingredient);
+  };
+
   //Открытие попапа IngredientDetails
-  const onOpenIngredientModal = () => {
+  const handleOpenIngredientModal = () => {
     setIsOpenIngredientModal(true);
   };
 
   //Открытие попапа OrderDetails
-  const onOpenOrderModal = () => {
+  const handleOpenOrderModal = () => {
     setIsOpenOrderModal(true);
+  };
+
+  //закрытие всех модалок
+  const handleCloseAllModals = () => {
+    setIsOpenIngredientModal(false);
+    setIsOpenOrderModal(false);
+    setSelectedIngredient({});
   };
 
   return (
@@ -50,15 +63,20 @@ function App() {
       {ingredients.length > 0 && (
         <Main
           ingredientsData={ingredients}
-          onOrderOpen={onOpenOrderModal}
-          onIngredientOpen={onOpenIngredientModal}
+          onOrderOpen={handleOpenOrderModal}
+          onIngredientOpen={handleOpenIngredientModal}
+          onIngredientClick={handleIngredientClick}
         />
       )}
 
       {isOpenIngredientModal && (
-        <IngredientDetails setOpen={setIsOpenIngredientModal} />
+        <IngredientDetails
+          setOpen={setIsOpenIngredientModal}
+          ingredient={selectedIngredient}
+          onClose={handleCloseAllModals}
+        />
       )}
-      {isOpenOrderModal && <OrderDetails setOpen={setIsOpenOrderModal} />}
+      {isOpenOrderModal && <OrderDetails onClose={handleCloseAllModals} />}
     </div>
   );
 }

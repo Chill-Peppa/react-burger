@@ -5,12 +5,8 @@ import styles from './modal.module.css';
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import ModalOverlay from '../modal-overlay/modal-overlay';
 
-const Modal = ({ title, children, setOpen }) => {
+const Modal = ({ title, children, onClose }) => {
   const modalRoot = document.getElementById('react-modals');
-
-  const onClose = React.useCallback(() => {
-    setOpen(false);
-  }, [setOpen]);
 
   //для закрытия по esc
   React.useEffect(() => {

@@ -4,9 +4,9 @@ import styles from './order-details.module.css';
 import done from '../../images/done.svg';
 import Modal from '../modal/modal';
 
-const OrderDetails = ({ setOpen }) => {
+const OrderDetails = ({ onClose }) => {
   return (
-    <Modal title="" setOpen={setOpen}>
+    <Modal title="" onClose={onClose}>
       <div className={styles.orderDetails}>
         <h3 className="text text_type_digits-large mt-4 mb-8">034536</h3>
         <span className="text text_type_main-medium mb-15">
