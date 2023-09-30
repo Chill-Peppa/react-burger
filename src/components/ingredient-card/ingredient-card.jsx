@@ -15,7 +15,6 @@ const IngredientCard = ({
 }) => {
   const handleClick = () => {
     onIngredientClick(ingredient);
-    console.log('на меня кликнули');
   };
 
   return (

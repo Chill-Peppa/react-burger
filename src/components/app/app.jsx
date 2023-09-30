@@ -51,7 +51,7 @@ function App() {
   const handleCloseAllModals = () => {
     setIsOpenIngredientModal(false);
     setIsOpenOrderModal(false);
-    setSelectedIngredient({});
+    setSelectedIngredient(null);
   };
 
   return (

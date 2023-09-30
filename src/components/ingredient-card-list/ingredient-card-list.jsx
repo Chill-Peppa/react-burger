@@ -8,7 +8,6 @@ import IngredientCard from '../ingredient-card/ingredient-card';
 const IngredientCardList = ({
   title,
   ingredientsArray,
-  typeIngredient,
   onIngredientOpen,
   onIngredientClick,
 }) => {
@@ -18,17 +17,14 @@ const IngredientCardList = ({
         {title}
       </h2>
       <ul className={styles.ingredientsList}>
-        {ingredientsArray.map(
-          (ingredient) =>
-            ingredient.type === typeIngredient && (
-              <IngredientCard
-                key={ingredient._id}
-                ingredient={ingredient}
-                onIngredientOpen={onIngredientOpen}
-                onIngredientClick={onIngredientClick}
-              />
-            ),
-        )}
+        {ingredientsArray.map((ingredient) => (
+          <IngredientCard
+            key={ingredient._id}
+            ingredient={ingredient}
+            onIngredientOpen={onIngredientOpen}
+            onIngredientClick={onIngredientClick}
+          />
+        ))}
       </ul>
     </>
   );
@@ -36,7 +32,6 @@ const IngredientCardList = ({
 
 IngredientCardList.propTypes = {
   title: PropTypes.string.isRequired,
-  typeIngredient: PropTypes.string.isRequired,
   onIngredientOpen: PropTypes.func.isRequired,
   onIngredientClick: PropTypes.func.isRequired,
   ingredientsArray: PropTypes.arrayOf(ingredientsDataType.isRequired)

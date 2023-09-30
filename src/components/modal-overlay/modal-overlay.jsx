@@ -2,23 +2,18 @@ import React from 'react';
 import styles from './modal-overlay.module.css';
 import PropTypes from 'prop-types';
 
-const ModalOverlay = ({ children, onCloseOverlay }) => {
+const ModalOverlay = ({ onCloseOverlay }) => {
   const closeByOverlay = (e) => {
     if (e.target === e.currentTarget) {
       onCloseOverlay();
     }
   };
 
-  return (
-    <div className={styles.background} onClick={closeByOverlay}>
-      {children}
-    </div>
-  );
+  return <div className={styles.background} onClick={closeByOverlay}></div>;
 };
 
 ModalOverlay.propTypes = {
   onCloseOverlay: PropTypes.func.isRequired,
-  children: PropTypes.elementType.isRequired,
 };
 
 export default ModalOverlay;

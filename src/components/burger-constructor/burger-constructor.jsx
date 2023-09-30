@@ -11,8 +11,6 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components';
 
 const BurgerConstructor = ({ onOrderOpen, ingredientsData }) => {
-  console.log(ingredientsData);
-
   const totalPrice = ingredientsData.reduce((prevItem, item) => {
     return prevItem + item.price;
   }, 0);

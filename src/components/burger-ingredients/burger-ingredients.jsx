@@ -14,15 +14,15 @@ const BurgerIngredients = ({
   const [current, setCurrent] = React.useState('bun');
 
   const bunArray = ingredientsData.filter(
-    (ingredient) => ingredient.type === `${tabs.BUN}`,
+    (ingredient) => ingredient.type === tabs.BUN,
   );
 
   const sauceArray = ingredientsData.filter(
-    (ingredient) => ingredient.type === `${tabs.SAUCE}`,
+    (ingredient) => ingredient.type === tabs.SAUCE,
   );
 
   const mainIngredientsArray = ingredientsData.filter(
-    (ingredient) => ingredient.type === `${tabs.MAIN}`,
+    (ingredient) => ingredient.type === tabs.MAIN,
   );
 
   return (
@@ -34,19 +34,19 @@ const BurgerIngredients = ({
       <div className={styles.tabContainer}>
         <Tab
           value={tabs.BUN}
-          active={current === `${tabs.BUN}`}
+          active={current === tabs.BUN}
           onClick={setCurrent}>
           Булки
         </Tab>
         <Tab
           value={tabs.SAUCE}
-          active={current === `${tabs.SAUCE}`}
+          active={current === tabs.SAUCE}
           onClick={setCurrent}>
           Соусы
         </Tab>
         <Tab
           value={tabs.MAIN}
-          active={current === `${tabs.MAIN}`}
+          active={current === tabs.MAIN}
           onClick={setCurrent}>
           Начинки
         </Tab>
@@ -56,21 +56,18 @@ const BurgerIngredients = ({
         <IngredientCardList
           title="Булки"
           ingredientsArray={bunArray}
-          typeIngredient={`${tabs.BUN}`}
           onIngredientOpen={onIngredientOpen}
           onIngredientClick={onIngredientClick}
         />
         <IngredientCardList
           title="Соусы"
           ingredientsArray={sauceArray}
-          typeIngredient={`${tabs.SAUCE}`}
           onIngredientOpen={onIngredientOpen}
           onIngredientClick={onIngredientClick}
         />
         <IngredientCardList
           title="Начинки"
           ingredientsArray={mainIngredientsArray}
-          typeIngredient={`${tabs.MAIN}`}
           onIngredientOpen={onIngredientOpen}
           onIngredientClick={onIngredientClick}
         />
