@@ -1,0 +1,28 @@
+.container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /*Чтобы нормально центрировать попап*/
+  border: 1px solid rgba(76, 76, 255, 0.2);
+  max-width: 720px;
+  max-height: 718px;
+  width: 100%;
+  background-color: #1c1c21;
+  border-radius: 40px;
+  padding: 40px 40px 0 40px;
+  z-index: 3;
+}
+
+.headerContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.close {
+  background: transparent;
+  border: none;
+  padding: 0;
+  display: flex;
+  cursor: pointer;
+}

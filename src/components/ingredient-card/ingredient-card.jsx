@@ -1,28 +1,38 @@
 import React from 'react';
-import cardStyles from './ingredient-card.module.css';
+import styles from './ingredient-card.module.css';
+import PropTypes from 'prop-types';
+import { ingredientsDataType } from '../../utils/constants';
 
 import {
   CurrencyIcon,
   Counter,
 } from '@ya.praktikum/react-developer-burger-ui-components';
-import PropTypes from 'prop-types';
 
-const IngredientCard = ({ ingredientData }) => {
+const IngredientCard = ({
+  onIngredientOpen,
+  onIngredientClick,
+  ingredient,
+}) => {
+  const handleClick = () => {
+    onIngredientClick(ingredient);
+  };
+
   return (
-    <li className={cardStyles.card}>
+    <li className={styles.card} onClick={onIngredientOpen}>
       <img
-        className={cardStyles.image}
-        src={ingredientData.image}
-        alt={ingredientData.name}
+        className={styles.image}
+        src={ingredient.image}
+        alt={ingredient.name}
+        onClick={handleClick}
       />
-      <div className={cardStyles.priceContainer}>
+      <div className={styles.priceContainer}>
         <span className="text text_type_digits-default">
-          {ingredientData.price}
+          {ingredient.price}
         </span>
         <CurrencyIcon type="primary" />
       </div>
-      <p className={`${cardStyles.name} text text_type_main-default`}>
-        {ingredientData.name}
+      <p className={`${styles.name} text text_type_main-default`}>
+        {ingredient.name}
       </p>
       <Counter count={3} size="default" />
     </li>
@@ -30,11 +40,9 @@ const IngredientCard = ({ ingredientData }) => {
 };
 
 IngredientCard.propTypes = {
-  ingredientData: PropTypes.shape({
-    image: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-  }),
+  ingredient: ingredientsDataType.isRequired,
+  onIngredientOpen: PropTypes.func.isRequired,
+  onIngredientClick: PropTypes.func.isRequired,
 };
 
 export default IngredientCard;
