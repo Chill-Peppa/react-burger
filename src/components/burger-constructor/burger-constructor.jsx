@@ -1,7 +1,6 @@
 import React from 'react';
 import styles from './burger-constructor.module.css';
 import PropTypes from 'prop-types';
-import { ingredientsDataType } from '../../utils/constants';
 
 import {
   ConstructorElement,
@@ -10,8 +9,12 @@ import {
   Button,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 
-const BurgerConstructor = ({ onOrderOpen, ingredientsData }) => {
-  const totalPrice = ingredientsData.reduce((prevItem, item) => {
+import { IngredientsContext } from '../../services/ingredientsContext';
+
+const BurgerConstructor = ({ onOrderOpen }) => {
+  const ingredients = React.useContext(IngredientsContext);
+
+  const totalPrice = ingredients.reduce((prevItem, item) => {
     return prevItem + item.price;
   }, 0);
 
@@ -22,14 +25,14 @@ const BurgerConstructor = ({ onOrderOpen, ingredientsData }) => {
           <ConstructorElement
             type="top"
             isLocked={true}
-            text={`${ingredientsData[0].name} (верх)`}
-            price={ingredientsData[0].price}
-            thumbnail={ingredientsData[0].image}
+            text={`${ingredients[0].name} (верх)`}
+            price={ingredients[0].price}
+            thumbnail={ingredients[0].image}
           />
         </div>
 
         <ul className={styles.main}>
-          {ingredientsData.map((ingredient) => (
+          {ingredients.map((ingredient) => (
             <li key={ingredient._id} className={styles.item}>
               <DragIcon type="primary" />
               <ConstructorElement
@@ -45,9 +48,9 @@ const BurgerConstructor = ({ onOrderOpen, ingredientsData }) => {
           <ConstructorElement
             type="bottom"
             isLocked={true}
-            text={`${ingredientsData[7].name} (низ)`}
-            price={ingredientsData[7].price}
-            thumbnail={ingredientsData[7].image}
+            text={`${ingredients[0].name} (низ)`}
+            price={ingredients[0].price}
+            thumbnail={ingredients[0].image}
           />
         </div>
       </div>
@@ -71,7 +74,6 @@ const BurgerConstructor = ({ onOrderOpen, ingredientsData }) => {
 
 BurgerConstructor.propTypes = {
   onOrderOpen: PropTypes.func.isRequired,
-  ingredientsData: PropTypes.arrayOf(ingredientsDataType.isRequired).isRequired,
 };
 
 export default BurgerConstructor;

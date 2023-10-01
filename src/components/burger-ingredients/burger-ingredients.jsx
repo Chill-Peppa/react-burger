@@ -2,26 +2,25 @@ import React from 'react';
 import styles from './burger-ingredients.module.css';
 import PropTypes from 'prop-types';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
-import { tabs, ingredientsDataType } from '../../utils/constants';
+import { tabs } from '../../utils/constants';
+import { IngredientsContext } from '../../services/ingredientsContext';
 
 import IngredientCardList from '../ingredient-card-list/ingredient-card-list';
 
-const BurgerIngredients = ({
-  onIngredientOpen,
-  ingredientsData,
-  onIngredientClick,
-}) => {
+const BurgerIngredients = ({ onIngredientOpen, onIngredientClick }) => {
   const [current, setCurrent] = React.useState('bun');
+  //тут берем значение из React.Context API
+  const ingredients = React.useContext(IngredientsContext);
 
-  const bunArray = ingredientsData.filter(
+  const bunArray = ingredients.filter(
     (ingredient) => ingredient.type === tabs.BUN,
   );
 
-  const sauceArray = ingredientsData.filter(
+  const sauceArray = ingredients.filter(
     (ingredient) => ingredient.type === tabs.SAUCE,
   );
 
-  const mainIngredientsArray = ingredientsData.filter(
+  const mainIngredientsArray = ingredients.filter(
     (ingredient) => ingredient.type === tabs.MAIN,
   );
 
@@ -79,7 +78,6 @@ const BurgerIngredients = ({
 BurgerIngredients.propTypes = {
   onIngredientOpen: PropTypes.func.isRequired,
   onIngredientClick: PropTypes.func.isRequired,
-  ingredientsData: PropTypes.arrayOf(ingredientsDataType.isRequired).isRequired,
 };
 
 export default BurgerIngredients;
