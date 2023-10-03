@@ -8,15 +8,22 @@ import {
   CurrencyIcon,
   Button,
 } from '@ya.praktikum/react-developer-burger-ui-components';
+// import { tabs } from '../../utils/constants';
 
 import { IngredientsContext } from '../../services/ingredientsContext';
 
-const BurgerConstructor = ({ onOrderOpen }) => {
+const BurgerConstructor = ({ handleGetOrderNumber }) => {
   const ingredients = React.useContext(IngredientsContext);
 
   const totalPrice = ingredients.reduce((prevItem, item) => {
     return prevItem + item.price;
   }, 0);
+
+  const onClickOrderSubmit = () => {
+    const AddedIngredientsIds = ingredients.map((ingredient) => ingredient._id);
+    console.log(AddedIngredientsIds);
+    handleGetOrderNumber(AddedIngredientsIds);
+  };
 
   return (
     <section className={styles.section}>
@@ -64,7 +71,7 @@ const BurgerConstructor = ({ onOrderOpen }) => {
           htmlType="button"
           type="primary"
           size="medium"
-          onClick={onOrderOpen}>
+          onClick={onClickOrderSubmit}>
           Оформить заказ
         </Button>
       </div>
@@ -72,8 +79,8 @@ const BurgerConstructor = ({ onOrderOpen }) => {
   );
 };
 
-BurgerConstructor.propTypes = {
-  onOrderOpen: PropTypes.func.isRequired,
-};
+// BurgerConstructor.propTypes = {
+//   onOrderOpen: PropTypes.func.isRequired,
+// };
 
 export default BurgerConstructor;

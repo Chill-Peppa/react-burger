@@ -5,21 +5,24 @@ import PropTypes from 'prop-types';
 import BurgerIngredients from '../burger-ingredients/burger-ingredients';
 import BurgerConstructor from '../burger-constructor/burger-constructor';
 
-const Main = ({ onIngredientOpen, onOrderOpen, onIngredientClick }) => {
+const Main = ({
+  onIngredientOpen,
+  onIngredientClick,
+  handleGetOrderNumber,
+}) => {
   return (
     <main className={styles.main}>
       <BurgerIngredients
         onIngredientOpen={onIngredientOpen}
         onIngredientClick={onIngredientClick}
       />
-      <BurgerConstructor onOrderOpen={onOrderOpen} />
+      <BurgerConstructor handleGetOrderNumber={handleGetOrderNumber} />
     </main>
   );
 };
 
 Main.propTypes = {
   onIngredientOpen: PropTypes.func.isRequired,
-  onOrderOpen: PropTypes.func.isRequired,
   onIngredientClick: PropTypes.func.isRequired,
 };
 

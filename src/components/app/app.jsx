@@ -9,10 +9,13 @@ import IngredientDetails from '../ingredient-details/ingredient-details';
 import Api from '../../utils/api';
 import { BASE_URL } from '../../utils/constants';
 import { IngredientsContext } from '../../services/ingredientsContext';
+import { NewOrderContext } from '../../services/newOrderContext';
 
 function App() {
-  //сейчас этот хук будет браться с привязкой к Context.Provider
+  /*------ хуки с привязкой к React.Context ------*/
   const [ingredients, setIngredients] = React.useState([]);
+  const [newOrderNumber, setNewOrderNumber] = React.useState(null);
+  /*------ без привязки к React.Context --------*/
   const [isOpenIngredientModal, setIsOpenIngredientModal] =
     React.useState(false);
   const [isOpenOrderModal, setIsOpenOrderModal] = React.useState(false);
@@ -36,6 +39,18 @@ function App() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  //Получить номер заказа
+  const handleGetOrderNumber = (ingredientsId) => {
+    api
+      .sendOrder(ingredientsId)
+      .then((res) => {
+        console.log(res);
+        setNewOrderNumber(res.order.number);
+        handleOpenOrderModal();
+      })
+      .catch((err) => console.error(`Ошибка: ${err}`));
+  };
+
   const handleOpenIngredientModal = () => {
     setIsOpenIngredientModal(true);
   };
@@ -58,25 +73,28 @@ function App() {
 
   return (
     <IngredientsContext.Provider value={ingredients}>
-      <div className={styles.page}>
-        <AppHeader />
-        {ingredients.length > 0 && (
-          <Main
-            onOrderOpen={handleOpenOrderModal}
-            onIngredientOpen={handleOpenIngredientModal}
-            onIngredientClick={handleIngredientClick}
-          />
-        )}
+      <NewOrderContext.Provider value={newOrderNumber}>
+        <div className={styles.page}>
+          <AppHeader />
+          {ingredients.length > 0 && (
+            <Main
+              onOrderOpen={handleOpenOrderModal}
+              onIngredientOpen={handleOpenIngredientModal}
+              onIngredientClick={handleIngredientClick}
+              handleGetOrderNumber={handleGetOrderNumber}
+            />
+          )}
 
-        {isOpenIngredientModal && (
-          <IngredientDetails
-            setOpen={setIsOpenIngredientModal}
-            ingredient={selectedIngredient}
-            onClose={handleCloseAllModals}
-          />
-        )}
-        {isOpenOrderModal && <OrderDetails onClose={handleCloseAllModals} />}
-      </div>
+          {isOpenIngredientModal && (
+            <IngredientDetails
+              setOpen={setIsOpenIngredientModal}
+              ingredient={selectedIngredient}
+              onClose={handleCloseAllModals}
+            />
+          )}
+          {isOpenOrderModal && <OrderDetails onClose={handleCloseAllModals} />}
+        </div>
+      </NewOrderContext.Provider>
     </IngredientsContext.Provider>
   );
 }

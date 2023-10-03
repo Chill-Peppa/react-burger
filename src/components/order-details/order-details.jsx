@@ -4,12 +4,17 @@ import done from '../../images/done.svg';
 import PropTypes from 'prop-types';
 
 import Modal from '../modal/modal';
+import { NewOrderContext } from '../../services/newOrderContext';
 
 const OrderDetails = ({ onClose }) => {
+  const newOrderNumber = React.useContext(NewOrderContext);
+
   return (
     <Modal title="" onClose={onClose}>
       <div className={styles.orderDetails}>
-        <h3 className="text text_type_digits-large mt-4 mb-8">034536</h3>
+        <h3 className="text text_type_digits-large mt-4 mb-8">
+          {newOrderNumber}
+        </h3>
         <span className="text text_type_main-medium mb-15">
           идентификатор заказа
         </span>

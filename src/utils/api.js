@@ -24,4 +24,13 @@ export default class Api {
       headers: this._headers,
     });
   }
+
+  //метод отправки заказа на сервер
+  sendOrder(id) {
+    return this._request(`${this._url}/api/orders`, {
+      headers: this._headers,
+      method: 'POST',
+      body: JSON.stringify({ ingredients: id }),
+    });
+  }
 }
