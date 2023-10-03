@@ -24,6 +24,7 @@ const Main = ({
 Main.propTypes = {
   onIngredientOpen: PropTypes.func.isRequired,
   onIngredientClick: PropTypes.func.isRequired,
+  handleGetOrderNumber: PropTypes.func.isRequired,
 };
 
 export default Main;

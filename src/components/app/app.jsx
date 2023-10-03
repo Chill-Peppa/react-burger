@@ -12,10 +12,9 @@ import { IngredientsContext } from '../../services/ingredientsContext';
 import { NewOrderContext } from '../../services/newOrderContext';
 
 function App() {
-  /*------ хуки с привязкой к React.Context ------*/
   const [ingredients, setIngredients] = React.useState([]);
   const [newOrderNumber, setNewOrderNumber] = React.useState(null);
-  /*------ без привязки к React.Context --------*/
+
   const [isOpenIngredientModal, setIsOpenIngredientModal] =
     React.useState(false);
   const [isOpenOrderModal, setIsOpenOrderModal] = React.useState(false);
@@ -29,6 +28,7 @@ function App() {
     },
   });
 
+  // получаем все ингредиенты
   React.useEffect(() => {
     api
       .getIngredientsInfo()
@@ -39,7 +39,7 @@ function App() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  //Получить номер заказа
+  // получить номер заказа
   const handleGetOrderNumber = (ingredientsId) => {
     api
       .sendOrder(ingredientsId)
@@ -64,7 +64,7 @@ function App() {
     setSelectedIngredient(ingredient);
   };
 
-  //Закрытие всех модалок
+  // закрытие всех модалок
   const handleCloseAllModals = () => {
     setIsOpenIngredientModal(false);
     setIsOpenOrderModal(false);
