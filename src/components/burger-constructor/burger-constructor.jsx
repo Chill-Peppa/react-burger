@@ -8,16 +8,26 @@ import {
   CurrencyIcon,
   Button,
 } from '@ya.praktikum/react-developer-burger-ui-components';
-// import { tabs } from '../../utils/constants';
+import { tabs } from '../../utils/constants';
 
 import { IngredientsContext } from '../../services/ingredientsContext';
 
 const BurgerConstructor = ({ handleGetOrderNumber }) => {
   const ingredients = React.useContext(IngredientsContext);
 
-  const totalPrice = ingredients.reduce((prevItem, item) => {
-    return prevItem + item.price;
-  }, 0);
+  const bunIngredients = ingredients.filter(
+    (ingredient) => ingredient.type === tabs.BUN,
+  );
+
+  const mainIngredients = ingredients.filter(
+    (ingredient) => ingredient.type !== tabs.BUN,
+  );
+
+  const totalPrice =
+    mainIngredients.reduce((prevItem, item) => {
+      return prevItem + item.price;
+    }, 0) +
+    bunIngredients[0].price * 2;
 
   const onClickOrderSubmit = () => {
     const AddedIngredientsIds = ingredients.map((ingredient) => ingredient._id);
@@ -32,14 +42,14 @@ const BurgerConstructor = ({ handleGetOrderNumber }) => {
           <ConstructorElement
             type="top"
             isLocked={true}
-            text={`${ingredients[0].name} (верх)`}
-            price={ingredients[0].price}
-            thumbnail={ingredients[0].image}
+            text={`${bunIngredients[0].name} (верх)`}
+            price={bunIngredients[0].price}
+            thumbnail={bunIngredients[0].image}
           />
         </div>
 
         <ul className={styles.main}>
-          {ingredients.map((ingredient) => (
+          {mainIngredients.map((ingredient) => (
             <li key={ingredient._id} className={styles.item}>
               <DragIcon type="primary" />
               <ConstructorElement
@@ -55,9 +65,9 @@ const BurgerConstructor = ({ handleGetOrderNumber }) => {
           <ConstructorElement
             type="bottom"
             isLocked={true}
-            text={`${ingredients[0].name} (низ)`}
-            price={ingredients[0].price}
-            thumbnail={ingredients[0].image}
+            text={`${bunIngredients[0].name} (низ)`}
+            price={bunIngredients[0].price}
+            thumbnail={bunIngredients[0].image}
           />
         </div>
       </div>
@@ -79,8 +89,8 @@ const BurgerConstructor = ({ handleGetOrderNumber }) => {
   );
 };
 
-// BurgerConstructor.propTypes = {
-//   onOrderOpen: PropTypes.func.isRequired,
-// };
+BurgerConstructor.propTypes = {
+  handleGetOrderNumber: PropTypes.func.isRequired,
+};
 
 export default BurgerConstructor;
