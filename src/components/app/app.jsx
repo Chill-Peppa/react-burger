@@ -5,11 +5,19 @@ import AppHeader from '../app-header/app-header';
 import Main from '../main/main';
 import OrderDetails from '../order-details/order-details';
 import IngredientDetails from '../ingredient-details/ingredient-details';
+import Modal from '../modal/modal';
 
 import Api from '../../utils/api';
 import { BASE_URL } from '../../utils/constants';
 import { IngredientsContext } from '../../services/ingredientsContext';
 import { NewOrderContext } from '../../services/newOrderContext';
+
+const api = new Api({
+  url: BASE_URL,
+  headers: {
+    'Content-Type': 'application/json',
+  },
+});
 
 function App() {
   const [ingredients, setIngredients] = React.useState([]);
@@ -19,14 +27,6 @@ function App() {
     React.useState(false);
   const [isOpenOrderModal, setIsOpenOrderModal] = React.useState(false);
   const [selectedIngredient, setSelectedIngredient] = React.useState({});
-
-  /*------------------ API --------------------*/
-  const api = new Api({
-    url: BASE_URL,
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  });
 
   // получаем все ингредиенты
   React.useEffect(() => {
@@ -39,7 +39,7 @@ function App() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // получить номер заказа
+  // получаем номер заказа
   const handleGetOrderNumber = (ingredientsId) => {
     api
       .sendOrder(ingredientsId)
@@ -76,6 +76,7 @@ function App() {
       <NewOrderContext.Provider value={newOrderNumber}>
         <div className={styles.page}>
           <AppHeader />
+
           {ingredients.length > 0 && (
             <Main
               onOrderOpen={handleOpenOrderModal}
@@ -86,13 +87,16 @@ function App() {
           )}
 
           {isOpenIngredientModal && (
-            <IngredientDetails
-              setOpen={setIsOpenIngredientModal}
-              ingredient={selectedIngredient}
-              onClose={handleCloseAllModals}
-            />
+            <Modal onClose={handleCloseAllModals} title="Детали ингредиента">
+              <IngredientDetails ingredient={selectedIngredient} />
+            </Modal>
           )}
-          {isOpenOrderModal && <OrderDetails onClose={handleCloseAllModals} />}
+
+          {isOpenOrderModal && (
+            <Modal onClose={handleCloseAllModals} title="">
+              <OrderDetails onClose={handleCloseAllModals} />
+            </Modal>
+          )}
         </div>
       </NewOrderContext.Provider>
     </IngredientsContext.Provider>
