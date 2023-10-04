@@ -24,6 +24,11 @@ const BurgerIngredients = ({ onIngredientOpen, onIngredientClick }) => {
     (ingredient) => ingredient.type === tabs.MAIN,
   );
 
+  const onTabClick = (value) => {
+    setCurrent(value);
+    document.getElementById(value).scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
     <section className={styles.section}>
       <h1 className={`${styles.title} text text_type_main-large`}>
@@ -34,19 +39,19 @@ const BurgerIngredients = ({ onIngredientOpen, onIngredientClick }) => {
         <Tab
           value={tabs.BUN}
           active={current === tabs.BUN}
-          onClick={setCurrent}>
+          onClick={onTabClick}>
           Булки
         </Tab>
         <Tab
           value={tabs.SAUCE}
           active={current === tabs.SAUCE}
-          onClick={setCurrent}>
+          onClick={onTabClick}>
           Соусы
         </Tab>
         <Tab
           value={tabs.MAIN}
           active={current === tabs.MAIN}
-          onClick={setCurrent}>
+          onClick={onTabClick}>
           Начинки
         </Tab>
       </div>
@@ -54,18 +59,21 @@ const BurgerIngredients = ({ onIngredientOpen, onIngredientClick }) => {
       <div className={styles.ingredientsContainer}>
         <IngredientCardList
           title="Булки"
+          id={tabs.BUN}
           ingredientsArray={bunArray}
           onIngredientOpen={onIngredientOpen}
           onIngredientClick={onIngredientClick}
         />
         <IngredientCardList
           title="Соусы"
+          id={tabs.SAUCE}
           ingredientsArray={sauceArray}
           onIngredientOpen={onIngredientOpen}
           onIngredientClick={onIngredientClick}
         />
         <IngredientCardList
           title="Начинки"
+          id={tabs.MAIN}
           ingredientsArray={mainIngredientsArray}
           onIngredientOpen={onIngredientOpen}
           onIngredientClick={onIngredientClick}

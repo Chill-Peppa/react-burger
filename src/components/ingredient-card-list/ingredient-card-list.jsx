@@ -10,10 +10,11 @@ const IngredientCardList = ({
   ingredientsArray,
   onIngredientOpen,
   onIngredientClick,
+  id,
 }) => {
   return (
     <>
-      <h2 className={`${styles.subtitle} text text_type_main-medium`}>
+      <h2 className={`${styles.subtitle} text text_type_main-medium`} id={id}>
         {title}
       </h2>
       <ul className={styles.ingredientsList}>
