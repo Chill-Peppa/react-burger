@@ -1,7 +1,6 @@
 import React from 'react';
 import styles from './burger-constructor.module.css';
 import PropTypes from 'prop-types';
-import { ingredientsDataType } from '../../utils/constants';
 
 import {
   ConstructorElement,
@@ -9,11 +8,52 @@ import {
   CurrencyIcon,
   Button,
 } from '@ya.praktikum/react-developer-burger-ui-components';
+import { tabs } from '../../utils/constants';
 
-const BurgerConstructor = ({ onOrderOpen, ingredientsData }) => {
-  const totalPrice = ingredientsData.reduce((prevItem, item) => {
-    return prevItem + item.price;
-  }, 0);
+import { IngredientsContext } from '../../services/ingredientsContext';
+
+const totalPriceInitialVal = { total: 0 };
+
+const reducer = (state, action) => {
+  switch (action.type) {
+    case 'increment':
+      return { total: action.payload };
+    default:
+      return { total: 0 };
+  }
+};
+
+const BurgerConstructor = ({ handleGetOrderNumber }) => {
+  const [totalPriceState, totalPriceDispatch] = React.useReducer(
+    reducer,
+    totalPriceInitialVal,
+  );
+
+  const ingredients = React.useContext(IngredientsContext);
+
+  const bunIngredients = ingredients.filter(
+    (ingredient) => ingredient.type === tabs.BUN,
+  );
+
+  const mainIngredients = ingredients.filter(
+    (ingredient) => ingredient.type !== tabs.BUN,
+  );
+
+  const totalPrice =
+    mainIngredients.reduce((prevItem, item) => {
+      return prevItem + item.price;
+    }, 0) +
+    bunIngredients[0].price * 2;
+
+  React.useEffect(() => {
+    totalPriceDispatch({ type: 'increment', payload: totalPrice });
+  }, [totalPrice]);
+
+  const onClickOrderSubmit = () => {
+    const AddedIngredientsIds = ingredients.map((ingredient) => ingredient._id);
+    console.log(AddedIngredientsIds);
+    handleGetOrderNumber(AddedIngredientsIds);
+  };
 
   return (
     <section className={styles.section}>
@@ -22,14 +62,14 @@ const BurgerConstructor = ({ onOrderOpen, ingredientsData }) => {
           <ConstructorElement
             type="top"
             isLocked={true}
-            text={`${ingredientsData[0].name} (верх)`}
-            price={ingredientsData[0].price}
-            thumbnail={ingredientsData[0].image}
+            text={`${bunIngredients[0].name} (верх)`}
+            price={bunIngredients[0].price}
+            thumbnail={bunIngredients[0].image}
           />
         </div>
 
         <ul className={styles.main}>
-          {ingredientsData.map((ingredient) => (
+          {mainIngredients.map((ingredient) => (
             <li key={ingredient._id} className={styles.item}>
               <DragIcon type="primary" />
               <ConstructorElement
@@ -45,23 +85,25 @@ const BurgerConstructor = ({ onOrderOpen, ingredientsData }) => {
           <ConstructorElement
             type="bottom"
             isLocked={true}
-            text={`${ingredientsData[7].name} (низ)`}
-            price={ingredientsData[7].price}
-            thumbnail={ingredientsData[7].image}
+            text={`${bunIngredients[0].name} (низ)`}
+            price={bunIngredients[0].price}
+            thumbnail={bunIngredients[0].image}
           />
         </div>
       </div>
 
       <div className={styles.total}>
         <div className={styles.totalContainer}>
-          <span className="text text_type_main-large">{totalPrice}</span>
+          <span className="text text_type_main-large">
+            {totalPriceState.total}
+          </span>
           <CurrencyIcon type="primary" />
         </div>
         <Button
           htmlType="button"
           type="primary"
           size="medium"
-          onClick={onOrderOpen}>
+          onClick={onClickOrderSubmit}>
           Оформить заказ
         </Button>
       </div>
@@ -70,8 +112,7 @@ const BurgerConstructor = ({ onOrderOpen, ingredientsData }) => {
 };
 
 BurgerConstructor.propTypes = {
-  onOrderOpen: PropTypes.func.isRequired,
-  ingredientsData: PropTypes.arrayOf(ingredientsDataType.isRequired).isRequired,
+  handleGetOrderNumber: PropTypes.func.isRequired,
 };
 
 export default BurgerConstructor;

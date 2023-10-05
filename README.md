@@ -13,4 +13,6 @@ https://react-burger-one-psi.vercel.app/
 - React Hooks (хуки)
 - Prettier (форматирование кода)
 - CSS-modules
+- PropTypes
+- React.Context
   (...будут дополняться)
