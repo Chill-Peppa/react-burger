@@ -11,6 +11,7 @@ const BurgerIngredients = ({ onIngredientOpen, onIngredientClick }) => {
   const [current, setCurrent] = React.useState('bun');
   //тут берем значение из React.Context API
   const ingredients = React.useContext(IngredientsContext);
+  console.log(ingredients);
 
   const bunArray = ingredients.filter(
     (ingredient) => ingredient.type === tabs.BUN,
