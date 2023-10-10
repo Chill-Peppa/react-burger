@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './app.module.css';
+import { useDispatch } from 'react-redux';
 
 import AppHeader from '../app-header/app-header';
 import Main from '../main/main';
@@ -9,8 +10,9 @@ import Modal from '../modal/modal';
 
 import Api from '../../utils/api';
 import { BASE_URL } from '../../utils/constants';
-import { IngredientsContext } from '../../services/ingredientsContext';
 import { NewOrderContext } from '../../services/newOrderContext';
+
+import { getIngredients } from '../../services/actions/burgerIngredients';
 
 const api = new Api({
   url: BASE_URL,
@@ -20,24 +22,18 @@ const api = new Api({
 });
 
 function App() {
-  const [ingredients, setIngredients] = React.useState([]);
+  const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    dispatch(getIngredients());
+  }, [dispatch]);
+
   const [newOrderNumber, setNewOrderNumber] = React.useState(null);
 
   const [isOpenIngredientModal, setIsOpenIngredientModal] =
     React.useState(false);
   const [isOpenOrderModal, setIsOpenOrderModal] = React.useState(false);
   const [selectedIngredient, setSelectedIngredient] = React.useState({});
-
-  // получаем все ингредиенты
-  React.useEffect(() => {
-    api
-      .getIngredientsInfo()
-      .then((ingredientsData) => {
-        setIngredients(ingredientsData.data);
-      })
-      .catch((err) => console.error(`Ошибка: ${err}`));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   // получаем номер заказа
   const handleGetOrderNumber = (ingredientsId) => {
@@ -72,34 +68,30 @@ function App() {
   };
 
   return (
-    <IngredientsContext.Provider value={ingredients}>
-      <NewOrderContext.Provider value={newOrderNumber}>
-        <div className={styles.page}>
-          <AppHeader />
+    <NewOrderContext.Provider value={newOrderNumber}>
+      <div className={styles.page}>
+        <AppHeader />
 
-          {ingredients.length > 0 && (
-            <Main
-              onOrderOpen={handleOpenOrderModal}
-              onIngredientOpen={handleOpenIngredientModal}
-              onIngredientClick={handleIngredientClick}
-              handleGetOrderNumber={handleGetOrderNumber}
-            />
-          )}
+        <Main
+          onOrderOpen={handleOpenOrderModal}
+          onIngredientOpen={handleOpenIngredientModal}
+          onIngredientClick={handleIngredientClick}
+          handleGetOrderNumber={handleGetOrderNumber}
+        />
 
-          {isOpenIngredientModal && (
-            <Modal onClose={handleCloseAllModals} title="Детали ингредиента">
-              <IngredientDetails ingredient={selectedIngredient} />
-            </Modal>
-          )}
+        {isOpenIngredientModal && (
+          <Modal onClose={handleCloseAllModals} title="Детали ингредиента">
+            <IngredientDetails ingredient={selectedIngredient} />
+          </Modal>
+        )}
 
-          {isOpenOrderModal && (
-            <Modal onClose={handleCloseAllModals} title="">
-              <OrderDetails onClose={handleCloseAllModals} />
-            </Modal>
-          )}
-        </div>
-      </NewOrderContext.Provider>
-    </IngredientsContext.Provider>
+        {isOpenOrderModal && (
+          <Modal onClose={handleCloseAllModals} title="">
+            <OrderDetails onClose={handleCloseAllModals} />
+          </Modal>
+        )}
+      </div>
+    </NewOrderContext.Provider>
   );
 }
 

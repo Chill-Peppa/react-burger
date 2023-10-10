@@ -3,14 +3,16 @@ import styles from './burger-ingredients.module.css';
 import PropTypes from 'prop-types';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import { tabs } from '../../utils/constants';
-import { IngredientsContext } from '../../services/ingredientsContext';
+import { useSelector } from 'react-redux';
+//import { IngredientsContext } from '../../services/ingredientsContext';
 
 import IngredientCardList from '../ingredient-card-list/ingredient-card-list';
 
 const BurgerIngredients = ({ onIngredientOpen, onIngredientClick }) => {
   const [current, setCurrent] = React.useState('bun');
   //тут берем значение из React.Context API
-  const ingredients = React.useContext(IngredientsContext);
+  //const ingredients = React.useContext(IngredientsContext);
+  const { ingredients } = useSelector((store) => store.ingredients);
   console.log(ingredients);
 
   const bunArray = ingredients.filter(

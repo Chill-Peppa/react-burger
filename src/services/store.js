@@ -1,5 +1,6 @@
-import { compose, createStore } from 'redux';
+import { compose, createStore, applyMiddleware } from 'redux';
 import { rootReducer } from './reducers';
+import thunk from 'redux-thunk';
 
 //Для знакомства кода с расширением Redux Devtools
 const composeEnhancers =
@@ -7,6 +8,6 @@ const composeEnhancers =
     ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({})
     : compose;
 
-const enhancer = composeEnhancers();
+const enhancer = composeEnhancers(applyMiddleware(thunk));
 
 export const store = createStore(rootReducer, enhancer);
