@@ -1,6 +1,11 @@
 import React from 'react';
 import styles from './burger-constructor.module.css';
 import PropTypes from 'prop-types';
+import { useSelector, useDispatch } from 'react-redux';
+import {
+  ADD_BUN_INGREDIENT,
+  ADD_MAIN_INGREDIENT,
+} from '../../services/actions/burgerConstructor';
 
 import {
   ConstructorElement,
@@ -9,8 +14,6 @@ import {
   Button,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import { tabs } from '../../utils/constants';
-
-import { IngredientsContext } from '../../services/ingredientsContext';
 
 const totalPriceInitialVal = { total: 0 };
 
@@ -24,12 +27,13 @@ const reducer = (state, action) => {
 };
 
 const BurgerConstructor = ({ handleGetOrderNumber }) => {
+  const dispatch = useDispatch();
   const [totalPriceState, totalPriceDispatch] = React.useReducer(
     reducer,
     totalPriceInitialVal,
   );
 
-  const ingredients = React.useContext(IngredientsContext);
+  const ingredients = useSelector((store) => store.ingredients.ingredients);
 
   const bunIngredients = ingredients.filter(
     (ingredient) => ingredient.type === tabs.BUN,
@@ -44,6 +48,24 @@ const BurgerConstructor = ({ handleGetOrderNumber }) => {
       return prevItem + item.price;
     }, 0) +
     bunIngredients[0].price * 2;
+
+  React.useEffect(() => {
+    dispatch({
+      type: ADD_BUN_INGREDIENT,
+      bun: bunIngredients[0],
+    });
+    dispatch({
+      type: ADD_MAIN_INGREDIENT,
+      main: mainIngredients,
+    });
+  }, [dispatch]);
+
+  const { mainIngredientsData, bunIngredientsData } = useSelector(
+    (store) => store.addedIngredients,
+  );
+
+  console.log(mainIngredientsData);
+  console.log(bunIngredientsData);
 
   React.useEffect(() => {
     totalPriceDispatch({ type: 'increment', payload: totalPrice });
@@ -68,18 +90,20 @@ const BurgerConstructor = ({ handleGetOrderNumber }) => {
           />
         </div>
 
-        <ul className={styles.main}>
-          {mainIngredients.map((ingredient) => (
-            <li key={ingredient._id} className={styles.item}>
-              <DragIcon type="primary" />
-              <ConstructorElement
-                text={ingredient.name}
-                price={ingredient.price}
-                thumbnail={ingredient.image}
-              />
-            </li>
-          ))}
-        </ul>
+        {mainIngredientsData.length > 0 && (
+          <ul className={styles.main}>
+            {mainIngredientsData.map((ingredient) => (
+              <li key={ingredient._id} className={styles.item}>
+                <DragIcon type="primary" />
+                <ConstructorElement
+                  text={ingredient.name}
+                  price={ingredient.price}
+                  thumbnail={ingredient.image}
+                />
+              </li>
+            ))}
+          </ul>
+        )}
 
         <div className={styles.bottom}>
           <ConstructorElement

@@ -13,7 +13,6 @@ const BurgerIngredients = ({ onIngredientOpen, onIngredientClick }) => {
   //тут берем значение из React.Context API
   //const ingredients = React.useContext(IngredientsContext);
   const { ingredients } = useSelector((store) => store.ingredients);
-  console.log(ingredients);
 
   const bunArray = ingredients.filter(
     (ingredient) => ingredient.type === tabs.BUN,

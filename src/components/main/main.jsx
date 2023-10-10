@@ -11,7 +11,7 @@ const Main = ({
   onIngredientClick,
   handleGetOrderNumber,
 }) => {
-  const { ingredientsRequest, ingredientsFailed } = useSelector(
+  const { ingredients, ingredientsRequest, ingredientsFailed } = useSelector(
     (store) => store.ingredients,
   );
 
@@ -20,14 +20,16 @@ const Main = ({
       {ingredientsRequest ? (
         <p>Загрузка данных...</p>
       ) : ingredientsFailed ? (
-        <p>Ошибка загрузки данных...</p>
+        <p>Произошла ошибка на сервере...</p>
       ) : (
         <BurgerIngredients
           onIngredientOpen={onIngredientOpen}
           onIngredientClick={onIngredientClick}
         />
       )}
-      {/* <BurgerConstructor handleGetOrderNumber={handleGetOrderNumber} /> */}
+      {ingredients.length > 0 && (
+        <BurgerConstructor handleGetOrderNumber={handleGetOrderNumber} />
+      )}
     </main>
   );
 };
