@@ -27,7 +27,7 @@ const reducer = (state, action) => {
   }
 };
 
-const BurgerConstructor = (/*{ handleGetOrderNumber }*/) => {
+const BurgerConstructor = ({ onOrderOpen }) => {
   const dispatch = useDispatch();
   const [totalPriceState, totalPriceDispatch] = React.useReducer(
     reducer,
@@ -73,6 +73,7 @@ const BurgerConstructor = (/*{ handleGetOrderNumber }*/) => {
 
   const onClickOrderSubmit = () => {
     const AddedIngredientsIds = ingredients.map((ingredient) => ingredient._id);
+    onOrderOpen();
     //console.log(AddedIngredientsIds);
     dispatch(getOrderNumber(AddedIngredientsIds));
     //handleGetOrderNumber(AddedIngredientsIds);

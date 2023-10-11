@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import BurgerIngredients from '../burger-ingredients/burger-ingredients';
 import BurgerConstructor from '../burger-constructor/burger-constructor';
 
-const Main = ({ onIngredientOpen }) => {
+const Main = ({ onIngredientOpen, onOrderOpen }) => {
   const { ingredients, ingredientsRequest, ingredientsFailed } = useSelector(
     (store) => store.ingredients,
   );
@@ -22,7 +22,9 @@ const Main = ({ onIngredientOpen }) => {
       ) : (
         <BurgerIngredients onIngredientOpen={onIngredientOpen} />
       )}
-      {ingredients.length > 0 && <BurgerConstructor />}
+      {ingredients.length > 0 && (
+        <BurgerConstructor onOrderOpen={onOrderOpen} />
+      )}
     </main>
   );
 };
