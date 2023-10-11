@@ -2,20 +2,24 @@ import React from 'react';
 import styles from './ingredient-card.module.css';
 import PropTypes from 'prop-types';
 import { ingredientsDataType } from '../../utils/constants';
+import { useDispatch, useSelector } from 'react-redux';
+import { OPEN_INGREDIENT } from '../../services/actions/ingredient';
 
 import {
   CurrencyIcon,
   Counter,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 
-const IngredientCard = ({
-  onIngredientOpen,
-  onIngredientClick,
-  ingredient,
-}) => {
+const IngredientCard = ({ onIngredientOpen, ingredient }) => {
+  const dispatch = useDispatch();
+
+  const { selectedIngredient } = useSelector((store) => store.ingredient);
+
   const handleClick = () => {
-    onIngredientClick(ingredient);
+    dispatch({ type: OPEN_INGREDIENT, ingredient: ingredient });
   };
+
+  console.log(selectedIngredient);
 
   return (
     <li className={styles.card} onClick={onIngredientOpen}>
@@ -42,7 +46,6 @@ const IngredientCard = ({
 IngredientCard.propTypes = {
   ingredient: ingredientsDataType.isRequired,
   onIngredientOpen: PropTypes.func.isRequired,
-  onIngredientClick: PropTypes.func.isRequired,
 };
 
 export default IngredientCard;

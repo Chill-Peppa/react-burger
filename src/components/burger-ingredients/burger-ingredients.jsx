@@ -8,10 +8,9 @@ import { useSelector } from 'react-redux';
 
 import IngredientCardList from '../ingredient-card-list/ingredient-card-list';
 
-const BurgerIngredients = ({ onIngredientOpen, onIngredientClick }) => {
+const BurgerIngredients = ({ onIngredientOpen }) => {
   const [current, setCurrent] = React.useState('bun');
-  //тут берем значение из React.Context API
-  //const ingredients = React.useContext(IngredientsContext);
+
   const { ingredients } = useSelector((store) => store.ingredients);
 
   const bunArray = ingredients.filter(
@@ -64,21 +63,18 @@ const BurgerIngredients = ({ onIngredientOpen, onIngredientClick }) => {
           id={tabs.BUN}
           ingredientsArray={bunArray}
           onIngredientOpen={onIngredientOpen}
-          onIngredientClick={onIngredientClick}
         />
         <IngredientCardList
           title="Соусы"
           id={tabs.SAUCE}
           ingredientsArray={sauceArray}
           onIngredientOpen={onIngredientOpen}
-          onIngredientClick={onIngredientClick}
         />
         <IngredientCardList
           title="Начинки"
           id={tabs.MAIN}
           ingredientsArray={mainIngredientsArray}
           onIngredientOpen={onIngredientOpen}
-          onIngredientClick={onIngredientClick}
         />
       </div>
     </section>
@@ -87,7 +83,6 @@ const BurgerIngredients = ({ onIngredientOpen, onIngredientClick }) => {
 
 BurgerIngredients.propTypes = {
   onIngredientOpen: PropTypes.func.isRequired,
-  onIngredientClick: PropTypes.func.isRequired,
 };
 
 export default BurgerIngredients;

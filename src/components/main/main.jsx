@@ -6,11 +6,7 @@ import { useSelector } from 'react-redux';
 import BurgerIngredients from '../burger-ingredients/burger-ingredients';
 import BurgerConstructor from '../burger-constructor/burger-constructor';
 
-const Main = ({
-  onIngredientOpen,
-  onIngredientClick,
-  handleGetOrderNumber,
-}) => {
+const Main = ({ onIngredientOpen, handleGetOrderNumber }) => {
   const { ingredients, ingredientsRequest, ingredientsFailed } = useSelector(
     (store) => store.ingredients,
   );
@@ -22,10 +18,7 @@ const Main = ({
       ) : ingredientsFailed ? (
         <p>Произошла ошибка на сервере...</p>
       ) : (
-        <BurgerIngredients
-          onIngredientOpen={onIngredientOpen}
-          onIngredientClick={onIngredientClick}
-        />
+        <BurgerIngredients onIngredientOpen={onIngredientOpen} />
       )}
       {ingredients.length > 0 && (
         <BurgerConstructor handleGetOrderNumber={handleGetOrderNumber} />
@@ -36,7 +29,6 @@ const Main = ({
 
 Main.propTypes = {
   onIngredientOpen: PropTypes.func.isRequired,
-  onIngredientClick: PropTypes.func.isRequired,
   handleGetOrderNumber: PropTypes.func.isRequired,
 };
 

@@ -1,7 +1,7 @@
 import {
   ADD_BUN_INGREDIENT,
   ADD_MAIN_INGREDIENT,
-  DELETE_MAIN_INGREDIENT,
+  //DELETE_MAIN_INGREDIENT,
 } from '../actions/burgerConstructor';
 
 //исходное значение ингредиентов в конструкторе

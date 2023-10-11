@@ -13,6 +13,7 @@ import { BASE_URL } from '../../utils/constants';
 import { NewOrderContext } from '../../services/newOrderContext';
 
 import { getIngredients } from '../../services/actions/burgerIngredients';
+import { CLOSE_INGREDIENT } from '../../services/actions/ingredient';
 
 const api = new Api({
   url: BASE_URL,
@@ -22,18 +23,17 @@ const api = new Api({
 });
 
 function App() {
-  const dispatch = useDispatch();
-
-  React.useEffect(() => {
-    dispatch(getIngredients());
-  }, [dispatch]);
-
   const [newOrderNumber, setNewOrderNumber] = React.useState(null);
 
   const [isOpenIngredientModal, setIsOpenIngredientModal] =
     React.useState(false);
   const [isOpenOrderModal, setIsOpenOrderModal] = React.useState(false);
-  const [selectedIngredient, setSelectedIngredient] = React.useState({});
+
+  const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    dispatch(getIngredients());
+  }, [dispatch]);
 
   // получаем номер заказа
   const handleGetOrderNumber = (ingredientsId) => {
@@ -55,16 +55,15 @@ function App() {
     setIsOpenOrderModal(true);
   };
 
-  const handleIngredientClick = (ingredient) => {
-    setIsOpenIngredientModal(true);
-    setSelectedIngredient(ingredient);
+  const onRemoveSelectedIngredient = () => {
+    dispatch({ type: CLOSE_INGREDIENT, selectedIngredient: null });
   };
 
   // закрытие всех модалок
   const handleCloseAllModals = () => {
     setIsOpenIngredientModal(false);
     setIsOpenOrderModal(false);
-    setSelectedIngredient(null);
+    onRemoveSelectedIngredient();
   };
 
   return (
@@ -75,13 +74,12 @@ function App() {
         <Main
           onOrderOpen={handleOpenOrderModal}
           onIngredientOpen={handleOpenIngredientModal}
-          onIngredientClick={handleIngredientClick}
           handleGetOrderNumber={handleGetOrderNumber}
         />
 
         {isOpenIngredientModal && (
           <Modal onClose={handleCloseAllModals} title="Детали ингредиента">
-            <IngredientDetails ingredient={selectedIngredient} />
+            <IngredientDetails />
           </Modal>
         )}
 

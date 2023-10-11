@@ -9,7 +9,6 @@ const IngredientCardList = ({
   title,
   ingredientsArray,
   onIngredientOpen,
-  onIngredientClick,
   id,
 }) => {
   return (
@@ -23,7 +22,6 @@ const IngredientCardList = ({
             key={ingredient._id}
             ingredient={ingredient}
             onIngredientOpen={onIngredientOpen}
-            onIngredientClick={onIngredientClick}
           />
         ))}
       </ul>
@@ -34,7 +32,6 @@ const IngredientCardList = ({
 IngredientCardList.propTypes = {
   title: PropTypes.string.isRequired,
   onIngredientOpen: PropTypes.func.isRequired,
-  onIngredientClick: PropTypes.func.isRequired,
   ingredientsArray: PropTypes.arrayOf(ingredientsDataType.isRequired)
     .isRequired,
 };
