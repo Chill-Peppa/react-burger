@@ -15,7 +15,7 @@ export const ingredientReducer = (state = initialState, action) => {
     case CLOSE_INGREDIENT:
       return {
         ...state,
-        viewedIngredient: null,
+        selectedIngredient: action.ingredient,
       };
     default:
       return state;

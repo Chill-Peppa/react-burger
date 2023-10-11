@@ -8,22 +8,22 @@ import OrderDetails from '../order-details/order-details';
 import IngredientDetails from '../ingredient-details/ingredient-details';
 import Modal from '../modal/modal';
 
-import Api from '../../utils/api';
-import { BASE_URL } from '../../utils/constants';
-import { NewOrderContext } from '../../services/newOrderContext';
+// import Api from '../../utils/api';
+// import { BASE_URL } from '../../utils/constants';
+//import { NewOrderContext } from '../../services/newOrderContext';
 
 import { getIngredients } from '../../services/actions/burgerIngredients';
 import { CLOSE_INGREDIENT } from '../../services/actions/ingredient';
 
-const api = new Api({
-  url: BASE_URL,
-  headers: {
-    'Content-Type': 'application/json',
-  },
-});
+// const api = new Api({
+//   url: BASE_URL,
+//   headers: {
+//     'Content-Type': 'application/json',
+//   },
+// });
 
 function App() {
-  const [newOrderNumber, setNewOrderNumber] = React.useState(null);
+  //const [newOrderNumber, setNewOrderNumber] = React.useState(null);
 
   const [isOpenIngredientModal, setIsOpenIngredientModal] =
     React.useState(false);
@@ -36,16 +36,16 @@ function App() {
   }, [dispatch]);
 
   // получаем номер заказа
-  const handleGetOrderNumber = (ingredientsId) => {
-    api
-      .sendOrder(ingredientsId)
-      .then((res) => {
-        console.log(res);
-        setNewOrderNumber(res.order.number);
-        handleOpenOrderModal();
-      })
-      .catch((err) => console.error(`Ошибка: ${err}`));
-  };
+  // const handleGetOrderNumber = (ingredientsId) => {
+  //   api
+  //     .sendOrder(ingredientsId)
+  //     .then((res) => {
+  //       console.log(res);
+  //       setNewOrderNumber(res.order.number);
+  //       handleOpenOrderModal();
+  //     })
+  //     .catch((err) => console.error(`Ошибка: ${err}`));
+  // };
 
   const handleOpenIngredientModal = () => {
     setIsOpenIngredientModal(true);
@@ -67,29 +67,26 @@ function App() {
   };
 
   return (
-    <NewOrderContext.Provider value={newOrderNumber}>
-      <div className={styles.page}>
-        <AppHeader />
+    <div className={styles.page}>
+      <AppHeader />
 
-        <Main
-          onOrderOpen={handleOpenOrderModal}
-          onIngredientOpen={handleOpenIngredientModal}
-          handleGetOrderNumber={handleGetOrderNumber}
-        />
+      <Main
+        onOrderOpen={handleOpenOrderModal}
+        onIngredientOpen={handleOpenIngredientModal}
+      />
 
-        {isOpenIngredientModal && (
-          <Modal onClose={handleCloseAllModals} title="Детали ингредиента">
-            <IngredientDetails />
-          </Modal>
-        )}
+      {isOpenIngredientModal && (
+        <Modal onClose={handleCloseAllModals} title="Детали ингредиента">
+          <IngredientDetails />
+        </Modal>
+      )}
 
-        {isOpenOrderModal && (
-          <Modal onClose={handleCloseAllModals} title="">
-            <OrderDetails onClose={handleCloseAllModals} />
-          </Modal>
-        )}
-      </div>
-    </NewOrderContext.Provider>
+      {isOpenOrderModal && (
+        <Modal onClose={handleCloseAllModals} title="">
+          <OrderDetails onClose={handleCloseAllModals} />
+        </Modal>
+      )}
+    </div>
   );
 }
 

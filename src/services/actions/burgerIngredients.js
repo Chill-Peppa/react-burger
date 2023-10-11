@@ -1,16 +1,8 @@
-import Api from '../../utils/api';
-import { BASE_URL } from '../../utils/constants';
+import { api } from '../../utils/api';
 
 export const GET_INGREDIENTS = 'GET_INGREDIENTS';
 export const GET_INGREDIENTS_SUCCESS = 'GET_INGREDIENTS_SUCCESS';
 export const GET_INGREDIENTS_FAILED = 'GET_INGREDIENTS_FAILED';
-
-const api = new Api({
-  url: BASE_URL,
-  headers: {
-    'Content-Type': 'application/json',
-  },
-});
 
 //асинхронный экшен (thunk)
 export function getIngredients() {

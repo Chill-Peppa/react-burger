@@ -6,10 +6,12 @@ import { useSelector } from 'react-redux';
 import BurgerIngredients from '../burger-ingredients/burger-ingredients';
 import BurgerConstructor from '../burger-constructor/burger-constructor';
 
-const Main = ({ onIngredientOpen, handleGetOrderNumber }) => {
+const Main = ({ onIngredientOpen }) => {
   const { ingredients, ingredientsRequest, ingredientsFailed } = useSelector(
     (store) => store.ingredients,
   );
+
+  console.log('v komponente main:', ingredients);
 
   return (
     <main className={styles.main}>
@@ -20,16 +22,14 @@ const Main = ({ onIngredientOpen, handleGetOrderNumber }) => {
       ) : (
         <BurgerIngredients onIngredientOpen={onIngredientOpen} />
       )}
-      {ingredients.length > 0 && (
-        <BurgerConstructor handleGetOrderNumber={handleGetOrderNumber} />
-      )}
+      {ingredients.length > 0 && <BurgerConstructor />}
     </main>
   );
 };
 
 Main.propTypes = {
   onIngredientOpen: PropTypes.func.isRequired,
-  handleGetOrderNumber: PropTypes.func.isRequired,
+  //handleGetOrderNumber: PropTypes.func.isRequired,
 };
 
 export default Main;

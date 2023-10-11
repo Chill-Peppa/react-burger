@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './burger-constructor.module.css';
-import PropTypes from 'prop-types';
+//import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   ADD_BUN_INGREDIENT,
@@ -14,6 +14,7 @@ import {
   Button,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import { tabs } from '../../utils/constants';
+import { getOrderNumber } from '../../services/actions/order';
 
 const totalPriceInitialVal = { total: 0 };
 
@@ -26,7 +27,7 @@ const reducer = (state, action) => {
   }
 };
 
-const BurgerConstructor = ({ handleGetOrderNumber }) => {
+const BurgerConstructor = (/*{ handleGetOrderNumber }*/) => {
   const dispatch = useDispatch();
   const [totalPriceState, totalPriceDispatch] = React.useReducer(
     reducer,
@@ -64,8 +65,7 @@ const BurgerConstructor = ({ handleGetOrderNumber }) => {
     (store) => store.addedIngredients,
   );
 
-  console.log(mainIngredientsData);
-  console.log(bunIngredientsData);
+  console.log('v komponente burger-constructor:', ingredients);
 
   React.useEffect(() => {
     totalPriceDispatch({ type: 'increment', payload: totalPrice });
@@ -73,8 +73,9 @@ const BurgerConstructor = ({ handleGetOrderNumber }) => {
 
   const onClickOrderSubmit = () => {
     const AddedIngredientsIds = ingredients.map((ingredient) => ingredient._id);
-    console.log(AddedIngredientsIds);
-    handleGetOrderNumber(AddedIngredientsIds);
+    //console.log(AddedIngredientsIds);
+    dispatch(getOrderNumber(AddedIngredientsIds));
+    //handleGetOrderNumber(AddedIngredientsIds);
   };
 
   return (
@@ -135,8 +136,8 @@ const BurgerConstructor = ({ handleGetOrderNumber }) => {
   );
 };
 
-BurgerConstructor.propTypes = {
-  handleGetOrderNumber: PropTypes.func.isRequired,
-};
+// BurgerConstructor.propTypes = {
+//   handleGetOrderNumber: PropTypes.func.isRequired,
+// };
 
 export default BurgerConstructor;

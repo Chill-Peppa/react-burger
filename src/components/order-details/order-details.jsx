@@ -1,11 +1,15 @@
 import React from 'react';
 import styles from './order-details.module.css';
 import done from '../../images/done.svg';
+import { useSelector } from 'react-redux';
 
-import { NewOrderContext } from '../../services/newOrderContext';
+//import { NewOrderContext } from '../../services/newOrderContext';
 
 const OrderDetails = () => {
-  const newOrderNumber = React.useContext(NewOrderContext);
+  //const newOrderNumber = React.useContext(NewOrderContext);
+
+  const { newOrderNumber } = useSelector((store) => store.order);
+  console.log(newOrderNumber);
 
   return (
     <div className={styles.orderDetails}>
