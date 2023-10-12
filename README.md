@@ -15,4 +15,6 @@ https://react-burger-one-psi.vercel.app/
 - CSS-modules
 - PropTypes
 - React.Context
+- Redux
+- Intersectional Observer API
   (...будут дополняться)

@@ -4,16 +4,19 @@ import PropTypes from 'prop-types';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import { tabs } from '../../utils/constants';
 import { useSelector } from 'react-redux';
+import { useInView } from 'react-intersection-observer';
 
 import IngredientCardList from '../ingredient-card-list/ingredient-card-list';
 
 const BurgerIngredients = ({ onIngredientOpen }) => {
-  const [current, setCurrent] = React.useState('bun');
-  const bunRef = React.useRef();
-  const sauceRef = React.useRef();
-  const mainRef = React.useRef();
-
   const { ingredients } = useSelector((store) => store.ingredients);
+
+  const [current, setCurrent] = React.useState('bun');
+  // const bunRef = React.useRef();
+  // const sauceRef = React.useRef();
+  // const mainRef = React.useRef();
+  const containerRef = React.useRef();
+  console.log(containerRef.current);
 
   const bunArray = ingredients.filter(
     (ingredient) => ingredient.type === tabs.BUN,
@@ -30,26 +33,50 @@ const BurgerIngredients = ({ onIngredientOpen }) => {
   //при клике на таб
   const onTabClick = (value) => {
     setCurrent(value);
-    if (value === tabs.BUN) {
-      bunRef.current.scrollIntoView({ behavior: 'smooth' });
-    } else if (value === tabs.SAUCE) {
-      sauceRef.current.scrollIntoView({ behavior: 'smooth' });
-    } else {
-      mainRef.current.scrollIntoView({ behavior: 'smooth' });
-    }
+    document.getElementById(value).scrollIntoView({ behavior: 'smooth' });
   };
 
   /*---------- Тут логика с Intersectional Observer ----------*/
-  //1 - entries — список объектов с информацией о пересечении.
-  //Для каждого наблюдаемого элемента создаётся один объект IntersectionObserverEntry.
-  //2 - observer — ссылка на экземпляр наблюдателя для вызова методов прослушивания
+  const [tabBunRef, inViewBun] = useInView({
+    root: containerRef.current,
+    threshold: 0,
+  });
 
-  // const callback = (entries, observer) => {
-  //   entries.foreach((title) => {
-  //     if (title.isIntersecting) {
-  //       console.log('Элемент пересёк границу области и всё ещё соприкасается с ней!')
-  //     }
-  //   })
+  const [tabSauceRef, inViewSauce] = useInView({
+    root: containerRef.current,
+    rootMargin: '0px 0px -90% 0px',
+  });
+
+  const [tabMainRef, inViewMain] = useInView({
+    root: containerRef.current,
+    rootMargin: '0px 0px -90% 0px',
+  });
+
+  React.useEffect(() => {
+    if (inViewBun) {
+      setCurrent(tabs.BUN);
+      console.log('булочка');
+    }
+    if (inViewSauce && !inViewBun) {
+      setCurrent(tabs.SAUCE);
+      console.log('соус');
+    }
+    if (inViewMain) {
+      setCurrent(tabs.MAIN);
+      console.log('мейн');
+    }
+  }, [inViewBun, inViewSauce, inViewMain]);
+
+  //при клике на таб
+  // const onTabClick = (value) => {
+  //   setCurrent(value);
+  //   if (value === tabs.BUN) {
+  //     bunRef.current.scrollIntoView({ behavior: 'smooth' });
+  //   } else if (value === tabs.SAUCE) {
+  //     sauceRef.current.scrollIntoView({ behavior: 'smooth' });
+  //   } else {
+  //     mainRef.current.scrollIntoView({ behavior: 'smooth' });
+  //   }
   // };
 
   return (
@@ -79,25 +106,25 @@ const BurgerIngredients = ({ onIngredientOpen }) => {
         </Tab>
       </div>
 
-      <div className={styles.ingredientsContainer}>
+      <div className={styles.ingredientsContainer} ref={containerRef}>
         <IngredientCardList
           title="Булки"
-          ref={bunRef}
-          //id={tabs.BUN}
+          ref={tabBunRef}
+          id={tabs.BUN}
           ingredientsArray={bunArray}
           onIngredientOpen={onIngredientOpen}
         />
         <IngredientCardList
           title="Соусы"
-          ref={sauceRef}
-          //id={tabs.SAUCE}
+          ref={tabSauceRef}
+          id={tabs.SAUCE}
           ingredientsArray={sauceArray}
           onIngredientOpen={onIngredientOpen}
         />
         <IngredientCardList
           title="Начинки"
-          ref={mainRef}
-          //id={tabs.MAIN}
+          ref={tabMainRef}
+          id={tabs.MAIN}
           ingredientsArray={mainIngredientsArray}
           onIngredientOpen={onIngredientOpen}
         />
