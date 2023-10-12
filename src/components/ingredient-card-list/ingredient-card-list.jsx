@@ -5,15 +5,12 @@ import { ingredientsDataType } from '../../utils/constants';
 
 import IngredientCard from '../ingredient-card/ingredient-card';
 
-const IngredientCardList = ({
-  title,
-  ingredientsArray,
-  onIngredientOpen,
-  id,
-}) => {
+const IngredientCardList = React.forwardRef((props, ref) => {
+  const { title, ingredientsArray, onIngredientOpen } = props;
+
   return (
     <>
-      <h2 className={`${styles.subtitle} text text_type_main-medium`} id={id}>
+      <h2 className={`${styles.subtitle} text text_type_main-medium`} ref={ref}>
         {title}
       </h2>
       <ul className={styles.ingredientsList}>
@@ -27,7 +24,7 @@ const IngredientCardList = ({
       </ul>
     </>
   );
-};
+});
 
 IngredientCardList.propTypes = {
   title: PropTypes.string.isRequired,

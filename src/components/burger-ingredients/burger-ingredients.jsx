@@ -4,12 +4,14 @@ import PropTypes from 'prop-types';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import { tabs } from '../../utils/constants';
 import { useSelector } from 'react-redux';
-//import { IngredientsContext } from '../../services/ingredientsContext';
 
 import IngredientCardList from '../ingredient-card-list/ingredient-card-list';
 
 const BurgerIngredients = ({ onIngredientOpen }) => {
   const [current, setCurrent] = React.useState('bun');
+  const bunRef = React.useRef();
+  const sauceRef = React.useRef();
+  const mainRef = React.useRef();
 
   const { ingredients } = useSelector((store) => store.ingredients);
 
@@ -25,10 +27,30 @@ const BurgerIngredients = ({ onIngredientOpen }) => {
     (ingredient) => ingredient.type === tabs.MAIN,
   );
 
+  //при клике на таб
   const onTabClick = (value) => {
     setCurrent(value);
-    document.getElementById(value).scrollIntoView({ behavior: 'smooth' });
+    if (value === tabs.BUN) {
+      bunRef.current.scrollIntoView({ behavior: 'smooth' });
+    } else if (value === tabs.SAUCE) {
+      sauceRef.current.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      mainRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
   };
+
+  /*---------- Тут логика с Intersectional Observer ----------*/
+  //1 - entries — список объектов с информацией о пересечении.
+  //Для каждого наблюдаемого элемента создаётся один объект IntersectionObserverEntry.
+  //2 - observer — ссылка на экземпляр наблюдателя для вызова методов прослушивания
+
+  // const callback = (entries, observer) => {
+  //   entries.foreach((title) => {
+  //     if (title.isIntersecting) {
+  //       console.log('Элемент пересёк границу области и всё ещё соприкасается с ней!')
+  //     }
+  //   })
+  // };
 
   return (
     <section className={styles.section}>
@@ -60,19 +82,22 @@ const BurgerIngredients = ({ onIngredientOpen }) => {
       <div className={styles.ingredientsContainer}>
         <IngredientCardList
           title="Булки"
-          id={tabs.BUN}
+          ref={bunRef}
+          //id={tabs.BUN}
           ingredientsArray={bunArray}
           onIngredientOpen={onIngredientOpen}
         />
         <IngredientCardList
           title="Соусы"
-          id={tabs.SAUCE}
+          ref={sauceRef}
+          //id={tabs.SAUCE}
           ingredientsArray={sauceArray}
           onIngredientOpen={onIngredientOpen}
         />
         <IngredientCardList
           title="Начинки"
-          id={tabs.MAIN}
+          ref={mainRef}
+          //id={tabs.MAIN}
           ingredientsArray={mainIngredientsArray}
           onIngredientOpen={onIngredientOpen}
         />
