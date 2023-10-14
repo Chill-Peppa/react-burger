@@ -9,6 +9,7 @@ import { tabs } from '../../utils/constants';
 import {
   ADD_BUN_INGREDIENT,
   ADD_MAIN_INGREDIENT,
+  DELETE_MAIN_INGREDIENT,
 } from '../../services/actions/burgerConstructor';
 
 import {
@@ -56,7 +57,6 @@ const BurgerConstructor = ({ onOrderOpen }) => {
   const { mainIngredientsData, bunIngredientsData } = useSelector(
     (store) => store.addedIngredients,
   );
-  console.log(bunIngredientsData);
 
   React.useEffect(() => {
     totalPriceDispatch({ type: 'increment', payload: totalPrice });
@@ -92,6 +92,10 @@ const BurgerConstructor = ({ onOrderOpen }) => {
     },
   });
 
+  const handleDeleteIngredient = (key) => {
+    dispatch({ type: DELETE_MAIN_INGREDIENT, id: key });
+  };
+
   return (
     <section className={styles.section} ref={dropTarget}>
       <div className={styles.ingredientContainer}>
@@ -120,6 +124,7 @@ const BurgerConstructor = ({ onOrderOpen }) => {
                   text={ingredient.name}
                   price={ingredient.price}
                   thumbnail={ingredient.image}
+                  handleClose={() => handleDeleteIngredient(ingredient.dropId)}
                 />
               </li>
             ))}

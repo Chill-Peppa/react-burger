@@ -1,7 +1,7 @@
 import {
   ADD_BUN_INGREDIENT,
   ADD_MAIN_INGREDIENT,
-  //DELETE_MAIN_INGREDIENT,
+  DELETE_MAIN_INGREDIENT,
 } from '../actions/burgerConstructor';
 
 //исходное значение ингредиентов в конструкторе
@@ -22,6 +22,14 @@ export const constructorReducer = (state = initialState, action) => {
       return {
         ...state,
         mainIngredientsData: [...state.mainIngredientsData, action.main],
+      };
+    }
+    case DELETE_MAIN_INGREDIENT: {
+      return {
+        ...state,
+        mainIngredientsData: [...state.mainIngredientsData].filter(
+          (item) => item.dropId !== action.id,
+        ),
       };
     }
     default:

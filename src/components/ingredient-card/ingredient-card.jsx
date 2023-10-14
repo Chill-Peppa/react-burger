@@ -13,7 +13,6 @@ import {
 
 const IngredientCard = ({ onIngredientOpen, ingredient }) => {
   const dispatch = useDispatch();
-  console.log(ingredient);
 
   const handleClick = () => {
     dispatch({ type: OPEN_INGREDIENT, ingredient: ingredient });
