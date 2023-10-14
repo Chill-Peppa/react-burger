@@ -33,30 +33,31 @@ const reducer = (state, action) => {
 
 const BurgerConstructor = ({ onOrderOpen }) => {
   const dispatch = useDispatch();
+
+  const ingredients = useSelector((store) => store.ingredients.ingredients);
+
+  const { mainIngredientsData, bunIngredientsData } = useSelector(
+    (store) => store.addedIngredients,
+  );
+
   const [totalPriceState, totalPriceDispatch] = React.useReducer(
     reducer,
     totalPriceInitialVal,
   );
 
-  const ingredients = useSelector((store) => store.ingredients.ingredients);
+  // const bunIngredients = ingredients.filter(
+  //   (ingredient) => ingredient.type === tabs.BUN,
+  // );
 
-  const bunIngredients = ingredients.filter(
-    (ingredient) => ingredient.type === tabs.BUN,
-  );
-
-  const mainIngredients = ingredients.filter(
-    (ingredient) => ingredient.type !== tabs.BUN,
-  );
+  // const mainIngredients = ingredients.filter(
+  //   (ingredient) => ingredient.type !== tabs.BUN,
+  // );
 
   const totalPrice =
-    mainIngredients.reduce((prevItem, item) => {
+    mainIngredientsData.reduce((prevItem, item) => {
       return prevItem + item.price;
     }, 0) +
-    bunIngredients[0].price * 2;
-
-  const { mainIngredientsData, bunIngredientsData } = useSelector(
-    (store) => store.addedIngredients,
-  );
+      bunIngredientsData.price * 2 || 0;
 
   React.useEffect(() => {
     totalPriceDispatch({ type: 'increment', payload: totalPrice });
@@ -82,8 +83,6 @@ const BurgerConstructor = ({ onOrderOpen }) => {
       });
     }
   };
-
-  console.log(mainIngredientsData);
 
   const [, dropTarget] = useDrop({
     accept: 'ingredient',
