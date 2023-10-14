@@ -2,8 +2,9 @@ import React from 'react';
 import styles from './ingredient-card.module.css';
 import PropTypes from 'prop-types';
 import { ingredientsDataType } from '../../utils/constants';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useDrag } from 'react-dnd';
+import { tabs } from '../../utils/constants';
 import { OPEN_INGREDIENT } from '../../services/actions/ingredient';
 
 import {
@@ -13,6 +14,12 @@ import {
 
 const IngredientCard = ({ onIngredientOpen, ingredient }) => {
   const dispatch = useDispatch();
+
+  const { mainIngredientsData, bunIngredientsData } = useSelector(
+    (store) => store.addedIngredients,
+  );
+
+  const [counter, setCounter] = React.useState(0);
 
   const handleClick = () => {
     dispatch({ type: OPEN_INGREDIENT, ingredient: ingredient });
@@ -25,6 +32,23 @@ const IngredientCard = ({ onIngredientOpen, ingredient }) => {
       isDrag: monitor.isDragging(),
     }),
   });
+
+  /*------------------- Логика счетчика ---------------------*/
+  const mainCounter = [...mainIngredientsData].filter(
+    (item) => item._id === ingredient._id,
+  ).length;
+  const bunCounter = [...[bunIngredientsData]].filter(
+    (item) => item._id === ingredient._id,
+  ).length;
+
+  //console.log([...[bunIngredientsData]]);
+  React.useEffect(() => {
+    if (ingredient.type === tabs.BUN) {
+      return setCounter(bunCounter * 2);
+    } else {
+      return setCounter(mainCounter);
+    }
+  }, [bunCounter, mainCounter, ingredient.type]);
 
   return (
     <li
@@ -46,7 +70,7 @@ const IngredientCard = ({ onIngredientOpen, ingredient }) => {
       <p className={`${styles.name} text text_type_main-default`}>
         {ingredient.name}
       </p>
-      <Counter count={3} size="default" />
+      <Counter count={counter} size="default" />
     </li>
   );
 };

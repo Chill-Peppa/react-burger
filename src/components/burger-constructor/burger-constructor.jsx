@@ -45,14 +45,6 @@ const BurgerConstructor = ({ onOrderOpen }) => {
     totalPriceInitialVal,
   );
 
-  // const bunIngredients = ingredients.filter(
-  //   (ingredient) => ingredient.type === tabs.BUN,
-  // );
-
-  // const mainIngredients = ingredients.filter(
-  //   (ingredient) => ingredient.type !== tabs.BUN,
-  // );
-
   const totalPrice =
     mainIngredientsData.reduce((prevItem, item) => {
       return prevItem + item.price;
