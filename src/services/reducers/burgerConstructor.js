@@ -6,7 +6,7 @@ import {
 
 //исходное значение ингредиентов в конструкторе
 const initialState = {
-  bunIngredientsData: [],
+  bunIngredientsData: {},
   mainIngredientsData: [],
 };
 
@@ -21,7 +21,7 @@ export const constructorReducer = (state = initialState, action) => {
     case ADD_MAIN_INGREDIENT: {
       return {
         ...state,
-        mainIngredientsData: action.main,
+        mainIngredientsData: [...state.mainIngredientsData, action.main],
       };
     }
     default:

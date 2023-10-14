@@ -15,6 +15,24 @@
   margin-left: 48px;
 }
 
+.bunTopDefault {
+  text-align: center;
+  margin-top: 150px;
+  margin-bottom: 50px;
+}
+
+.mainDefault {
+  text-align: center;
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+.bunBottomDefault {
+  text-align: center;
+  margin-top: 50px;
+  margin-bottom: 150px;
+}
+
 .main {
   margin: 0;
   padding: 0;

@@ -3,6 +3,7 @@ import styles from './ingredient-card.module.css';
 import PropTypes from 'prop-types';
 import { ingredientsDataType } from '../../utils/constants';
 import { useDispatch } from 'react-redux';
+import { useDrag } from 'react-dnd';
 import { OPEN_INGREDIENT } from '../../services/actions/ingredient';
 
 import {
@@ -12,13 +13,25 @@ import {
 
 const IngredientCard = ({ onIngredientOpen, ingredient }) => {
   const dispatch = useDispatch();
+  console.log(ingredient);
 
   const handleClick = () => {
     dispatch({ type: OPEN_INGREDIENT, ingredient: ingredient });
   };
 
+  const [{ isDrag }, dragRef] = useDrag({
+    type: 'ingredient',
+    item: ingredient,
+    collect: (monitor) => ({
+      isDrag: monitor.isDragging(),
+    }),
+  });
+
   return (
-    <li className={styles.card} onClick={onIngredientOpen}>
+    <li
+      className={isDrag ? styles.draggedCard : styles.card}
+      onClick={onIngredientOpen}
+      ref={dragRef}>
       <img
         className={styles.image}
         src={ingredient.image}

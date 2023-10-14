@@ -12,11 +12,7 @@ const BurgerIngredients = ({ onIngredientOpen }) => {
   const { ingredients } = useSelector((store) => store.ingredients);
 
   const [current, setCurrent] = React.useState('bun');
-  // const bunRef = React.useRef();
-  // const sauceRef = React.useRef();
-  // const mainRef = React.useRef();
   const containerRef = React.useRef();
-  console.log(containerRef.current);
 
   const bunArray = ingredients.filter(
     (ingredient) => ingredient.type === tabs.BUN,
@@ -55,29 +51,14 @@ const BurgerIngredients = ({ onIngredientOpen }) => {
   React.useEffect(() => {
     if (inViewBun) {
       setCurrent(tabs.BUN);
-      console.log('булочка');
     }
     if (inViewSauce && !inViewBun) {
       setCurrent(tabs.SAUCE);
-      console.log('соус');
     }
     if (inViewMain) {
       setCurrent(tabs.MAIN);
-      console.log('мейн');
     }
   }, [inViewBun, inViewSauce, inViewMain]);
-
-  //при клике на таб
-  // const onTabClick = (value) => {
-  //   setCurrent(value);
-  //   if (value === tabs.BUN) {
-  //     bunRef.current.scrollIntoView({ behavior: 'smooth' });
-  //   } else if (value === tabs.SAUCE) {
-  //     sauceRef.current.scrollIntoView({ behavior: 'smooth' });
-  //   } else {
-  //     mainRef.current.scrollIntoView({ behavior: 'smooth' });
-  //   }
-  // };
 
   return (
     <section className={styles.section}>
