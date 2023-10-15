@@ -1,10 +1,12 @@
 import React from 'react';
 import styles from './burger-constructor-ingredient.module.css';
+import PropTypes from 'prop-types';
 import {
   ConstructorElement,
   DragIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useDrag, useDrop } from 'react-dnd';
+import { ingredientsDataType } from '../../utils/constants';
 
 const BurgerConstructorIngredient = ({
   ingredient,
@@ -15,6 +17,7 @@ const BurgerConstructorIngredient = ({
   /*------------------ SORT ----------------------*/
   const { _id } = ingredient;
   const ingredientItemRef = React.useRef(null);
+  console.log(ingredient);
 
   const [{ handlerId }, drop] = useDrop({
     accept: 'constructor-item',
@@ -87,3 +90,10 @@ const BurgerConstructorIngredient = ({
 };
 
 export default BurgerConstructorIngredient;
+
+BurgerConstructorIngredient.propTypes = {
+  handleDeleteIngredient: PropTypes.func.isRequired,
+  moveCard: PropTypes.func.isRequired,
+  index: PropTypes.number.isRequired,
+  ingredient: ingredientsDataType.isRequired,
+};
