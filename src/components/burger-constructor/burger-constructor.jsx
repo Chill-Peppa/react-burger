@@ -4,21 +4,23 @@ import PropTypes from 'prop-types';
 import { useDrop } from 'react-dnd';
 import { useSelector, useDispatch } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
+import update from 'immutability-helper';
 
 import { tabs } from '../../utils/constants';
 import {
   ADD_BUN_INGREDIENT,
   ADD_MAIN_INGREDIENT,
   DELETE_MAIN_INGREDIENT,
+  SORT_INGREDIENTS,
 } from '../../services/actions/burgerConstructor';
 
 import {
   ConstructorElement,
-  DragIcon,
   CurrencyIcon,
   Button,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import { getOrderNumber } from '../../services/actions/order';
+import BurgerConstructorIngredient from '../burger-constructor-ingredient/burger-constructor-ingredient';
 
 const totalPriceInitialVal = { total: 0 };
 
@@ -87,6 +89,21 @@ const BurgerConstructor = ({ onOrderOpen }) => {
     dispatch({ type: DELETE_MAIN_INGREDIENT, id: key });
   };
 
+  const moveCard = React.useCallback(
+    (dragIndex, hoverIndex) => {
+      dispatch({
+        type: SORT_INGREDIENTS,
+        sortMain: update(mainIngredientsData, {
+          $splice: [
+            [dragIndex, 1],
+            [hoverIndex, 0, mainIngredientsData[dragIndex]],
+          ],
+        }),
+      });
+    },
+    [dispatch, mainIngredientsData],
+  );
+
   return (
     <section className={styles.section} ref={dropTarget}>
       <div className={styles.ingredientContainer}>
@@ -108,16 +125,14 @@ const BurgerConstructor = ({ onOrderOpen }) => {
 
         {mainIngredientsData.length > 0 ? (
           <ul className={styles.main}>
-            {mainIngredientsData.map((ingredient) => (
-              <li key={ingredient.dropId} className={styles.item}>
-                <DragIcon type="primary" />
-                <ConstructorElement
-                  text={ingredient.name}
-                  price={ingredient.price}
-                  thumbnail={ingredient.image}
-                  handleClose={() => handleDeleteIngredient(ingredient.dropId)}
-                />
-              </li>
+            {mainIngredientsData.map((ingredient, index) => (
+              <BurgerConstructorIngredient
+                index={index}
+                key={ingredient.dropId}
+                ingredient={ingredient}
+                handleDeleteIngredient={handleDeleteIngredient}
+                moveCard={moveCard}
+              />
             ))}
           </ul>
         ) : (

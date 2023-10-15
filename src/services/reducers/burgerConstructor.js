@@ -2,6 +2,7 @@ import {
   ADD_BUN_INGREDIENT,
   ADD_MAIN_INGREDIENT,
   DELETE_MAIN_INGREDIENT,
+  SORT_INGREDIENTS,
 } from '../actions/burgerConstructor';
 
 //исходное значение ингредиентов в конструкторе
@@ -30,6 +31,12 @@ export const constructorReducer = (state = initialState, action) => {
         mainIngredientsData: [...state.mainIngredientsData].filter(
           (item) => item.dropId !== action.id,
         ),
+      };
+    }
+    case SORT_INGREDIENTS: {
+      return {
+        ...state,
+        mainIngredientsData: [...action.sortMain],
       };
     }
     default:
