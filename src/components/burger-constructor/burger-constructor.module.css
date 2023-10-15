@@ -47,6 +47,14 @@
   margin-left: 48px;
 }
 
+.disabled {
+  cursor: not-allowed;
+  background: #f8f8f8;
+  color: #c2c2c2;
+  border: none;
+  pointer-events: none;
+}
+
 /*--------- Итоговый прайс -----------*/
 .total {
   margin-top: 40px;

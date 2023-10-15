@@ -167,6 +167,9 @@ const BurgerConstructor = ({ onOrderOpen }) => {
           <CurrencyIcon type="primary" />
         </div>
         <Button
+          extraClass={`${
+            Object.keys(bunIngredientsData).length ? ' ' : styles.disabled
+          }`}
           htmlType="button"
           type="primary"
           size="medium"
