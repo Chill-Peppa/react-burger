@@ -12,10 +12,12 @@ export function getOrderNumber(id) {
     api
       .sendOrder(id)
       .then((res) => {
-        dispatch({
-          type: GET_ORDER_NUMBER_SUCCESS,
-          newOrderNumber: res.order.number,
-        });
+        setTimeout(() => {
+          dispatch({
+            type: GET_ORDER_NUMBER_SUCCESS,
+            newOrderNumber: res.order.number,
+          });
+        }, 1000);
       })
       .catch((err) => {
         dispatch({
