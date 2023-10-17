@@ -1,17 +1,27 @@
 import React from 'react';
 import styles from './order-details.module.css';
 import done from '../../images/done.svg';
-
-import { NewOrderContext } from '../../services/newOrderContext';
+import { useSelector } from 'react-redux';
 
 const OrderDetails = () => {
-  const newOrderNumber = React.useContext(NewOrderContext);
+  const { newOrderNumber, orderNumberRequest, orderNumberFailed } = useSelector(
+    (store) => store.order,
+  );
+  console.log(newOrderNumber);
 
   return (
     <div className={styles.orderDetails}>
-      <h3 className="text text_type_digits-large mt-4 mb-8">
-        {newOrderNumber}
-      </h3>
+      {orderNumberRequest ? (
+        <p className="text text_type_main-small text_color_inactive">
+          Загрузка данных...
+        </p>
+      ) : orderNumberFailed ? (
+        <p>Произошла ошибка на сервере...</p>
+      ) : (
+        <h3 className="text text_type_digits-large mt-4 mb-8">
+          {newOrderNumber}
+        </h3>
+      )}
       <span className="text text_type_main-medium mb-15">
         идентификатор заказа
       </span>

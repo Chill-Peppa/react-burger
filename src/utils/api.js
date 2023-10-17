@@ -1,3 +1,5 @@
+import { BASE_URL } from '../utils/constants';
+
 export default class Api {
   constructor({ url, headers }) {
     this._url = url;
@@ -34,3 +36,11 @@ export default class Api {
     });
   }
 }
+
+//тут экземпляр класса
+export const api = new Api({
+  url: BASE_URL,
+  headers: {
+    'Content-Type': 'application/json',
+  },
+});

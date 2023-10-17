@@ -3,14 +3,16 @@ import styles from './burger-ingredients.module.css';
 import PropTypes from 'prop-types';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import { tabs } from '../../utils/constants';
-import { IngredientsContext } from '../../services/ingredientsContext';
+import { useSelector } from 'react-redux';
+import { useInView } from 'react-intersection-observer';
 
 import IngredientCardList from '../ingredient-card-list/ingredient-card-list';
 
-const BurgerIngredients = ({ onIngredientOpen, onIngredientClick }) => {
+const BurgerIngredients = ({ onIngredientOpen }) => {
+  const { ingredients } = useSelector((store) => store.ingredients);
+
   const [current, setCurrent] = React.useState('bun');
-  //тут берем значение из React.Context API
-  const ingredients = React.useContext(IngredientsContext);
+  const containerRef = React.useRef();
 
   const bunArray = ingredients.filter(
     (ingredient) => ingredient.type === tabs.BUN,
@@ -24,10 +26,39 @@ const BurgerIngredients = ({ onIngredientOpen, onIngredientClick }) => {
     (ingredient) => ingredient.type === tabs.MAIN,
   );
 
+  //при клике на таб
   const onTabClick = (value) => {
     setCurrent(value);
     document.getElementById(value).scrollIntoView({ behavior: 'smooth' });
   };
+
+  /*---------- Тут логика с Intersectional Observer ----------*/
+  const [tabBunRef, inViewBun] = useInView({
+    root: containerRef.current,
+    threshold: 0,
+  });
+
+  const [tabSauceRef, inViewSauce] = useInView({
+    root: containerRef.current,
+    rootMargin: '0px 0px -90% 0px',
+  });
+
+  const [tabMainRef, inViewMain] = useInView({
+    root: containerRef.current,
+    rootMargin: '0px 0px -90% 0px',
+  });
+
+  React.useEffect(() => {
+    if (inViewBun) {
+      setCurrent(tabs.BUN);
+    }
+    if (inViewSauce && !inViewBun) {
+      setCurrent(tabs.SAUCE);
+    }
+    if (inViewMain) {
+      setCurrent(tabs.MAIN);
+    }
+  }, [inViewBun, inViewSauce, inViewMain]);
 
   return (
     <section className={styles.section}>
@@ -56,27 +87,27 @@ const BurgerIngredients = ({ onIngredientOpen, onIngredientClick }) => {
         </Tab>
       </div>
 
-      <div className={styles.ingredientsContainer}>
+      <div className={styles.ingredientsContainer} ref={containerRef}>
         <IngredientCardList
           title="Булки"
+          ref={tabBunRef}
           id={tabs.BUN}
           ingredientsArray={bunArray}
           onIngredientOpen={onIngredientOpen}
-          onIngredientClick={onIngredientClick}
         />
         <IngredientCardList
           title="Соусы"
+          ref={tabSauceRef}
           id={tabs.SAUCE}
           ingredientsArray={sauceArray}
           onIngredientOpen={onIngredientOpen}
-          onIngredientClick={onIngredientClick}
         />
         <IngredientCardList
           title="Начинки"
+          ref={tabMainRef}
           id={tabs.MAIN}
           ingredientsArray={mainIngredientsArray}
           onIngredientOpen={onIngredientOpen}
-          onIngredientClick={onIngredientClick}
         />
       </div>
     </section>
@@ -85,7 +116,6 @@ const BurgerIngredients = ({ onIngredientOpen, onIngredientClick }) => {
 
 BurgerIngredients.propTypes = {
   onIngredientOpen: PropTypes.func.isRequired,
-  onIngredientClick: PropTypes.func.isRequired,
 };
 
 export default BurgerIngredients;

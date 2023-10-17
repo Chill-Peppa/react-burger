@@ -15,4 +15,7 @@ https://react-burger-one-psi.vercel.app/
 - CSS-modules
 - PropTypes
 - React.Context
+- Redux
+- Intersectional Observer API
+- React-DND, uuid
   (...будут дополняться)

@@ -1,0 +1,8 @@
+.item {
+  list-style: none;
+  margin-left: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: move;
+}
