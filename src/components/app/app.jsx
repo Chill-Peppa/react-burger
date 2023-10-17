@@ -8,23 +8,10 @@ import OrderDetails from '../order-details/order-details';
 import IngredientDetails from '../ingredient-details/ingredient-details';
 import Modal from '../modal/modal';
 
-// import Api from '../../utils/api';
-// import { BASE_URL } from '../../utils/constants';
-//import { NewOrderContext } from '../../services/newOrderContext';
-
 import { getIngredients } from '../../services/actions/burgerIngredients';
-import { CLOSE_INGREDIENT } from '../../services/actions/ingredient';
-
-// const api = new Api({
-//   url: BASE_URL,
-//   headers: {
-//     'Content-Type': 'application/json',
-//   },
-// });
+import { closeIngredient } from '../../services/actions/ingredient';
 
 function App() {
-  //const [newOrderNumber, setNewOrderNumber] = React.useState(null);
-
   const [isOpenIngredientModal, setIsOpenIngredientModal] =
     React.useState(false);
   const [isOpenOrderModal, setIsOpenOrderModal] = React.useState(false);
@@ -35,18 +22,6 @@ function App() {
     dispatch(getIngredients());
   }, [dispatch]);
 
-  // получаем номер заказа
-  // const handleGetOrderNumber = (ingredientsId) => {
-  //   api
-  //     .sendOrder(ingredientsId)
-  //     .then((res) => {
-  //       console.log(res);
-  //       setNewOrderNumber(res.order.number);
-  //       handleOpenOrderModal();
-  //     })
-  //     .catch((err) => console.error(`Ошибка: ${err}`));
-  // };
-
   const handleOpenIngredientModal = () => {
     setIsOpenIngredientModal(true);
   };
@@ -56,7 +31,7 @@ function App() {
   };
 
   const onRemoveSelectedIngredient = () => {
-    dispatch({ type: CLOSE_INGREDIENT, selectedIngredient: null });
+    dispatch(closeIngredient(null));
   };
 
   // закрытие всех модалок

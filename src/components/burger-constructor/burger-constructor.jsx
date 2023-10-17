@@ -8,10 +8,10 @@ import update from 'immutability-helper';
 
 import { tabs } from '../../utils/constants';
 import {
-  ADD_BUN_INGREDIENT,
-  ADD_MAIN_INGREDIENT,
-  DELETE_MAIN_INGREDIENT,
   SORT_INGREDIENTS,
+  addBun,
+  addMain,
+  deleteMain,
 } from '../../services/actions/burgerConstructor';
 
 import {
@@ -66,15 +66,9 @@ const BurgerConstructor = ({ onOrderOpen }) => {
   /*------------ DND ------------*/
   const onDropHandler = (item) => {
     if (item.type === tabs.BUN) {
-      dispatch({
-        type: ADD_BUN_INGREDIENT,
-        bun: item,
-      });
+      dispatch(addBun(item));
     } else if (item.type !== tabs.BUN) {
-      dispatch({
-        type: ADD_MAIN_INGREDIENT,
-        main: { ...item, dropId: uuidv4() },
-      });
+      dispatch(addMain({ ...item, dropId: uuidv4() }));
     }
   };
 
@@ -86,7 +80,7 @@ const BurgerConstructor = ({ onOrderOpen }) => {
   });
 
   const handleDeleteIngredient = (key) => {
-    dispatch({ type: DELETE_MAIN_INGREDIENT, id: key });
+    dispatch(deleteMain(key));
   };
 
   const moveCard = React.useCallback(

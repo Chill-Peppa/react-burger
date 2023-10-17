@@ -5,7 +5,7 @@ import { ingredientsDataType } from '../../utils/constants';
 import { useDispatch, useSelector } from 'react-redux';
 import { useDrag } from 'react-dnd';
 import { tabs } from '../../utils/constants';
-import { OPEN_INGREDIENT } from '../../services/actions/ingredient';
+import { openIngredient } from '../../services/actions/ingredient';
 
 import {
   CurrencyIcon,
@@ -22,7 +22,7 @@ const IngredientCard = ({ onIngredientOpen, ingredient }) => {
   const [counter, setCounter] = React.useState(0);
 
   const handleClick = () => {
-    dispatch({ type: OPEN_INGREDIENT, ingredient: ingredient });
+    dispatch(openIngredient(ingredient));
   };
 
   const [{ isDrag }, dragRef] = useDrag({

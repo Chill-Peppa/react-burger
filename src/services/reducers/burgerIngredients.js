@@ -1,4 +1,3 @@
-//В этом файле получаю список ингредиентов
 import {
   GET_INGREDIENTS,
   GET_INGREDIENTS_SUCCESS,
