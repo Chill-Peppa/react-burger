@@ -7,6 +7,7 @@ import { HTML5Backend } from 'react-dnd-html5-backend';
 
 import BurgerIngredients from '../burger-ingredients/burger-ingredients';
 import BurgerConstructor from '../burger-constructor/burger-constructor';
+import Loader from '../loader/loader';
 
 const Main = ({ onIngredientOpen, onOrderOpen }) => {
   const { ingredients, ingredientsRequest, ingredientsFailed } = useSelector(
@@ -17,9 +18,11 @@ const Main = ({ onIngredientOpen, onOrderOpen }) => {
     <main className={styles.main}>
       <DndProvider backend={HTML5Backend}>
         {ingredientsRequest ? (
-          <p>Загрузка данных...</p>
+          <p className={styles.loader}>
+            <Loader />
+          </p>
         ) : ingredientsFailed ? (
-          <p>Произошла ошибка на сервере...</p>
+          <p>Произошла ошибка на сервере 🤕...</p>
         ) : (
           <BurgerIngredients onIngredientOpen={onIngredientOpen} />
         )}

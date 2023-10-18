@@ -5,3 +5,11 @@
   gap: 40px;
   /* padding-bottom: 40px; */
 }
+
+.loader {
+  max-width: 1280px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+}

@@ -16,7 +16,7 @@ const OrderDetails = () => {
           Загрузка данных...
         </p>
       ) : orderNumberFailed ? (
-        <p>Произошла ошибка на сервере...</p>
+        <p>Произошла ошибка на сервере 🤕...</p>
       ) : (
         <h3 className="text text_type_digits-large mt-4 mb-8">
           {newOrderNumber}
