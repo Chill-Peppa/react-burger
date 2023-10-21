@@ -1,0 +1,39 @@
+.profile {
+  max-width: 1280px;
+  margin: 120px auto 0;
+}
+
+.container {
+  width: 860px;
+  display: flex;
+  gap: 60px;
+}
+
+.menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  height: 64px;
+}
+
+.link {
+  text-decoration: none;
+  color: #8585ad;
+}
+
+.link:active {
+  color: #f2f2f3;
+}
+
+.active {
+  color: #f2f2f3;
+}
+
+.input {
+  margin-bottom: 24px;
+}
