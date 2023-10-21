@@ -7,6 +7,7 @@ import Main from '../main/main';
 import OrderDetails from '../order-details/order-details';
 import IngredientDetails from '../ingredient-details/ingredient-details';
 import Modal from '../modal/modal';
+import NotFoundPage from '../../pages/not-found/not-found';
 
 import { getIngredients } from '../../services/actions/burgerIngredients';
 import { closeIngredient } from '../../services/actions/ingredient';
@@ -43,7 +44,8 @@ function App() {
 
   return (
     <div className={styles.page}>
-      <AppHeader />
+      <NotFoundPage />
+      {/* <AppHeader />
 
       <Main
         onOrderOpen={handleOpenOrderModal}
@@ -60,7 +62,7 @@ function App() {
         <Modal onClose={handleCloseAllModals} title="">
           <OrderDetails onClose={handleCloseAllModals} />
         </Modal>
-      )}
+      )} */}
     </div>
   );
 }
