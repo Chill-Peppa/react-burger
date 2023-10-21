@@ -8,7 +8,6 @@ const NotFoundPage = () => {
       <div className={styles.main}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          //   xmlns:xlink="http://www.w3.org/1999/xlink"
           width="470"
           height="290"
           viewBox="0 0 470 290">
@@ -26,10 +25,8 @@ const NotFoundPage = () => {
               transform="translate(-448 -157)"
             />
             <g transform="translate(-448 -157) translate(448 157)">
-              <mask id="prefix__b" fill="#fff">
-                {/* <use xlink:href="#prefix__a" /> */}
-              </mask>
-              {/* <use fill="#F6F6F7" xlink:href="#prefix__a" /> */}
+              <mask id="prefix__b" fill="#fff"></mask>
+
               <path
                 fill="#EDEDF0"
                 fill-rule="nonzero"
