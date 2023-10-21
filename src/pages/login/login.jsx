@@ -7,15 +7,14 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Link } from 'react-router-dom';
 
-function Login() {
+function Login({ title }) {
   return (
     <section className={styles.sign}>
       <h2 className={`${styles.title} text text_type_main-medium mb-6`}>
-        Вход
+        {title}
       </h2>
       <form className={styles.form}>
         <Input
-          className={styles.input}
           name="email"
           placeholder="E-mail"
           autoComplete="off"

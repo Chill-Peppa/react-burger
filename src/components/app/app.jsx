@@ -9,6 +9,7 @@ import IngredientDetails from '../ingredient-details/ingredient-details';
 import Modal from '../modal/modal';
 import NotFoundPage from '../../pages/not-found/not-found';
 import Login from '../../pages/login/login';
+import Register from '../../pages/register/register';
 
 import { getIngredients } from '../../services/actions/burgerIngredients';
 import { closeIngredient } from '../../services/actions/ingredient';
@@ -46,7 +47,7 @@ function App() {
   return (
     <div className={styles.page}>
       <AppHeader />
-      <Login />
+      <Register title="Регистрация" />
       {/*
       <Main
         onOrderOpen={handleOpenOrderModal}
@@ -65,6 +66,7 @@ function App() {
         </Modal>
       )} 
       <NotFoundPage />
+      <Login title='Вход' />
       */}
     </div>
   );
