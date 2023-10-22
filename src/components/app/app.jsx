@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './app.module.css';
 import { useDispatch } from 'react-redux';
+import { Routes, Route, useLocation } from 'react-router-dom';
 
 import AppHeader from '../app-header/app-header';
 import Main from '../main/main';
@@ -16,6 +17,7 @@ import Profile from '../../pages/profile/profile';
 
 import { getIngredients } from '../../services/actions/burgerIngredients';
 import { closeIngredient } from '../../services/actions/ingredient';
+import { headerLocations } from '../../utils/constants';
 
 function App() {
   const [isOpenIngredientModal, setIsOpenIngredientModal] =
@@ -23,6 +25,7 @@ function App() {
   const [isOpenOrderModal, setIsOpenOrderModal] = React.useState(false);
 
   const dispatch = useDispatch();
+  const location = useLocation();
 
   React.useEffect(() => {
     dispatch(getIngredients());
@@ -49,13 +52,31 @@ function App() {
 
   return (
     <div className={styles.page}>
-      <AppHeader />
-      <Profile />
-      {/*
-      <Main
-        onOrderOpen={handleOpenOrderModal}
-        onIngredientOpen={handleOpenIngredientModal}
-      />
+      {headerLocations.includes(location.pathname) && <AppHeader />}
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <Main
+              onOrderOpen={handleOpenOrderModal}
+              onIngredientOpen={handleOpenIngredientModal}
+            />
+          }
+        />
+        <Route path="/login" element={<Login title="Вход" />} />
+        <Route path="/register" element={<Register title="Регистрация" />} />
+        <Route
+          path="/forgot-password"
+          element={<ForgotPassword title="Восстановление пароля" />}
+        />
+        <Route
+          path="/reset-password"
+          element={<ResetPassword title="Восстановление пароля" />}
+        />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/profile/orders" element={<Profile />} />
+        <Route path="*" element={<NotFoundPage />} />
+      </Routes>
 
       {isOpenIngredientModal && (
         <Modal onClose={handleCloseAllModals} title="Детали ингредиента">
@@ -67,13 +88,7 @@ function App() {
         <Modal onClose={handleCloseAllModals} title="">
           <OrderDetails onClose={handleCloseAllModals} />
         </Modal>
-      )} 
-      <NotFoundPage />
-      <Login title='Вход' />
-      <Register title="Регистрация" />
-      <ForgotPassword title="Восстановление пароля" />
-      <ResetPassword title="Восстановление пароля" />
-      */}
+      )}
     </div>
   );
 }

@@ -24,16 +24,41 @@
 .link {
   text-decoration: none;
   color: #8585ad;
+  opacity: 1;
+  transition: all 0.3s ease-in-out;
 }
 
 .link:active {
   color: #f2f2f3;
 }
 
+.link:hover {
+  opacity: 0.7;
+}
+
 .active {
+  text-decoration: none;
   color: #f2f2f3;
 }
 
 .input {
   margin-bottom: 24px;
+}
+
+.button {
+  font-family: 'Jet Brains Mono', Arial, sans-serif;
+  font-weight: bold;
+  margin: 0;
+  padding: 0;
+  font-size: 24px;
+  color: #8585ad;
+  background: inherit;
+  border: none;
+  cursor: pointer;
+  opacity: 1;
+  transition: all 0.3s ease-in-out;
+}
+
+.button:hover {
+  opacity: 0.7;
 }

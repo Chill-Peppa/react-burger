@@ -26,3 +26,13 @@ export const ingredientsDataType = PropTypes.shape({
   _id: PropTypes.string.isRequired,
   dropId: PropTypes.string,
 });
+
+export const headerLocations = [
+  '/',
+  '/login',
+  '/register',
+  '/forgot-password',
+  '/reset-password',
+  '/profile',
+  '/profile/orders',
+];

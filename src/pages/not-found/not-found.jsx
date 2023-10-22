@@ -131,7 +131,9 @@ const NotFoundPage = () => {
           </h2>
           <p className={`${styles.paragraph} text text_type_main-medium`}>
             Зато у нас много других интересных страниц. Вернитесь на{' '}
-            <Link className={`${styles.back} text text_type_main-medium`}>
+            <Link
+              to="/"
+              className={`${styles.back} text text_type_main-medium`}>
               главную
             </Link>
             , чтобы с ними ознакомиться.
