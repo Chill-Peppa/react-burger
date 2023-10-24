@@ -35,6 +35,37 @@ export default class Api {
       body: JSON.stringify({ ingredients: id }),
     });
   }
+
+  //метод на регистрацию юзера
+  register(user) {
+    return this._request(`${this._url}/api/auth/register`, {
+      headers: this._headers,
+      method: 'POST',
+      mode: 'cors',
+      cache: 'no-cache',
+      credentials: 'same-origin',
+      redirect: 'follow',
+      referrerPolicy: 'no-referrer',
+      body: JSON.stringify(user),
+    }).then(this._returnResponse);
+  }
+
+  //метод для авторизации в системе
+  // login(email, password) {
+  //   return this._request(`${this._url}/api/auth/login`, {
+  //     headers: this._headers,
+  //     method: 'POST',
+  //     mode: 'cors',
+  //     cache: 'no-cache',
+  //     credentials: 'same-origin',
+  //     redirect: 'follow',
+  //     referrerPolicy: 'no-referrer',
+  //     body: JSON.stringify({
+  //       email: `${email}`,
+  //       password: `${password}`,
+  //     }),
+  //   }).then(this._returnResponse);
+  // }
 }
 
 //тут экземпляр класса

@@ -5,7 +5,7 @@ import React from 'react';
 import styles from './order-history.module.css';
 
 function OrderHistory() {
-  return <h2 className={styles.orderTitle}>order-history</h2>;
+  return <div className={styles.order}>order-history</div>;
 }
 
 export default OrderHistory;

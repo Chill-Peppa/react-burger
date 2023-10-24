@@ -36,3 +36,7 @@ export const headerLocations = [
   '/profile',
   '/profile/orders',
 ];
+
+//Scoof Scoofov
+//testqwerty@yandex.ru
+//puzojitel228

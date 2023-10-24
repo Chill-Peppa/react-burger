@@ -16,7 +16,7 @@ export const deleteMain = (id) => {
   return { type: DELETE_MAIN_INGREDIENT, id };
 };
 //если будет время, надо подумать над тем как
-//нормально написать криейтор, чтобы он всё таки работал,
+//нормально написать криейтор, чтобы он всё таки работал.
 //сейчас днд не сортируется, если всё оставить так
 export const sortIngredients = (sortMain) => {
   return { type: SORT_INGREDIENTS, sortMain };

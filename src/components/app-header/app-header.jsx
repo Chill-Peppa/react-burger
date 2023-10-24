@@ -31,7 +31,7 @@ const AppHeader = () => {
               </NavLink>
             </li>
             <li>
-              <Link to="/" className={styles.menuLink}>
+              <Link to="#" className={styles.menuLink}>
                 <ListIcon type="secondary" />
                 <span className="text text_type_main-default">
                   Лента заказов
