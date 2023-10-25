@@ -1,4 +1,5 @@
 import { BASE_URL } from '../utils/constants';
+import { getCookie } from './cookies';
 
 export default class Api {
   constructor({ url, headers }) {
@@ -51,21 +52,31 @@ export default class Api {
   }
 
   //метод для авторизации в системе
-  // login(email, password) {
-  //   return this._request(`${this._url}/api/auth/login`, {
-  //     headers: this._headers,
-  //     method: 'POST',
-  //     mode: 'cors',
-  //     cache: 'no-cache',
-  //     credentials: 'same-origin',
-  //     redirect: 'follow',
-  //     referrerPolicy: 'no-referrer',
-  //     body: JSON.stringify({
-  //       email: `${email}`,
-  //       password: `${password}`,
-  //     }),
-  //   }).then(this._returnResponse);
-  // }
+  login(user) {
+    return this._request(`${this._url}/api/auth/login`, {
+      headers: this._headers,
+      method: 'POST',
+      mode: 'cors',
+      cache: 'no-cache',
+      credentials: 'same-origin',
+      redirect: 'follow',
+      referrerPolicy: 'no-referrer',
+      body: JSON.stringify(user),
+    }).then(this._returnResponse);
+  }
+
+  logout() {
+    return this._request(`${this._url}/api/auth/logout`, {
+      headers: this._headers,
+      method: 'POST',
+      mode: 'cors',
+      cache: 'no-cache',
+      credentials: 'same-origin',
+      redirect: 'follow',
+      referrerPolicy: 'no-referrer',
+      body: JSON.stringify({ token: getCookie('refreshToken') }),
+    }).then(this._returnResponse);
+  }
 }
 
 //тут экземпляр класса

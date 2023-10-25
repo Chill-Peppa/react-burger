@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './profile.module.css';
+import { useDispatch } from 'react-redux';
 import { NavLink, useLocation } from 'react-router-dom';
 import {
   EmailInput,
@@ -7,10 +8,12 @@ import {
   Input,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import OrderHistory from '../order-history/order-history';
+import { logout } from '../../services/actions/auth';
 
 function Profile() {
   const inputRef = React.useRef(null);
   const location = useLocation();
+  const dispatch = useDispatch();
 
   const onIconClick = () => {
     setTimeout(() => inputRef.current.focus(), 0);
@@ -18,6 +21,11 @@ function Profile() {
 
   const returnLinkState = ({ isActive }) => {
     return `${isActive ? styles.active : styles.link}`;
+  };
+
+  const handleLogout = () => {
+    dispatch(logout());
+    console.log('разлогинились');
   };
 
   return (
@@ -36,7 +44,9 @@ function Profile() {
               </NavLink>
             </li>
             <li className={`text text_type_main-medium ${styles.item}`}>
-              <button className={styles.button}>Выход</button>
+              <button className={styles.button} onClick={handleLogout}>
+                Выход
+              </button>
             </li>
           </ul>
           <p className="mt-20 text text_type_main-default text_color_inactive">
