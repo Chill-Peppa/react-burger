@@ -65,6 +65,7 @@ export default class Api {
     }).then(this._returnResponse);
   }
 
+  //чтобы разлогиниться
   logout() {
     return this._request(`${this._url}/api/auth/logout`, {
       headers: this._headers,
@@ -75,6 +76,37 @@ export default class Api {
       redirect: 'follow',
       referrerPolicy: 'no-referrer',
       body: JSON.stringify({ token: getCookie('refreshToken') }),
+    }).then(this._returnResponse);
+  }
+
+  //для восстановления пароля
+  recoverPassword(email) {
+    return this._request(`${this._url}/api/password-reset`, {
+      headers: this._headers,
+      method: 'POST',
+      mode: 'cors',
+      cache: 'no-cache',
+      credentials: 'same-origin',
+      redirect: 'follow',
+      referrerPolicy: 'no-referrer',
+      body: JSON.stringify({ email: email }),
+    }).then(this._returnResponse);
+  }
+
+  //сбрасываем пароль
+  resetPassword(passwordData) {
+    return this._request(`${this._url}/api/password-reset/reset`, {
+      headers: this._headers,
+      method: 'POST',
+      mode: 'cors',
+      cache: 'no-cache',
+      credentials: 'same-origin',
+      redirect: 'follow',
+      referrerPolicy: 'no-referrer',
+      body: JSON.stringify({
+        password: passwordData.newPassword,
+        token: passwordData.token,
+      }),
     }).then(this._returnResponse);
   }
 }

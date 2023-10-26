@@ -8,6 +8,12 @@ import {
   AUTH_LOGOUT,
   AUTH_LOGOUT_SUCCESS,
   AUTH_LOGOUT_FAILED,
+  AUTH_FORGOT_PASSWORD,
+  AUTH_FORGOT_PASSWORD_SUCCESS,
+  AUTH_FORGOT_PASSWORD_FAILED,
+  AUTH_RESET_PASSWORD,
+  AUTH_RESET_PASSWORD_SUCCESS,
+  AUTH_RESET_PASSWORD_FAILED,
 } from '../actions/auth';
 
 const initialState = {
@@ -20,10 +26,16 @@ const initialState = {
   registerFailed: false,
 
   loginRequest: false,
-  loginFail: false,
+  loginFailed: false,
 
   logoutRequest: false,
-  logoutFail: false,
+  logoutFailed: false,
+
+  forgotPasswordRequest: false,
+  forgotPasswordFailed: false,
+
+  resetPasswordRequest: false,
+  resetPasswordFailed: false,
 };
 
 export const authReducer = (state = initialState, action) => {
@@ -88,6 +100,48 @@ export const authReducer = (state = initialState, action) => {
         ...state,
         logoutFailed: true,
         logoutRequest: false,
+      };
+    }
+    case AUTH_FORGOT_PASSWORD: {
+      return {
+        ...state,
+        forgotPasswordRequest: true,
+        forgotPasswordFailed: false,
+      };
+    }
+    case AUTH_FORGOT_PASSWORD_SUCCESS: {
+      return {
+        ...state,
+        forgotPasswordRequest: false,
+        forgotPasswordFailed: false,
+      };
+    }
+    case AUTH_FORGOT_PASSWORD_FAILED: {
+      return {
+        ...state,
+        forgotPasswordRequest: false,
+        forgotPasswordFailed: true,
+      };
+    }
+    case AUTH_RESET_PASSWORD: {
+      return {
+        ...state,
+        resetPasswordRequest: true,
+        resetPasswordFailed: false,
+      };
+    }
+    case AUTH_RESET_PASSWORD_SUCCESS: {
+      return {
+        ...state,
+        resetPasswordRequest: false,
+        resetPasswordFailed: false,
+      };
+    }
+    case AUTH_RESET_PASSWORD_FAILED: {
+      return {
+        ...state,
+        resetPasswordRequest: false,
+        resetPasswordFailed: true,
       };
     }
     default: {
