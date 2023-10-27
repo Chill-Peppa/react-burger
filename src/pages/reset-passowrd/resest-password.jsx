@@ -11,7 +11,7 @@ import { resetPassword } from '../../services/actions/auth';
 
 function ResetPassword({ title }) {
   const [passwordData, setPasswordData] = React.useState({
-    password: '',
+    newPassword: '',
     token: '',
   });
 
@@ -24,8 +24,10 @@ function ResetPassword({ title }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(resetPassword(passwordData));
-    console.log('тут сброс');
+    console.log(passwordData.newPassword);
   };
+
+  console.log('новый пароль', passwordData.newPassword);
 
   return (
     <section className={styles.resetPassword}>
@@ -35,14 +37,14 @@ function ResetPassword({ title }) {
       <form className={styles.form} onSubmit={handleSubmit}>
         <PasswordInput
           placeholder={'Введите новый пароль'}
-          name={'password'}
-          value={passwordData.password}
+          name={'newPassword'}
+          value={passwordData.newPassword || ''}
           extraClass={styles.input}
           onChange={handleChange}
         />
         <Input
-          name="code"
-          value={passwordData.token}
+          name={'token'}
+          value={passwordData.token || ''}
           placeholder="Введите код из письма"
           autoComplete="off"
           type="text"
@@ -50,7 +52,6 @@ function ResetPassword({ title }) {
           size={'default'}
           extraClass={styles.input}
           onChange={handleChange}
-          required
         />
         <Button
           extraClass={styles.button}
