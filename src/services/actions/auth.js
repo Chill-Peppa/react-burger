@@ -25,6 +25,10 @@ export const AUTH_GET_USER = 'AUTH_GET_USER';
 export const AUTH_GET_USER_SUCCESS = 'AUTH_GET_USER_SUCCESS';
 export const AUTH_GET_USER_FAILED = 'AUTH_GET_USER_FAILED';
 
+export const AUTH_UPDATE_USER = 'AUTH_UPDATE_USER';
+export const AUTH_UPDATE_USER_SUCCESS = 'AUTH_UPDATE_USER_SUCCESS';
+export const AUTH_UPDATE_USER_FAILED = 'AUTH_UPDATE_USER_FAILED';
+
 //thunk на регистрацию
 export function register(user) {
   return function (dispatch) {
@@ -148,6 +152,24 @@ export function getUserInfo() {
       .catch((err) => {
         dispatch({
           type: AUTH_GET_USER_FAILED,
+        });
+      });
+  };
+}
+
+//обновляем данные юзера
+export function updateUserInfo(form) {
+  return function (dispatch) {
+    dispatch({ type: AUTH_UPDATE_USER });
+
+    api
+      .updateUserInfo(form)
+      .then((res) => {
+        dispatch({ type: AUTH_UPDATE_USER_SUCCESS, user: res.user });
+      })
+      .catch((err) => {
+        dispatch({
+          type: AUTH_UPDATE_USER_FAILED,
         });
       });
   };

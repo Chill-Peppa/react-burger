@@ -9,7 +9,7 @@ import {
   Button,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import OrderHistory from '../order-history/order-history';
-import { logout } from '../../services/actions/auth';
+import { logout, updateUserInfo } from '../../services/actions/auth';
 
 function Profile() {
   const { user } = useSelector((store) => store.user);
@@ -47,6 +47,15 @@ function Profile() {
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleCancel = () => {
+    setForm({ ...user });
+  };
+
+  const handleUpdate = (e) => {
+    e.preventDefault();
+    dispatch(updateUserInfo(form));
   };
 
   const returnLinkState = ({ isActive }) => {
@@ -119,10 +128,17 @@ function Profile() {
               value={form.password}
             />
             <div className={styles.buttons}>
-              <button type="button" className={styles.buttonCancel}>
+              <button
+                type="button"
+                className={styles.buttonCancel}
+                onCancel={handleCancel}>
                 Отмена
               </button>
-              <Button htmlType="submit" type="primary" size="medium">
+              <Button
+                htmlType="submit"
+                type="primary"
+                size="medium"
+                onClick={handleUpdate}>
                 Сохранить
               </Button>
             </div>
