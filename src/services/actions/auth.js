@@ -21,6 +21,10 @@ export const AUTH_RESET_PASSWORD = 'AUTH_RESET_PASSWORD';
 export const AUTH_RESET_PASSWORD_SUCCESS = 'AUTH_RESET_PASSWORD_SUCCESS';
 export const AUTH_RESET_PASSWORD_FAILED = 'AUTH_RESET_PASSWORD_FAILED';
 
+export const AUTH_GET_USER = 'AUTH_GET_USER';
+export const AUTH_GET_USER_SUCCESS = 'AUTH_GET_USER_SUCCESS';
+export const AUTH_GET_USER_FAILED = 'AUTH_GET_USER_FAILED';
+
 //thunk на регистрацию
 export function register(user) {
   return function (dispatch) {
@@ -126,6 +130,24 @@ export function resetPassword(passwordData) {
       .catch((err) => {
         dispatch({
           type: AUTH_RESET_PASSWORD_FAILED,
+        });
+      });
+  };
+}
+
+//получаем данные юзера
+export function getUserInfo() {
+  return function (dispatch) {
+    dispatch({ type: AUTH_GET_USER });
+
+    api
+      .getUserInfo()
+      .then(() => {
+        dispatch({ type: AUTH_GET_USER_SUCCESS });
+      })
+      .catch((err) => {
+        dispatch({
+          type: AUTH_GET_USER_FAILED,
         });
       });
   };

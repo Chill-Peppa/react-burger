@@ -14,6 +14,9 @@ import {
   AUTH_RESET_PASSWORD,
   AUTH_RESET_PASSWORD_SUCCESS,
   AUTH_RESET_PASSWORD_FAILED,
+  AUTH_GET_USER,
+  AUTH_GET_USER_SUCCESS,
+  AUTH_GET_USER_FAILED,
 } from '../actions/auth';
 
 const initialState = {
@@ -36,6 +39,9 @@ const initialState = {
 
   resetPasswordRequest: false,
   resetPasswordFailed: false,
+
+  getUserRequest: false,
+  getUserFailed: false,
 };
 
 export const authReducer = (state = initialState, action) => {
@@ -142,6 +148,28 @@ export const authReducer = (state = initialState, action) => {
         ...state,
         resetPasswordRequest: false,
         resetPasswordFailed: true,
+      };
+    }
+    case AUTH_GET_USER: {
+      return {
+        ...state,
+        getUserRequest: true,
+        getUserFailed: false,
+      };
+    }
+    case AUTH_GET_USER_SUCCESS: {
+      return {
+        ...state,
+        user: { ...action.user },
+        getUserRequest: false,
+        getUserFailed: false,
+      };
+    }
+    case AUTH_GET_USER_FAILED: {
+      return {
+        ...state,
+        getUserRequest: false,
+        getUserFailed: true,
       };
     }
     default: {

@@ -17,9 +17,14 @@ import Profile from '../../pages/profile/profile';
 
 import { getIngredients } from '../../services/actions/burgerIngredients';
 import { closeIngredient } from '../../services/actions/ingredient';
+import { getUserInfo } from '../../services/actions/auth';
 import { headerLocations } from '../../utils/constants';
+import { getCookie } from '../../utils/cookies';
 
 function App() {
+  const accessToken = getCookie('accessToken');
+  console.log('accessToken:', accessToken);
+
   const [isOpenIngredientModal, setIsOpenIngredientModal] =
     React.useState(false);
   const [isOpenOrderModal, setIsOpenOrderModal] = React.useState(false);
@@ -29,7 +34,10 @@ function App() {
 
   React.useEffect(() => {
     dispatch(getIngredients());
-  }, [dispatch]);
+    if (accessToken) {
+      dispatch(getUserInfo());
+    }
+  }, [dispatch, accessToken]);
 
   const handleOpenIngredientModal = () => {
     setIsOpenIngredientModal(true);

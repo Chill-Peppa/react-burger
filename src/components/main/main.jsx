@@ -36,7 +36,7 @@ const Main = ({ onIngredientOpen, onOrderOpen }) => {
 
 Main.propTypes = {
   onIngredientOpen: PropTypes.func.isRequired,
-  //handleGetOrderNumber: PropTypes.func.isRequired,
+  onOrderOpen: PropTypes.func.isRequired,
 };
 
 export default Main;

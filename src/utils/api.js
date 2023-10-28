@@ -48,7 +48,7 @@ export default class Api {
       redirect: 'follow',
       referrerPolicy: 'no-referrer',
       body: JSON.stringify(user),
-    }).then(this._returnResponse);
+    });
   }
 
   //метод для авторизации в системе
@@ -62,7 +62,7 @@ export default class Api {
       redirect: 'follow',
       referrerPolicy: 'no-referrer',
       body: JSON.stringify(user),
-    }).then(this._returnResponse);
+    });
   }
 
   //чтобы разлогиниться
@@ -76,7 +76,7 @@ export default class Api {
       redirect: 'follow',
       referrerPolicy: 'no-referrer',
       body: JSON.stringify({ token: getCookie('refreshToken') }),
-    }).then(this._returnResponse);
+    });
   }
 
   //для восстановления пароля
@@ -90,7 +90,7 @@ export default class Api {
       redirect: 'follow',
       referrerPolicy: 'no-referrer',
       body: JSON.stringify({ email: email }),
-    }).then(this._returnResponse);
+    });
   }
 
   //сбрасываем пароль
@@ -107,7 +107,17 @@ export default class Api {
         password: passwordData.newPassword,
         token: passwordData.token,
       }),
-    }).then(this._returnResponse);
+    });
+  }
+
+  //получаем данные юзера
+  getUserInfo() {
+    return this._request(`${this._url}/api/auth/user`, {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + getCookie('accessToken'),
+      },
+    });
   }
 }
 

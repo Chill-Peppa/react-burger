@@ -1,11 +1,12 @@
 import React from 'react';
 import styles from './profile.module.css';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useLocation } from 'react-router-dom';
 import {
   EmailInput,
   PasswordInput,
   Input,
+  Button,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import OrderHistory from '../order-history/order-history';
 import { logout } from '../../services/actions/auth';
@@ -14,6 +15,8 @@ function Profile() {
   const inputRef = React.useRef(null);
   const location = useLocation();
   const dispatch = useDispatch();
+
+  const { user } = useSelector((store) => store.user);
 
   const onIconClick = () => {
     setTimeout(() => inputRef.current.focus(), 0);
@@ -59,6 +62,7 @@ function Profile() {
           <form>
             <Input
               type="text"
+              value={user.name}
               placeholder="Имя"
               icon="EditIcon"
               name="name"
@@ -71,11 +75,24 @@ function Profile() {
             />
             <EmailInput
               name="email"
+              value={user.email}
               placeholder="Логин"
               extraClass={styles.input}
               isIcon={true}
             />
-            <PasswordInput name={'password'} icon="EditIcon" />
+            <PasswordInput
+              name={'password'}
+              icon="EditIcon"
+              value={user.password}
+            />
+            <div className={styles.buttons}>
+              <button type="button" className={styles.buttonCancel}>
+                Отмена
+              </button>
+              <Button htmlType="submit" type="primary" size="medium">
+                Войти
+              </Button>
+            </div>
           </form>
         )}
       </div>
