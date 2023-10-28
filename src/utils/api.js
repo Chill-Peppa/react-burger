@@ -119,6 +119,27 @@ export default class Api {
       },
     });
   }
+
+  //обновляем данные юзера
+  updateUserInfo(form) {
+    return this._request(`${this._url}/api/auth/user`, {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + getCookie('accessToken'),
+      },
+      method: 'PATCH',
+      mode: 'cors',
+      cache: 'no-cache',
+      credentials: 'same-origin',
+      redirect: 'follow',
+      referrerPolicy: 'no-referrer',
+      body: JSON.stringify({
+        name: form.name,
+        email: form.email,
+        password: form.password,
+      }),
+    });
+  }
 }
 
 //тут экземпляр класса

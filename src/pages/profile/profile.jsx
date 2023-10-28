@@ -35,7 +35,6 @@ function Profile() {
     setDisabled(true);
   };
 
-  //чтобы подсвечивался инпут
   React.useEffect(() => {
     if (!disabled) {
       inputRef.current.focus();
@@ -47,7 +46,7 @@ function Profile() {
   }, [disabled, user]);
 
   const handleChange = (e) => {
-    setForm({ ...user, [e.target.name]: e.target.value });
+    setForm({ ...form, [e.target.name]: e.target.value });
   };
 
   const returnLinkState = ({ isActive }) => {
@@ -97,7 +96,7 @@ function Profile() {
               onBlur={handleBlur}
               icon={'EditIcon'}
               ref={inputRef}
-              value={form.name || ''}
+              value={form.name}
               onChange={handleChange}
               error={false}
               size={'default'}
@@ -106,7 +105,7 @@ function Profile() {
 
             <EmailInput
               name={'email'}
-              value={form.email || ''}
+              value={form.email}
               placeholder="Логин"
               onChange={handleChange}
               extraClass={styles.input}
@@ -117,7 +116,7 @@ function Profile() {
               name={'password'}
               icon="EditIcon"
               onChange={handleChange}
-              value={form.password || ''}
+              value={form.password}
             />
             <div className={styles.buttons}>
               <button type="button" className={styles.buttonCancel}>

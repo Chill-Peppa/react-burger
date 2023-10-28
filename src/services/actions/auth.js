@@ -142,8 +142,8 @@ export function getUserInfo() {
 
     api
       .getUserInfo()
-      .then(() => {
-        dispatch({ type: AUTH_GET_USER_SUCCESS });
+      .then((res) => {
+        dispatch({ type: AUTH_GET_USER_SUCCESS, user: res.user });
       })
       .catch((err) => {
         dispatch({
