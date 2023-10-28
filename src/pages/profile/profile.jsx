@@ -12,14 +12,42 @@ import OrderHistory from '../order-history/order-history';
 import { logout } from '../../services/actions/auth';
 
 function Profile() {
+  const { user } = useSelector((store) => store.user);
+  console.log(user);
+  //для состояния инпутов
+  const [disabled, setDisabled] = React.useState(true);
+
+  const [form, setForm] = React.useState({
+    name: '',
+    email: '',
+    password: '',
+  });
+
   const inputRef = React.useRef(null);
   const location = useLocation();
   const dispatch = useDispatch();
 
-  const { user } = useSelector((store) => store.user);
-
   const onIconClick = () => {
-    setTimeout(() => inputRef.current.focus(), 0);
+    setDisabled(false);
+  };
+
+  const handleBlur = () => {
+    setDisabled(true);
+  };
+
+  //чтобы подсвечивался инпут
+  React.useEffect(() => {
+    if (!disabled) {
+      inputRef.current.focus();
+    }
+
+    if (user) {
+      setForm({ name: user.name, email: user.email, password: '' });
+    }
+  }, [disabled, user]);
+
+  const handleChange = (e) => {
+    setForm({ ...user, [e.target.name]: e.target.value });
   };
 
   const returnLinkState = ({ isActive }) => {
@@ -61,36 +89,42 @@ function Profile() {
         ) : (
           <form>
             <Input
-              type="text"
-              value={user.name}
-              placeholder="Имя"
-              icon="EditIcon"
-              name="name"
-              ref={inputRef}
-              onIconClick={onIconClick}
-              errorText={'Ой, произошла ошибка'}
-              size={'default'}
+              name={'name'}
+              placeholder={'Имя'}
+              type={'text'}
               extraClass={styles.input}
-              disabled={true}
+              onIconClick={onIconClick}
+              onBlur={handleBlur}
+              icon={'EditIcon'}
+              ref={inputRef}
+              value={form.name || ''}
+              onChange={handleChange}
+              error={false}
+              size={'default'}
+              disabled={disabled}
             />
+
             <EmailInput
-              name="email"
-              value={user.email}
+              name={'email'}
+              value={form.email || ''}
               placeholder="Логин"
+              onChange={handleChange}
               extraClass={styles.input}
               isIcon={true}
             />
+
             <PasswordInput
               name={'password'}
               icon="EditIcon"
-              value={user.password}
+              onChange={handleChange}
+              value={form.password || ''}
             />
             <div className={styles.buttons}>
               <button type="button" className={styles.buttonCancel}>
                 Отмена
               </button>
               <Button htmlType="submit" type="primary" size="medium">
-                Войти
+                Сохранить
               </Button>
             </div>
           </form>
