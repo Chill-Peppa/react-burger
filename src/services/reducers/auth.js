@@ -20,6 +20,9 @@ import {
   AUTH_UPDATE_USER,
   AUTH_UPDATE_USER_SUCCESS,
   AUTH_UPDATE_USER_FAILED,
+  AUTH_UPDATE_TOKEN,
+  AUTH_UPDATE_TOKEN_SUCCESS,
+  AUTH_UPDATE_TOKEN_FAILED,
 } from '../actions/auth';
 
 const initialState = {
@@ -48,6 +51,10 @@ const initialState = {
 
   updateUserRequest: false,
   updateUserFailed: false,
+
+  updateTokenRequest: false,
+  updateTokenFailed: false,
+  tokenData: {},
 };
 
 export const authReducer = (state = initialState, action) => {
@@ -104,12 +111,14 @@ export const authReducer = (state = initialState, action) => {
     case AUTH_LOGOUT_SUCCESS: {
       return {
         ...state,
-        initialState,
+        logoutFailed: false,
+        logoutRequest: false,
       };
     }
     case AUTH_LOGOUT_FAILED: {
       return {
         ...state,
+        ...initialState,
         logoutFailed: true,
         logoutRequest: false,
       };
@@ -198,6 +207,28 @@ export const authReducer = (state = initialState, action) => {
         ...state,
         getUserRequest: false,
         getUserFailed: true,
+      };
+    }
+    case AUTH_UPDATE_TOKEN: {
+      return {
+        ...state,
+        updateTokenRequest: true,
+        updateTokenFailed: false,
+      };
+    }
+    case AUTH_UPDATE_TOKEN_SUCCESS: {
+      return {
+        ...state,
+        updateTokenRequest: false,
+        updateTokenFailed: false,
+        tokenData: { ...action.tokenData },
+      };
+    }
+    case AUTH_UPDATE_TOKEN_FAILED: {
+      return {
+        ...state,
+        updateTokenRequest: false,
+        updateTokenFailed: true,
       };
     }
     default: {

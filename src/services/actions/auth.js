@@ -29,6 +29,10 @@ export const AUTH_UPDATE_USER = 'AUTH_UPDATE_USER';
 export const AUTH_UPDATE_USER_SUCCESS = 'AUTH_UPDATE_USER_SUCCESS';
 export const AUTH_UPDATE_USER_FAILED = 'AUTH_UPDATE_USER_FAILED';
 
+export const AUTH_UPDATE_TOKEN = 'AUTH_UPDATE_TOKEN';
+export const AUTH_UPDATE_TOKEN_SUCCESS = 'AUTH_UPDATE_TOKEN_SUCCESS';
+export const AUTH_UPDATE_TOKEN_FAILED = 'AUTH_UPDATE_TOKEN_FAILED';
+
 //thunk на регистрацию
 export function register(user) {
   return function (dispatch) {
@@ -153,6 +157,7 @@ export function getUserInfo() {
         dispatch({
           type: AUTH_GET_USER_FAILED,
         });
+        dispatch(updateToken());
       });
   };
 }
@@ -170,6 +175,27 @@ export function updateUserInfo(form) {
       .catch((err) => {
         dispatch({
           type: AUTH_UPDATE_USER_FAILED,
+        });
+      });
+  };
+}
+
+//обновление токена
+export function updateToken() {
+  return function (dispatch) {
+    dispatch({ type: AUTH_UPDATE_TOKEN });
+
+    api
+      .updateToken()
+      .then((res) => {
+        dispatch({ type: AUTH_UPDATE_TOKEN_SUCCESS, tokenData: res });
+        setCookie('accessToken', res.accessToken.split('Bearer ')[1]);
+        setCookie('refreshToken', res.refreshToken);
+        dispatch(getUserInfo());
+      })
+      .catch((err) => {
+        dispatch({
+          type: AUTH_UPDATE_TOKEN_FAILED,
         });
       });
   };

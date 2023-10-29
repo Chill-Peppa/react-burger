@@ -140,6 +140,20 @@ export default class Api {
       }),
     });
   }
+
+  //обновление токена
+  updateToken() {
+    return this._request(`${this._url}/api/auth/token`, {
+      headers: this._headers,
+      method: 'POST',
+      mode: 'cors',
+      cache: 'no-cache',
+      credentials: 'same-origin',
+      redirect: 'follow',
+      referrerPolicy: 'no-referrer',
+      body: JSON.stringify({ token: getCookie('refreshToken') }),
+    });
+  }
 }
 
 //тут экземпляр класса
