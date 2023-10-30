@@ -55,6 +55,8 @@ const initialState = {
   updateTokenRequest: false,
   updateTokenFailed: false,
   tokenData: {},
+
+  isLoggedIn: false,
 };
 
 export const authReducer = (state = initialState, action) => {
@@ -64,6 +66,7 @@ export const authReducer = (state = initialState, action) => {
         ...state,
         registerRequest: true,
         registerFailed: false,
+        isLoggedIn: false,
       };
     }
     case AUTH_REGISTER_SUCCESS: {
@@ -71,6 +74,7 @@ export const authReducer = (state = initialState, action) => {
         ...state,
         user: { ...action.user },
         registerRequest: false,
+        isLoggedIn: true,
       };
     }
     case AUTH_REGISTER_FAILED: {
@@ -78,6 +82,7 @@ export const authReducer = (state = initialState, action) => {
         ...state,
         registerFailed: true,
         registerRequest: false,
+        isLoggedIn: false,
       };
     }
     case AUTH_LOGIN: {
@@ -85,6 +90,7 @@ export const authReducer = (state = initialState, action) => {
         ...state,
         loginRequest: true,
         loginFailed: false,
+        isLoggedIn: false,
       };
     }
     case AUTH_LOGIN_SUCCESS: {
@@ -92,6 +98,7 @@ export const authReducer = (state = initialState, action) => {
         ...state,
         user: { ...action.user },
         loginRequest: false,
+        isLoggedIn: true,
       };
     }
     case AUTH_LOGIN_FAILED: {
@@ -99,6 +106,7 @@ export const authReducer = (state = initialState, action) => {
         ...state,
         loginFailed: true,
         loginRequest: false,
+        isLoggedIn: false,
       };
     }
     case AUTH_LOGOUT: {
@@ -111,16 +119,18 @@ export const authReducer = (state = initialState, action) => {
     case AUTH_LOGOUT_SUCCESS: {
       return {
         ...state,
+        ...initialState,
         logoutFailed: false,
         logoutRequest: false,
+        isLoggedIn: false,
       };
     }
     case AUTH_LOGOUT_FAILED: {
       return {
         ...state,
-        ...initialState,
         logoutFailed: true,
         logoutRequest: false,
+        isLoggedIn: true,
       };
     }
     case AUTH_FORGOT_PASSWORD: {
@@ -128,6 +138,7 @@ export const authReducer = (state = initialState, action) => {
         ...state,
         forgotPasswordRequest: true,
         forgotPasswordFailed: false,
+        isLoggedIn: false,
       };
     }
     case AUTH_FORGOT_PASSWORD_SUCCESS: {
@@ -135,6 +146,7 @@ export const authReducer = (state = initialState, action) => {
         ...state,
         forgotPasswordRequest: false,
         forgotPasswordFailed: false,
+        isLoggedIn: false,
       };
     }
     case AUTH_FORGOT_PASSWORD_FAILED: {
@@ -142,6 +154,7 @@ export const authReducer = (state = initialState, action) => {
         ...state,
         forgotPasswordRequest: false,
         forgotPasswordFailed: true,
+        isLoggedIn: false,
       };
     }
     case AUTH_RESET_PASSWORD: {
@@ -149,6 +162,7 @@ export const authReducer = (state = initialState, action) => {
         ...state,
         resetPasswordRequest: true,
         resetPasswordFailed: false,
+        isLoggedIn: false,
       };
     }
     case AUTH_RESET_PASSWORD_SUCCESS: {
@@ -156,6 +170,7 @@ export const authReducer = (state = initialState, action) => {
         ...state,
         resetPasswordRequest: false,
         resetPasswordFailed: false,
+        isLoggedIn: true,
       };
     }
     case AUTH_RESET_PASSWORD_FAILED: {
@@ -163,6 +178,7 @@ export const authReducer = (state = initialState, action) => {
         ...state,
         resetPasswordRequest: false,
         resetPasswordFailed: true,
+        isLoggedIn: false,
       };
     }
     case AUTH_GET_USER: {
@@ -170,6 +186,7 @@ export const authReducer = (state = initialState, action) => {
         ...state,
         getUserRequest: true,
         getUserFailed: false,
+        isLoggedIn: false,
       };
     }
     case AUTH_GET_USER_SUCCESS: {
@@ -178,6 +195,7 @@ export const authReducer = (state = initialState, action) => {
         user: { ...action.user },
         getUserRequest: false,
         getUserFailed: false,
+        isLoggedIn: true,
       };
     }
     case AUTH_GET_USER_FAILED: {
@@ -185,6 +203,7 @@ export const authReducer = (state = initialState, action) => {
         ...state,
         getUserRequest: false,
         getUserFailed: true,
+        isLoggedIn: false,
       };
     }
     case AUTH_UPDATE_USER: {
@@ -229,6 +248,7 @@ export const authReducer = (state = initialState, action) => {
         ...state,
         updateTokenRequest: false,
         updateTokenFailed: true,
+        isLoggedIn: false,
       };
     }
     default: {

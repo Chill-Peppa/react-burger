@@ -14,6 +14,7 @@ import Register from '../../pages/register/register';
 import ForgotPassword from '../../pages/forgot-password/forgot-password';
 import ResetPassword from '../../pages/reset-passowrd/resest-password';
 import Profile from '../../pages/profile/profile';
+import { ProtectedRoute } from '../protected-route/protected-route';
 
 import { getIngredients } from '../../services/actions/burgerIngredients';
 import { closeIngredient } from '../../services/actions/ingredient';
@@ -63,26 +64,64 @@ function App() {
       {headerLocations.includes(location.pathname) && <AppHeader />}
       <Routes>
         <Route
-          path="/"
+          path="/login"
           element={
-            <Main
-              onOrderOpen={handleOpenOrderModal}
-              onIngredientOpen={handleOpenIngredientModal}
+            <ProtectedRoute
+              onlyUnAuth={true}
+              element={<Login title="Вход" />}
             />
           }
         />
-        <Route path="/login" element={<Login title="Вход" />} />
-        <Route path="/register" element={<Register title="Регистрация" />} />
+        <Route
+          path="/register"
+          element={
+            <ProtectedRoute
+              onlyUnAuth={true}
+              element={<Register title="Регистрация" />}
+            />
+          }
+        />
         <Route
           path="/forgot-password"
-          element={<ForgotPassword title="Восстановление пароля" />}
+          element={
+            <ProtectedRoute
+              onlyUnAuth={true}
+              element={<ForgotPassword title="Восстановление пароля" />}
+            />
+          }
         />
         <Route
           path="/reset-password"
-          element={<ResetPassword title="Восстановление пароля" />}
+          element={
+            <ProtectedRoute
+              onlyUnAuth={true}
+              element={<ResetPassword title="Восстановление пароля" />}
+            />
+          }
         />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/profile/orders" element={<Profile />} />
+
+        <Route
+          path="/"
+          element={
+            <ProtectedRoute
+              onlyUnAuth={false}
+              element={
+                <Main
+                  onOrderOpen={handleOpenOrderModal}
+                  onIngredientOpen={handleOpenIngredientModal}
+                />
+              }
+            />
+          }
+        />
+        <Route
+          path="/profile"
+          element={<ProtectedRoute onlyUnAuth={false} element={<Profile />} />}
+        />
+        <Route
+          path="/profile/orders"
+          element={<ProtectedRoute onlyUnAuth={false} element={<Profile />} />}
+        />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
 

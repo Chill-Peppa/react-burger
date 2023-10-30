@@ -5,11 +5,12 @@ import {
   Button,
   Input,
 } from '@ya.praktikum/react-developer-burger-ui-components';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { forgotPassword } from '../../services/actions/auth';
 
 function ForgotPassword({ title }) {
+  const navigate = useNavigate();
   const [email, setEmail] = React.useState('');
 
   const dispatch = useDispatch();
@@ -21,8 +22,7 @@ function ForgotPassword({ title }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(forgotPassword(email));
-    console.log(email);
-    console.log('123');
+    navigate('/reset-password');
   };
 
   return (
