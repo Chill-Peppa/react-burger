@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './app.module.css';
 import { useDispatch } from 'react-redux';
-import { Routes, Route, useLocation } from 'react-router-dom';
+import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 
 import AppHeader from '../app-header/app-header';
 import Main from '../main/main';
@@ -14,24 +14,22 @@ import Register from '../../pages/register/register';
 import ForgotPassword from '../../pages/forgot-password/forgot-password';
 import ResetPassword from '../../pages/reset-passowrd/resest-password';
 import Profile from '../../pages/profile/profile';
+import IngredientPage from '../../pages/ingredient-page/ingredient-page';
 import { ProtectedRoute } from '../protected-route/protected-route';
 
 import { getIngredients } from '../../services/actions/burgerIngredients';
-import { closeIngredient } from '../../services/actions/ingredient';
 import { getUserInfo } from '../../services/actions/auth';
-import { headerLocations } from '../../utils/constants';
 import { getCookie } from '../../utils/cookies';
 
 function App() {
   const accessToken = getCookie('accessToken');
   console.log('accessToken:', accessToken);
 
-  const [isOpenIngredientModal, setIsOpenIngredientModal] =
-    React.useState(false);
   const [isOpenOrderModal, setIsOpenOrderModal] = React.useState(false);
 
   const dispatch = useDispatch();
   const location = useLocation();
+  const navigate = useNavigate();
 
   React.useEffect(() => {
     dispatch(getIngredients());
@@ -40,29 +38,23 @@ function App() {
     }
   }, [dispatch, accessToken]);
 
-  const handleOpenIngredientModal = () => {
-    setIsOpenIngredientModal(true);
-  };
-
   const handleOpenOrderModal = () => {
     setIsOpenOrderModal(true);
   };
 
-  const onRemoveSelectedIngredient = () => {
-    dispatch(closeIngredient(null));
+  const handleCloseModalOrder = () => {
+    setIsOpenOrderModal(false);
   };
 
-  // закрытие всех модалок
-  const handleCloseAllModals = () => {
-    setIsOpenIngredientModal(false);
-    setIsOpenOrderModal(false);
-    onRemoveSelectedIngredient();
+  const handleCloseModalIngredient = () => {
+    navigate(-1);
   };
 
   return (
     <div className={styles.page}>
-      {headerLocations.includes(location.pathname) && <AppHeader />}
-      <Routes>
+      <AppHeader />
+
+      <Routes location={location.state?.backgroundLocation || location}>
         <Route
           path="/login"
           element={
@@ -99,18 +91,12 @@ function App() {
             />
           }
         />
-
         <Route
           path="/"
           element={
             <ProtectedRoute
               onlyUnAuth={false}
-              element={
-                <Main
-                  onOrderOpen={handleOpenOrderModal}
-                  onIngredientOpen={handleOpenIngredientModal}
-                />
-              }
+              element={<Main onOrderOpen={handleOpenOrderModal} />}
             />
           }
         />
@@ -122,18 +108,28 @@ function App() {
           path="/profile/orders"
           element={<ProtectedRoute onlyUnAuth={false} element={<Profile />} />}
         />
+        <Route path="/ingredients/:id" element={<IngredientPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
 
-      {isOpenIngredientModal && (
-        <Modal onClose={handleCloseAllModals} title="Детали ингредиента">
-          <IngredientDetails />
-        </Modal>
+      {location.state?.backgroundLocation && (
+        <Routes>
+          <Route
+            path="/ingredients/:id"
+            element={
+              <Modal
+                onClose={handleCloseModalIngredient}
+                title="Детали ингредиента">
+                <IngredientDetails />
+              </Modal>
+            }
+          />
+        </Routes>
       )}
 
       {isOpenOrderModal && (
-        <Modal onClose={handleCloseAllModals} title="">
-          <OrderDetails onClose={handleCloseAllModals} />
+        <Modal onClose={handleCloseModalOrder} title="">
+          <OrderDetails onClose={handleCloseModalOrder} />
         </Modal>
       )}
     </div>

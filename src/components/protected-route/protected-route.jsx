@@ -28,6 +28,11 @@ export const ProtectedRoute = ({ onlyUnAuth, element }) => {
   return element;
 };
 
+ProtectedRoute.propTypes = {
+  onlyUnAuth: PropTypes.bool.isRequired,
+  element: PropTypes.element.isRequired,
+};
+
 //onlyUnAuth помечает только те страницы на
 //которые может заходить неавторизованный пользователь
 

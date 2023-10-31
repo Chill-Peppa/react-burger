@@ -1,29 +1,25 @@
 import React from 'react';
 import styles from './ingredient-card.module.css';
-import PropTypes from 'prop-types';
+//import PropTypes from 'prop-types';
 import { ingredientsDataType } from '../../utils/constants';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useDrag } from 'react-dnd';
 import { tabs } from '../../utils/constants';
-import { openIngredient } from '../../services/actions/ingredient';
+import { Link, useLocation } from 'react-router-dom';
 
 import {
   CurrencyIcon,
   Counter,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 
-const IngredientCard = ({ onIngredientOpen, ingredient }) => {
-  const dispatch = useDispatch();
+const IngredientCard = ({ ingredient }) => {
+  const location = useLocation();
 
   const { mainIngredientsData, bunIngredientsData } = useSelector(
     (store) => store.addedIngredients,
   );
 
   const [counter, setCounter] = React.useState(0);
-
-  const handleClick = () => {
-    dispatch(openIngredient(ingredient));
-  };
 
   const [{ isDrag }, dragRef] = useDrag({
     type: 'ingredient',
@@ -51,33 +47,34 @@ const IngredientCard = ({ onIngredientOpen, ingredient }) => {
   }, [bunCounter, mainCounter, ingredient.type]);
 
   return (
-    <li
-      className={isDrag ? styles.draggedCard : styles.card}
-      onClick={onIngredientOpen}
-      ref={dragRef}>
-      <img
-        className={styles.image}
-        src={ingredient.image}
-        alt={ingredient.name}
-        onClick={handleClick}
-      />
-      <div className={styles.priceContainer}>
-        <span className="text text_type_digits-default">
-          {ingredient.price}
-        </span>
-        <CurrencyIcon type="primary" />
-      </div>
-      <p className={`${styles.name} text text_type_main-default`}>
-        {ingredient.name}
-      </p>
-      <Counter count={counter} size="default" />
-    </li>
+    <Link
+      to={`/ingredients/${ingredient._id}`}
+      className={styles.link}
+      state={{ backgroundLocation: location }}>
+      <li className={isDrag ? styles.draggedCard : styles.card} ref={dragRef}>
+        <img
+          className={styles.image}
+          src={ingredient.image}
+          alt={ingredient.name}
+        />
+        <div className={styles.priceContainer}>
+          <span className="text text_type_digits-default">
+            {ingredient.price}
+          </span>
+          <CurrencyIcon type="primary" />
+        </div>
+        <p className={`${styles.name} text text_type_main-default`}>
+          {ingredient.name}
+        </p>
+        <Counter count={counter} size="default" />
+      </li>
+    </Link>
   );
 };
 
 IngredientCard.propTypes = {
   ingredient: ingredientsDataType.isRequired,
-  onIngredientOpen: PropTypes.func.isRequired,
+  //onIngredientOpen: PropTypes.func.isRequired,
 };
 
 export default IngredientCard;

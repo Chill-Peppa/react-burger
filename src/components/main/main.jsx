@@ -9,7 +9,7 @@ import BurgerIngredients from '../burger-ingredients/burger-ingredients';
 import BurgerConstructor from '../burger-constructor/burger-constructor';
 import Loader from '../loader/loader';
 
-const Main = ({ onIngredientOpen, onOrderOpen }) => {
+const Main = ({ onOrderOpen }) => {
   const { ingredients, ingredientsRequest, ingredientsFailed } = useSelector(
     (store) => store.ingredients,
   );
@@ -24,7 +24,7 @@ const Main = ({ onIngredientOpen, onOrderOpen }) => {
         ) : ingredientsFailed ? (
           <p>Произошла ошибка на сервере 🤕...</p>
         ) : (
-          <BurgerIngredients onIngredientOpen={onIngredientOpen} />
+          <BurgerIngredients />
         )}
         {ingredients.length > 0 && (
           <BurgerConstructor onOrderOpen={onOrderOpen} />
@@ -35,7 +35,7 @@ const Main = ({ onIngredientOpen, onOrderOpen }) => {
 };
 
 Main.propTypes = {
-  onIngredientOpen: PropTypes.func.isRequired,
+  //onIngredientOpen: PropTypes.func.isRequired,
   onOrderOpen: PropTypes.func.isRequired,
 };
 

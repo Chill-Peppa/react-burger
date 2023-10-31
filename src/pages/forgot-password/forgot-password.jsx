@@ -6,6 +6,7 @@ import {
   Input,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Link, useNavigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import { forgotPassword } from '../../services/actions/auth';
 
@@ -60,5 +61,9 @@ function ForgotPassword({ title }) {
     </section>
   );
 }
+
+ForgotPassword.propTypes = {
+  title: PropTypes.string.isRequired,
+};
 
 export default ForgotPassword;

@@ -6,6 +6,7 @@ import {
   Input,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { resetPassword } from '../../services/actions/auth';
 
@@ -67,5 +68,9 @@ function ResetPassword({ title }) {
     </section>
   );
 }
+
+ResetPassword.propTypes = {
+  title: PropTypes.string.isRequired,
+};
 
 export default ResetPassword;
