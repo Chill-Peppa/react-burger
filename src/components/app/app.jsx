@@ -87,6 +87,7 @@ function App() {
           element={
             <ProtectedRoute
               onlyUnAuth={true}
+              isEmailEnter={true}
               element={<ResetPassword title="Восстановление пароля" />}
             />
           }

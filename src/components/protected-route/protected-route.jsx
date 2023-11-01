@@ -3,7 +3,7 @@ import { Navigate, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 
-export const ProtectedRoute = ({ onlyUnAuth, element }) => {
+export const ProtectedRoute = ({ onlyUnAuth, element, isEmailEnter }) => {
   const location = useLocation();
   const { isLoggedIn } = useSelector((store) => store.user);
 
@@ -25,12 +25,23 @@ export const ProtectedRoute = ({ onlyUnAuth, element }) => {
     return <Navigate to="/login" replace state={{ from: location }} />;
   }
 
+  if (onlyUnAuth && isEmailEnter) {
+    return (
+      <Navigate
+        to={(location.state && location.state.from.location) || '/'}
+        replace
+        state={{ from: location }}
+      />
+    );
+  }
+
   return element;
 };
 
 ProtectedRoute.propTypes = {
-  onlyUnAuth: PropTypes.bool.isRequired,
+  onlyUnAuth: PropTypes.bool,
   element: PropTypes.element.isRequired,
+  isEmailEnter: PropTypes.bool,
 };
 
 //onlyUnAuth помечает только те страницы на
