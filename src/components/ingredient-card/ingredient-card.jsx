@@ -1,6 +1,5 @@
 import React from 'react';
 import styles from './ingredient-card.module.css';
-//import PropTypes from 'prop-types';
 import { ingredientsDataType } from '../../utils/constants';
 import { useSelector } from 'react-redux';
 import { useDrag } from 'react-dnd';

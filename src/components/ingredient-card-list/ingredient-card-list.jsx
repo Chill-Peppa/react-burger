@@ -27,7 +27,6 @@ const IngredientCardList = React.forwardRef((props, ref) => {
 
 IngredientCardList.propTypes = {
   title: PropTypes.string.isRequired,
-  //onIngredientOpen: PropTypes.func.isRequired,
   ingredientsArray: PropTypes.arrayOf(ingredientsDataType.isRequired)
     .isRequired,
 };

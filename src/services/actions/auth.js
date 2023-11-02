@@ -106,7 +106,7 @@ export function logout() {
 }
 
 //забыли пароль
-export function forgotPassword(email) {
+export function forgotPassword(email, onResetNavigate) {
   return function (dispatch) {
     dispatch({ type: AUTH_FORGOT_PASSWORD });
 
@@ -117,6 +117,7 @@ export function forgotPassword(email) {
           type: AUTH_FORGOT_PASSWORD_SUCCESS,
         });
       })
+      .then(() => onResetNavigate())
       .catch((err) => {
         dispatch({
           type: AUTH_FORGOT_PASSWORD_FAILED,

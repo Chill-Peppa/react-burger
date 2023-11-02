@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 
 export const ProtectedRoute = ({ onlyUnAuth, element, isEmailEnter }) => {
   const location = useLocation();
-  const { isLoggedIn } = useSelector((store) => store.user);
+  const { isLoggedIn, isPasswordReset } = useSelector((store) => store.user);
 
   React.useEffect(() => {
     console.log(location);
@@ -14,7 +14,7 @@ export const ProtectedRoute = ({ onlyUnAuth, element, isEmailEnter }) => {
   if (onlyUnAuth && isLoggedIn) {
     return (
       <Navigate
-        to={(location.state && location.state.from.location) || '/'}
+        to={(location.state && location.state.from.pathname) || '/'}
         replace
         state={{ from: location }}
       />
@@ -25,10 +25,15 @@ export const ProtectedRoute = ({ onlyUnAuth, element, isEmailEnter }) => {
     return <Navigate to="/login" replace state={{ from: location }} />;
   }
 
-  if (onlyUnAuth && isEmailEnter) {
+  if (
+    onlyUnAuth &&
+    isEmailEnter &&
+    !isPasswordReset &&
+    (!isLoggedIn || isLoggedIn)
+  ) {
     return (
       <Navigate
-        to={(location.state && location.state.from.location) || '/'}
+        to={(location.state && location.state.from.pathname) || '/'}
         replace
         state={{ from: location }}
       />
