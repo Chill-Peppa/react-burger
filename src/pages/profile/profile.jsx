@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './profile.module.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { NavLink, useLocation, useNavigate } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import {
   EmailInput,
   PasswordInput,
@@ -13,7 +13,6 @@ import { logout, updateUserInfo } from '../../services/actions/auth';
 
 function Profile() {
   const { user } = useSelector((store) => store.user);
-  const navigate = useNavigate();
 
   //для состояния инпутов
   const [disabled, setDisabled] = React.useState(true);
@@ -65,7 +64,6 @@ function Profile() {
 
   const handleLogout = () => {
     dispatch(logout());
-    //navigate('/login', { replace: true });
   };
 
   return (
