@@ -20,10 +20,13 @@ function ForgotPassword({ title }) {
     setEmail(e.target.value);
   };
 
+  const onResetNavigate = () => {
+    navigate('/reset-password');
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(forgotPassword(email));
-    navigate('/reset-password');
+    dispatch(forgotPassword(email, onResetNavigate));
   };
 
   return (

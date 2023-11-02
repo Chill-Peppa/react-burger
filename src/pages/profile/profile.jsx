@@ -65,7 +65,7 @@ function Profile() {
 
   const handleLogout = () => {
     dispatch(logout());
-    navigate('/login', { replace: true });
+    //navigate('/login', { replace: true });
   };
 
   return (

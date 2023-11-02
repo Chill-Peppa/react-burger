@@ -92,15 +92,8 @@ function App() {
             />
           }
         />
-        <Route
-          path="/"
-          element={
-            <ProtectedRoute
-              onlyUnAuth={false}
-              element={<Main onOrderOpen={handleOpenOrderModal} />}
-            />
-          }
-        />
+        <Route path="/" element={<Main onOrderOpen={handleOpenOrderModal} />} />
+
         <Route
           path="/profile"
           element={<ProtectedRoute onlyUnAuth={false} element={<Profile />} />}
