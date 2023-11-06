@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './burger-ingredients.module.css';
-import PropTypes from 'prop-types';
+//import PropTypes from 'prop-types';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import { tabs } from '../../utils/constants';
 import { useSelector } from 'react-redux';
@@ -8,7 +8,7 @@ import { useInView } from 'react-intersection-observer';
 
 import IngredientCardList from '../ingredient-card-list/ingredient-card-list';
 
-const BurgerIngredients = ({ onIngredientOpen }) => {
+const BurgerIngredients = () => {
   const { ingredients } = useSelector((store) => store.ingredients);
 
   const [current, setCurrent] = React.useState('bun');
@@ -93,29 +93,26 @@ const BurgerIngredients = ({ onIngredientOpen }) => {
           ref={tabBunRef}
           id={tabs.BUN}
           ingredientsArray={bunArray}
-          onIngredientOpen={onIngredientOpen}
         />
         <IngredientCardList
           title="Соусы"
           ref={tabSauceRef}
           id={tabs.SAUCE}
           ingredientsArray={sauceArray}
-          onIngredientOpen={onIngredientOpen}
         />
         <IngredientCardList
           title="Начинки"
           ref={tabMainRef}
           id={tabs.MAIN}
           ingredientsArray={mainIngredientsArray}
-          onIngredientOpen={onIngredientOpen}
         />
       </div>
     </section>
   );
 };
 
-BurgerIngredients.propTypes = {
-  onIngredientOpen: PropTypes.func.isRequired,
-};
+// BurgerIngredients.propTypes = {
+//   onIngredientOpen: PropTypes.func.isRequired,
+// };
 
 export default BurgerIngredients;

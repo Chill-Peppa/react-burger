@@ -5,6 +5,7 @@ import { useDrop } from 'react-dnd';
 import { useSelector, useDispatch } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
 import update from 'immutability-helper';
+import { useNavigate } from 'react-router-dom';
 
 import { tabs } from '../../utils/constants';
 import {
@@ -35,12 +36,15 @@ const reducer = (state, action) => {
 
 const BurgerConstructor = ({ onOrderOpen }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const ingredients = useSelector((store) => store.ingredients.ingredients);
 
   const { mainIngredientsData, bunIngredientsData } = useSelector(
     (store) => store.addedIngredients,
   );
+
+  const { isLoggedIn } = useSelector((store) => store.user);
 
   const [totalPriceState, totalPriceDispatch] = React.useReducer(
     reducer,
@@ -59,8 +63,12 @@ const BurgerConstructor = ({ onOrderOpen }) => {
 
   const onClickOrderSubmit = () => {
     const AddedIngredientsIds = ingredients.map((ingredient) => ingredient._id);
-    onOrderOpen();
-    dispatch(getOrderNumber(AddedIngredientsIds));
+    if (isLoggedIn) {
+      onOrderOpen();
+      dispatch(getOrderNumber(AddedIngredientsIds));
+    } else {
+      navigate('/login', { replace: true });
+    }
   };
 
   /*------------ DND ------------*/

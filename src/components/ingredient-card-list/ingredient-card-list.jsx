@@ -6,7 +6,7 @@ import { ingredientsDataType } from '../../utils/constants';
 import IngredientCard from '../ingredient-card/ingredient-card';
 
 const IngredientCardList = React.forwardRef((props, ref) => {
-  const { title, ingredientsArray, onIngredientOpen, id } = props;
+  const { title, ingredientsArray, id } = props;
 
   return (
     <>
@@ -18,11 +18,7 @@ const IngredientCardList = React.forwardRef((props, ref) => {
       </h2>
       <ul className={styles.ingredientsList}>
         {ingredientsArray.map((ingredient) => (
-          <IngredientCard
-            key={ingredient._id}
-            ingredient={ingredient}
-            onIngredientOpen={onIngredientOpen}
-          />
+          <IngredientCard key={ingredient._id} ingredient={ingredient} />
         ))}
       </ul>
     </>
@@ -31,7 +27,6 @@ const IngredientCardList = React.forwardRef((props, ref) => {
 
 IngredientCardList.propTypes = {
   title: PropTypes.string.isRequired,
-  onIngredientOpen: PropTypes.func.isRequired,
   ingredientsArray: PropTypes.arrayOf(ingredientsDataType.isRequired)
     .isRequired,
 };

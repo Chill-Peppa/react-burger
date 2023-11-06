@@ -7,8 +7,9 @@ import { HTML5Backend } from 'react-dnd-html5-backend';
 
 import BurgerIngredients from '../burger-ingredients/burger-ingredients';
 import BurgerConstructor from '../burger-constructor/burger-constructor';
+import Loader from '../loader/loader';
 
-const Main = ({ onIngredientOpen, onOrderOpen }) => {
+const Main = ({ onOrderOpen }) => {
   const { ingredients, ingredientsRequest, ingredientsFailed } = useSelector(
     (store) => store.ingredients,
   );
@@ -17,11 +18,13 @@ const Main = ({ onIngredientOpen, onOrderOpen }) => {
     <main className={styles.main}>
       <DndProvider backend={HTML5Backend}>
         {ingredientsRequest ? (
-          <p>Загрузка данных...</p>
+          <p className={styles.loader}>
+            <Loader />
+          </p>
         ) : ingredientsFailed ? (
-          <p>Произошла ошибка на сервере...</p>
+          <p>Произошла ошибка на сервере 🤕...</p>
         ) : (
-          <BurgerIngredients onIngredientOpen={onIngredientOpen} />
+          <BurgerIngredients />
         )}
         {ingredients.length > 0 && (
           <BurgerConstructor onOrderOpen={onOrderOpen} />
@@ -32,8 +35,8 @@ const Main = ({ onIngredientOpen, onOrderOpen }) => {
 };
 
 Main.propTypes = {
-  onIngredientOpen: PropTypes.func.isRequired,
-  //handleGetOrderNumber: PropTypes.func.isRequired,
+  //onIngredientOpen: PropTypes.func.isRequired,
+  onOrderOpen: PropTypes.func.isRequired,
 };
 
 export default Main;

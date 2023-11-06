@@ -3,5 +3,13 @@
   margin: 0 auto;
   display: flex;
   gap: 40px;
-  /* padding-bottom: 40px; */
+}
+
+.loader {
+  max-width: 1280px;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
