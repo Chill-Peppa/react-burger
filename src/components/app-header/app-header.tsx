@@ -10,10 +10,10 @@ import {
 
 import { NavLink, Link, useLocation } from 'react-router-dom';
 
-const AppHeader = () => {
+const AppHeader: React.FC = () => {
   const location = useLocation();
 
-  const returnLinkState = ({ isActive }) => {
+  const returnLinkState = ({ isActive }: { isActive: boolean }) => {
     return `${isActive ? styles.active : styles.menuLink}`;
   };
 
@@ -21,6 +21,7 @@ const AppHeader = () => {
     <header className={styles.header}>
       <nav className={styles.navigation}>
         <div className={styles.leftSide}>
+          ст
           <ul className={styles.menuList}>
             <li>
               <NavLink to="/" className={returnLinkState}>
@@ -39,7 +40,6 @@ const AppHeader = () => {
               </Link>
             </li>
           </ul>
-
           <NavLink to="/">
             <Logo />
           </NavLink>
