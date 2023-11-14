@@ -1,21 +1,21 @@
 import React from 'react';
 import styles from './burger-ingredients.module.css';
-//import PropTypes from 'prop-types';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import { tabs } from '../../utils/constants';
 import { useSelector } from 'react-redux';
 import { useInView } from 'react-intersection-observer';
+import { IIngredient } from '../../types/ingredientsTypes';
 
 import IngredientCardList from '../ingredient-card-list/ingredient-card-list';
 
 const BurgerIngredients = () => {
-  const { ingredients } = useSelector((store) => store.ingredients);
+  const { ingredients } = useSelector((store: any) => store.ingredients);
 
   const [current, setCurrent] = React.useState('bun');
   const containerRef = React.useRef();
 
   const bunArray = ingredients.filter(
-    (ingredient) => ingredient.type === tabs.BUN,
+    (ingredient: IIngredient) => ingredient.type === tabs.BUN,
   );
 
   const sauceArray = ingredients.filter(
@@ -110,9 +110,5 @@ const BurgerIngredients = () => {
     </section>
   );
 };
-
-// BurgerIngredients.propTypes = {
-//   onIngredientOpen: PropTypes.func.isRequired,
-// };
 
 export default BurgerIngredients;

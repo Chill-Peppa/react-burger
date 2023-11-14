@@ -1,14 +1,20 @@
 import React from 'react';
 import styles from './burger-constructor-ingredient.module.css';
-import PropTypes from 'prop-types';
 import {
   ConstructorElement,
   DragIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useDrag, useDrop } from 'react-dnd';
-import { ingredientsDataType } from '../../utils/constants';
+import { IIngredient } from '../../types/ingredientsTypes';
 
-const BurgerConstructorIngredient = ({
+interface IBurgerConstructorIngredient {
+  ingredient: IIngredient;
+  index: number;
+  handleDeleteIngredient: (key: string) => void;
+  moveCard: (dragIndex: number, hoverIndex: number) => void;
+}
+
+const BurgerConstructorIngredient: React.FC<IBurgerConstructorIngredient> = ({
   ingredient,
   handleDeleteIngredient,
   index,
@@ -16,7 +22,7 @@ const BurgerConstructorIngredient = ({
 }) => {
   /*------------------ SORT ----------------------*/
   const { _id } = ingredient;
-  const ingredientItemRef = React.useRef(null);
+  const ingredientItemRef = React.useRef<HTMLLIElement>(null);
   console.log(ingredient);
 
   const [{ handlerId }, drop] = useDrop({
@@ -26,12 +32,13 @@ const BurgerConstructorIngredient = ({
         handlerId: monitor.getHandlerId(),
       };
     },
-    hover(item, monitor) {
+    hover(item: any, monitor) {
       if (!ingredientItemRef.current) {
         return;
       }
 
       const dragIndex = item.index;
+
       const hoverIndex = index;
 
       if (dragIndex === hoverIndex) {
@@ -39,17 +46,18 @@ const BurgerConstructorIngredient = ({
       }
 
       const hoverBoundingRect =
-        ingredientItemRef.current?.getBoundingClientRect();
-      const hoverMiddleY =
+        ingredientItemRef.current?.getBoundingClientRect() as DOMRect;
+      const hoverMiddleY: number =
         (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
       const clientOffset = monitor.getClientOffset();
-      const hoverClientY = clientOffset.y - hoverBoundingRect.top;
-
-      if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
-        return;
-      }
-      if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) {
-        return;
+      if (clientOffset !== null) {
+        const hoverClientY = clientOffset.y - hoverBoundingRect.top;
+        if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
+          return;
+        }
+        if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) {
+          return;
+        }
       }
 
       moveCard(dragIndex, hoverIndex);
@@ -90,10 +98,3 @@ const BurgerConstructorIngredient = ({
 };
 
 export default BurgerConstructorIngredient;
-
-BurgerConstructorIngredient.propTypes = {
-  handleDeleteIngredient: PropTypes.func.isRequired,
-  moveCard: PropTypes.func.isRequired,
-  index: PropTypes.number.isRequired,
-  ingredient: ingredientsDataType.isRequired,
-};
