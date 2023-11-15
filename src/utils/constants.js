@@ -9,7 +9,7 @@ export const tabs = {
 
 export const BASE_URL = 'https://norma.nomoreparties.space';
 
-export const ESCAPE_KEY_CODE = 27;
+export const ESCAPE_KEY_CODE = 'Escape';
 
 export const ingredientsDataType = PropTypes.shape({
   calories: PropTypes.number.isRequired,

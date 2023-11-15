@@ -1,12 +1,21 @@
 import React from 'react';
 import styles from './ingredient-card-list.module.css';
-import PropTypes from 'prop-types';
-import { ingredientsDataType } from '../../utils/constants';
 
 import IngredientCard from '../ingredient-card/ingredient-card';
+import { IIngredient } from '../../types/ingredientsTypes';
 
-const IngredientCardList = React.forwardRef((props, ref) => {
+interface IngredientCardListProps {
+  title: string;
+  id: string;
+  ingredientsArray: IIngredient[];
+}
+
+const IngredientCardList = React.forwardRef<
+  HTMLHeadingElement,
+  IngredientCardListProps
+>((props, ref) => {
   const { title, ingredientsArray, id } = props;
+  console.log(id);
 
   return (
     <>
@@ -24,11 +33,5 @@ const IngredientCardList = React.forwardRef((props, ref) => {
     </>
   );
 });
-
-IngredientCardList.propTypes = {
-  title: PropTypes.string.isRequired,
-  ingredientsArray: PropTypes.arrayOf(ingredientsDataType.isRequired)
-    .isRequired,
-};
 
 export default IngredientCardList;

@@ -8,28 +8,31 @@ import { IIngredient } from '../../types/ingredientsTypes';
 
 import IngredientCardList from '../ingredient-card-list/ingredient-card-list';
 
-const BurgerIngredients = () => {
+const BurgerIngredients: React.FC = () => {
   const { ingredients } = useSelector((store: any) => store.ingredients);
 
-  const [current, setCurrent] = React.useState('bun');
-  const containerRef = React.useRef();
+  const [current, setCurrent] = React.useState<string>('bun');
+  const containerRef = React.useRef<HTMLDivElement>(null);
 
   const bunArray = ingredients.filter(
     (ingredient: IIngredient) => ingredient.type === tabs.BUN,
   );
 
   const sauceArray = ingredients.filter(
-    (ingredient) => ingredient.type === tabs.SAUCE,
+    (ingredient: IIngredient) => ingredient.type === tabs.SAUCE,
   );
 
   const mainIngredientsArray = ingredients.filter(
-    (ingredient) => ingredient.type === tabs.MAIN,
+    (ingredient: IIngredient) => ingredient.type === tabs.MAIN,
   );
 
   //при клике на таб
-  const onTabClick = (value) => {
+  const onTabClick = (value: string) => {
     setCurrent(value);
-    document.getElementById(value).scrollIntoView({ behavior: 'smooth' });
+    const element = document.getElementById(value);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
   };
 
   /*---------- Тут логика с Intersectional Observer ----------*/

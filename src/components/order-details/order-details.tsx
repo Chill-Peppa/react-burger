@@ -3,11 +3,10 @@ import styles from './order-details.module.css';
 import done from '../../images/done.svg';
 import { useSelector } from 'react-redux';
 
-const OrderDetails = () => {
+const OrderDetails: React.FC = () => {
   const { newOrderNumber, orderNumberRequest, orderNumberFailed } = useSelector(
-    (store) => store.order,
+    (store: any) => store.order,
   );
-  console.log(newOrderNumber);
 
   return (
     <div className={styles.orderDetails}>
@@ -25,7 +24,7 @@ const OrderDetails = () => {
       <span className="text text_type_main-medium mb-15">
         идентификатор заказа
       </span>
-      <img src={done} alt="Заказ начали готовить" />
+      <img src={done as unknown as string} alt="Заказ начали готовить" />
       <p className="text text_type_main-small mt-15 mb-2">
         Ваш заказ начали готовить
       </p>

@@ -1,24 +1,28 @@
 import React from 'react';
 import styles from './ingredient-card.module.css';
-import { ingredientsDataType } from '../../utils/constants';
 import { useSelector } from 'react-redux';
 import { useDrag } from 'react-dnd';
 import { tabs } from '../../utils/constants';
 import { Link, useLocation } from 'react-router-dom';
+import { IIngredient } from '../../types/ingredientsTypes';
 
 import {
   CurrencyIcon,
   Counter,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 
-const IngredientCard = ({ ingredient }) => {
+interface IngredientCardProps {
+  ingredient: IIngredient;
+}
+
+const IngredientCard: React.FC<IngredientCardProps> = ({ ingredient }) => {
   const location = useLocation();
 
   const { mainIngredientsData, bunIngredientsData } = useSelector(
-    (store) => store.addedIngredients,
+    (store: any) => store.addedIngredients,
   );
 
-  const [counter, setCounter] = React.useState(0);
+  const [counter, setCounter] = React.useState<number>(0);
 
   const [{ isDrag }, dragRef] = useDrag({
     type: 'ingredient',
@@ -36,7 +40,6 @@ const IngredientCard = ({ ingredient }) => {
     (item) => item._id === ingredient._id,
   ).length;
 
-  //console.log([...[bunIngredientsData]]);
   React.useEffect(() => {
     if (ingredient.type === tabs.BUN) {
       return setCounter(bunCounter * 2);
@@ -69,11 +72,6 @@ const IngredientCard = ({ ingredient }) => {
       </li>
     </Link>
   );
-};
-
-IngredientCard.propTypes = {
-  ingredient: ingredientsDataType.isRequired,
-  //onIngredientOpen: PropTypes.func.isRequired,
 };
 
 export default IngredientCard;

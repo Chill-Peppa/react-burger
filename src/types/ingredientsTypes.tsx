@@ -12,6 +12,6 @@ export interface IIngredient {
   image_mobile: string;
   image_large: string;
   __v: number;
-  dropId: string;
+  dropId?: string;
   index?: number;
 }

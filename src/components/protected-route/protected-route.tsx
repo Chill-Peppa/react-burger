@@ -1,11 +1,22 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import PropTypes from 'prop-types';
 
-export const ProtectedRoute = ({ onlyUnAuth, element, isEmailEnter }) => {
+interface IProtectedRoute {
+  onlyUnAuth: boolean;
+  isEmailEnter?: boolean;
+  element: ReactNode;
+}
+
+export const ProtectedRoute: React.FC<IProtectedRoute> = ({
+  onlyUnAuth,
+  element,
+  isEmailEnter,
+}) => {
   const location = useLocation();
-  const { isLoggedIn, isPasswordReset } = useSelector((store) => store.user);
+  const { isLoggedIn, isPasswordReset } = useSelector(
+    (store: any) => store.user,
+  );
 
   React.useEffect(() => {
     console.log(location);
@@ -41,12 +52,6 @@ export const ProtectedRoute = ({ onlyUnAuth, element, isEmailEnter }) => {
   }
 
   return element;
-};
-
-ProtectedRoute.propTypes = {
-  onlyUnAuth: PropTypes.bool,
-  element: PropTypes.element.isRequired,
-  isEmailEnter: PropTypes.bool,
 };
 
 //onlyUnAuth помечает только те страницы на

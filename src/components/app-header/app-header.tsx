@@ -21,7 +21,6 @@ const AppHeader: React.FC = () => {
     <header className={styles.header}>
       <nav className={styles.navigation}>
         <div className={styles.leftSide}>
-          ст
           <ul className={styles.menuList}>
             <li>
               <NavLink to="/" className={returnLinkState}>

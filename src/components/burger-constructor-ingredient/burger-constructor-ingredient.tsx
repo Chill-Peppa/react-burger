@@ -80,6 +80,10 @@ const BurgerConstructorIngredient: React.FC<IBurgerConstructorIngredient> = ({
 
   drag(drop(ingredientItemRef));
 
+  //чтобы тс не ругался, пришлось сделать какую-то странную магию
+  //! - это чтобы точно не возврщаться undefind
+  const dragId = ingredient.dropId!;
+
   return (
     <li
       className={styles.item}
@@ -91,7 +95,7 @@ const BurgerConstructorIngredient: React.FC<IBurgerConstructorIngredient> = ({
         text={ingredient.name}
         price={ingredient.price}
         thumbnail={ingredient.image}
-        handleClose={() => handleDeleteIngredient(ingredient.dropId)}
+        handleClose={() => handleDeleteIngredient(dragId)}
       />
     </li>
   );
