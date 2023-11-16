@@ -1,6 +1,5 @@
 import React from 'react';
 import styles from './burger-constructor.module.css';
-import PropTypes from 'prop-types';
 import { useDrop } from 'react-dnd';
 import { useSelector, useDispatch } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
@@ -23,18 +22,15 @@ import {
 import { getOrderNumber } from '../../services/actions/order';
 import BurgerConstructorIngredient from '../burger-constructor-ingredient/burger-constructor-ingredient';
 
-//этот интерфейс для стейта
 interface IState {
   total: number;
 }
 
-//а этот для экшена
 interface IAction {
   type: 'increment' | 'decrement';
   payload: number;
 }
 
-//а этот интерфейс для пропсов BurgerConstructor
 interface IBurgerConstructor {
   onOrderOpen: () => void;
 }
@@ -205,10 +201,6 @@ const BurgerConstructor: React.FC<IBurgerConstructor> = ({ onOrderOpen }) => {
       </div>
     </section>
   );
-};
-
-BurgerConstructor.propTypes = {
-  onOrderOpen: PropTypes.func.isRequired,
 };
 
 export default BurgerConstructor;
