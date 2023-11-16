@@ -10,13 +10,13 @@ import PropTypes from 'prop-types';
 
 import { forgotPassword } from '../../services/actions/auth';
 
-function ForgotPassword({ title }) {
+function ForgotPassword({ title }: { title: string }) {
   const navigate = useNavigate();
   const [email, setEmail] = React.useState('');
 
   const dispatch = useDispatch();
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
   };
 
@@ -24,9 +24,9 @@ function ForgotPassword({ title }) {
     navigate('/reset-password');
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(forgotPassword(email, onResetNavigate));
+    dispatch<any>(forgotPassword(email, onResetNavigate));
   };
 
   return (

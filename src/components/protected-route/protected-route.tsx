@@ -1,11 +1,11 @@
-import React, { ReactNode } from 'react';
+import React, { ReactElement } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 interface IProtectedRoute {
   onlyUnAuth: boolean;
   isEmailEnter?: boolean;
-  element: ReactNode;
+  element: ReactElement;
 }
 
 export const ProtectedRoute: React.FC<IProtectedRoute> = ({
@@ -14,6 +14,7 @@ export const ProtectedRoute: React.FC<IProtectedRoute> = ({
   isEmailEnter,
 }) => {
   const location = useLocation();
+
   const { isLoggedIn, isPasswordReset } = useSelector(
     (store: any) => store.user,
   );
@@ -58,7 +59,7 @@ export const ProtectedRoute: React.FC<IProtectedRoute> = ({
 //которые может заходить неавторизованный пользователь
 
 //то есть если мы залогинены isLoggedIn = true идем
-//на страницы которая  onlyUnAuth = true, условие этой функции выполняется
+//на страницы которые  onlyUnAuth = true, условие этой функции выполняется
 //и нас перебрасывает по прописанному маршруту
 
 //(!onlyUnAuth && !isLoggedIn) это наоборот, мы не залогинены идем на

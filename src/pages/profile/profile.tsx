@@ -12,7 +12,7 @@ import OrderHistory from '../order-history/order-history';
 import { logout, updateUserInfo } from '../../services/actions/auth';
 
 function Profile() {
-  const { user } = useSelector((store) => store.user);
+  const { user } = useSelector((store: any) => store.user);
 
   //для состояния инпутов
   const [disabled, setDisabled] = React.useState(true);
@@ -23,7 +23,7 @@ function Profile() {
     password: '',
   });
 
-  const inputRef = React.useRef(null);
+  const inputRef = React.useRef<HTMLInputElement>(null);
   const location = useLocation();
   const dispatch = useDispatch();
 
@@ -36,7 +36,7 @@ function Profile() {
   };
 
   React.useEffect(() => {
-    if (!disabled) {
+    if (!disabled && inputRef.current) {
       inputRef.current.focus();
     }
 
@@ -45,7 +45,7 @@ function Profile() {
     }
   }, [disabled, user]);
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
@@ -53,17 +53,17 @@ function Profile() {
     setForm({ ...user });
   };
 
-  const handleUpdate = (e) => {
+  const handleUpdate = (e: React.SyntheticEvent) => {
     e.preventDefault();
-    dispatch(updateUserInfo(form));
+    dispatch<any>(updateUserInfo(form));
   };
 
-  const returnLinkState = ({ isActive }) => {
+  const returnLinkState = ({ isActive }: { isActive: boolean }) => {
     return `${isActive ? styles.active : styles.link}`;
   };
 
   const handleLogout = () => {
-    dispatch(logout());
+    dispatch<any>(logout());
   };
 
   return (
@@ -130,7 +130,7 @@ function Profile() {
               <button
                 type="button"
                 className={styles.buttonCancel}
-                onCancel={handleCancel}>
+                onClick={handleCancel}>
                 Отмена
               </button>
               <Button

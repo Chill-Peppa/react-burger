@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { resetPassword } from '../../services/actions/auth';
 
-function ResetPassword({ title }) {
+function ResetPassword({ title }: { title: string }) {
   const [passwordData, setPasswordData] = React.useState({
     newPassword: '',
     token: '',
@@ -19,13 +19,13 @@ function ResetPassword({ title }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPasswordData({ ...passwordData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(resetPassword(passwordData, onNavigateLogin));
+    dispatch<any>(resetPassword(passwordData, onNavigateLogin));
     console.log(passwordData.newPassword);
   };
 
@@ -68,7 +68,10 @@ function ResetPassword({ title }) {
         </Button>
       </form>
       <p className={`text text_type_main-default text_color_inactive`}>
-        Вспомнили пароль? <Link className={styles.link}>Войти</Link>
+        Вспомнили пароль?{' '}
+        <Link to="/login" className={styles.link}>
+          Войти
+        </Link>
       </p>
     </section>
   );
