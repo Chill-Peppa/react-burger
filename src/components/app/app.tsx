@@ -21,7 +21,7 @@ import { getIngredients } from '../../services/actions/burgerIngredients';
 import { getUserInfo } from '../../services/actions/auth';
 import { getCookie } from '../../utils/cookies';
 
-function App() {
+const App: React.FC = () => {
   const accessToken = getCookie('accessToken');
   console.log('accessToken:', accessToken);
 
@@ -32,9 +32,9 @@ function App() {
   const navigate = useNavigate();
 
   React.useEffect(() => {
-    dispatch(getIngredients());
+    dispatch<any>(getIngredients());
     if (accessToken) {
-      dispatch(getUserInfo());
+      dispatch<any>(getUserInfo());
     }
   }, [dispatch, accessToken]);
 
@@ -123,11 +123,11 @@ function App() {
 
       {isOpenOrderModal && (
         <Modal onClose={handleCloseModalOrder} title="">
-          <OrderDetails onClose={handleCloseModalOrder} />
+          <OrderDetails />
         </Modal>
       )}
     </div>
   );
-}
+};
 
 export default App;

@@ -7,21 +7,20 @@ import {
   Input,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import { login } from '../../services/actions/auth';
 
-function Login({ title }) {
+function Login({ title }: { title: string }) {
   const [user, setUser] = React.useState({ email: '', password: '' });
 
   const dispatch = useDispatch();
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUser({ ...user, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(login(user));
+    dispatch<any>(login(user));
     console.log(user);
   };
 
@@ -72,9 +71,5 @@ function Login({ title }) {
     </section>
   );
 }
-
-Login.propTypes = {
-  title: PropTypes.string.isRequired,
-};
 
 export default Login;

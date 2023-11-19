@@ -2,13 +2,16 @@ import React from 'react';
 import styles from './ingredient-details.module.css';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import { IIngredient } from '../../types/ingredientsTypes';
 
-const IngredientDetails = () => {
+const IngredientDetails: React.FC = () => {
   const { id } = useParams();
 
   const ingredient = useSelector(
-    (store) =>
-      store.ingredients.ingredients.find(({ _id }) => _id === id) ?? {},
+    (store: any) =>
+      store.ingredients.ingredients.find(
+        ({ _id }: IIngredient) => _id === id,
+      ) ?? {},
   );
 
   return (

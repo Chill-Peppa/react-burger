@@ -1,14 +1,44 @@
-import { BASE_URL } from '../utils/constants';
+import { BASE_URL } from './constants';
 import { getCookie } from './cookies';
 
-export default class Api {
-  constructor({ url, headers }) {
+type THeaders = {
+  readonly 'Content-Type': string;
+};
+
+interface IConstructor {
+  url: string;
+  headers: THeaders;
+}
+
+interface IApi<T> {
+  readonly _url: string;
+  readonly _headers: T;
+}
+
+interface IUser {
+  name: string;
+  email: string;
+  password: string;
+}
+
+interface IPasswordData {
+  newPassword: string;
+  token: string;
+}
+
+// Ключевое слово implements в TypeScript используется
+// для указания того, что класс реализует определенный интерфейс.
+export default class Api implements IApi<THeaders> {
+  readonly _url: string;
+  readonly _headers: THeaders;
+
+  constructor({ url, headers }: IConstructor) {
     this._url = url;
     this._headers = headers;
   }
 
   //внутренний метод проверки ответа
-  _returnResponse(res) {
+  _returnResponse(res: Response) {
     if (res.ok) {
       return res.json();
     }
@@ -17,7 +47,7 @@ export default class Api {
   }
 
   //универсальный метод запроса с проверкой ответа
-  _request(url, options) {
+  _request(url: string, options: RequestInit) {
     return fetch(url, options).then(this._returnResponse);
   }
 
@@ -29,7 +59,7 @@ export default class Api {
   }
 
   //метод отправки заказа на сервер
-  sendOrder(id) {
+  sendOrder(id: string) {
     return this._request(`${this._url}/api/orders`, {
       headers: this._headers,
       method: 'POST',
@@ -38,7 +68,7 @@ export default class Api {
   }
 
   //метод на регистрацию юзера
-  register(user) {
+  register(user: IUser) {
     return this._request(`${this._url}/api/auth/register`, {
       headers: this._headers,
       method: 'POST',
@@ -52,7 +82,7 @@ export default class Api {
   }
 
   //метод для авторизации в системе
-  login(user) {
+  login(user: IUser) {
     return this._request(`${this._url}/api/auth/login`, {
       headers: this._headers,
       method: 'POST',
@@ -80,7 +110,7 @@ export default class Api {
   }
 
   //для восстановления пароля
-  recoverPassword(email) {
+  recoverPassword(email: string) {
     return this._request(`${this._url}/api/password-reset`, {
       headers: this._headers,
       method: 'POST',
@@ -94,7 +124,7 @@ export default class Api {
   }
 
   //сбрасываем пароль
-  resetPassword(passwordData) {
+  resetPassword(passwordData: IPasswordData) {
     return this._request(`${this._url}/api/password-reset/reset`, {
       headers: this._headers,
       method: 'POST',
@@ -121,7 +151,7 @@ export default class Api {
   }
 
   //обновляем данные юзера
-  updateUserInfo(form) {
+  updateUserInfo(form: IUser) {
     return this._request(`${this._url}/api/auth/user`, {
       headers: {
         'Content-Type': 'application/json',

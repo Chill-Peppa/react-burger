@@ -1,4 +1,4 @@
-export function setCookie(name, value, props) {
+export function setCookie(name: string, value: string, props: any) {
   props = {
     path: '/',
     ...props,
@@ -26,7 +26,7 @@ export function setCookie(name, value, props) {
 }
 
 //с помощью этой функции получаем интересующую нас куку
-export function getCookie(name) {
+export function getCookie(name: string) {
   const matches = document.cookie.match(
     new RegExp(
       '(?:^|; )' +
@@ -38,6 +38,6 @@ export function getCookie(name) {
   return matches ? decodeURIComponent(matches[1]) : undefined;
 }
 
-export function deleteCookie(name) {
-  setCookie(name, null, { expires: -1 });
+export function deleteCookie(name: string) {
+  setCookie(name, '', { expires: -1 });
 }

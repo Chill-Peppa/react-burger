@@ -1,19 +1,24 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import ReactDOM from 'react-dom';
 import styles from './modal.module.css';
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import PropTypes from 'prop-types';
 import { ESCAPE_KEY_CODE } from '../../utils/constants';
 
 import ModalOverlay from '../modal-overlay/modal-overlay';
 
-const modalRoot = document.getElementById('react-modals');
+const modalRoot = document.getElementById('react-modals') as HTMLElement;
 
-const Modal = ({ title, children, onClose }) => {
+interface IModalProps {
+  title: string;
+  onClose: () => void;
+  children: ReactNode;
+}
+
+const Modal: React.FC<IModalProps> = ({ title, children, onClose }) => {
   //для закрытия по esc
   React.useEffect(() => {
-    const closeByEsc = (e) => {
-      if (e.keyCode === ESCAPE_KEY_CODE) {
+    const closeByEsc = (e: KeyboardEvent) => {
+      if (e.key === ESCAPE_KEY_CODE) {
         onClose();
       }
     };
@@ -37,12 +42,6 @@ const Modal = ({ title, children, onClose }) => {
     </>,
     modalRoot,
   );
-};
-
-Modal.propTypes = {
-  onClose: PropTypes.func.isRequired,
-  children: PropTypes.node.isRequired,
-  title: PropTypes.string,
 };
 
 export default Modal;

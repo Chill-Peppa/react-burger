@@ -1,6 +1,5 @@
 import React from 'react';
 import styles from './burger-constructor.module.css';
-import PropTypes from 'prop-types';
 import { useDrop } from 'react-dnd';
 import { useSelector, useDispatch } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
@@ -14,7 +13,7 @@ import {
   addMain,
   deleteMain,
 } from '../../services/actions/burgerConstructor';
-
+import { IIngredient } from '../../types/ingredientsTypes';
 import {
   ConstructorElement,
   CurrencyIcon,
@@ -23,9 +22,22 @@ import {
 import { getOrderNumber } from '../../services/actions/order';
 import BurgerConstructorIngredient from '../burger-constructor-ingredient/burger-constructor-ingredient';
 
-const totalPriceInitialVal = { total: 0 };
+interface IState {
+  total: number;
+}
 
-const reducer = (state, action) => {
+interface IAction {
+  type: 'increment' | 'decrement';
+  payload: number;
+}
+
+interface IBurgerConstructor {
+  onOrderOpen: () => void;
+}
+
+const totalPriceInitialVal: IState = { total: 0 };
+
+const reducer = (state: IState, action: IAction) => {
   switch (action.type) {
     case 'increment':
       return { total: action.payload };
@@ -34,17 +46,21 @@ const reducer = (state, action) => {
   }
 };
 
-const BurgerConstructor = ({ onOrderOpen }) => {
+const BurgerConstructor: React.FC<IBurgerConstructor> = ({ onOrderOpen }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const ingredients = useSelector((store) => store.ingredients.ingredients);
-
-  const { mainIngredientsData, bunIngredientsData } = useSelector(
-    (store) => store.addedIngredients,
+  const ingredients = useSelector(
+    (store: any) => store.ingredients.ingredients,
   );
 
-  const { isLoggedIn } = useSelector((store) => store.user);
+  console.log(ingredients);
+
+  const { mainIngredientsData, bunIngredientsData } = useSelector(
+    (store: any) => store.addedIngredients,
+  );
+
+  const { isLoggedIn } = useSelector((store: any) => store.user);
 
   const [totalPriceState, totalPriceDispatch] = React.useReducer(
     reducer,
@@ -52,7 +68,7 @@ const BurgerConstructor = ({ onOrderOpen }) => {
   );
 
   const totalPrice =
-    mainIngredientsData.reduce((prevItem, item) => {
+    mainIngredientsData.reduce((prevItem: number, item: { price: number }) => {
       return prevItem + item.price;
     }, 0) +
       bunIngredientsData.price * 2 || 0;
@@ -62,17 +78,19 @@ const BurgerConstructor = ({ onOrderOpen }) => {
   }, [totalPrice]);
 
   const onClickOrderSubmit = () => {
-    const AddedIngredientsIds = ingredients.map((ingredient) => ingredient._id);
+    const AddedIngredientsIds = ingredients.map(
+      (ingredient: IIngredient) => ingredient._id,
+    );
     if (isLoggedIn) {
       onOrderOpen();
-      dispatch(getOrderNumber(AddedIngredientsIds));
+      dispatch<any>(getOrderNumber(AddedIngredientsIds));
     } else {
       navigate('/login', { replace: true });
     }
   };
 
   /*------------ DND ------------*/
-  const onDropHandler = (item) => {
+  const onDropHandler = (item: IIngredient) => {
     if (item.type === tabs.BUN) {
       dispatch(addBun(item));
     } else if (item.type !== tabs.BUN) {
@@ -82,17 +100,17 @@ const BurgerConstructor = ({ onOrderOpen }) => {
 
   const [, dropTarget] = useDrop({
     accept: 'ingredient',
-    drop(item) {
+    drop(item: IIngredient) {
       onDropHandler(item);
     },
   });
 
-  const handleDeleteIngredient = (key) => {
+  const handleDeleteIngredient = (key: string) => {
     dispatch(deleteMain(key));
   };
 
   const moveCard = React.useCallback(
-    (dragIndex, hoverIndex) => {
+    (dragIndex: number, hoverIndex: number) => {
       dispatch({
         type: SORT_INGREDIENTS,
         sortMain: update(mainIngredientsData, {
@@ -127,15 +145,17 @@ const BurgerConstructor = ({ onOrderOpen }) => {
 
         {mainIngredientsData.length > 0 ? (
           <ul className={styles.main}>
-            {mainIngredientsData.map((ingredient, index) => (
-              <BurgerConstructorIngredient
-                index={index}
-                key={ingredient.dropId}
-                ingredient={ingredient}
-                handleDeleteIngredient={handleDeleteIngredient}
-                moveCard={moveCard}
-              />
-            ))}
+            {mainIngredientsData.map(
+              (ingredient: IIngredient, index: number) => (
+                <BurgerConstructorIngredient
+                  index={index}
+                  key={ingredient.dropId}
+                  ingredient={ingredient}
+                  handleDeleteIngredient={handleDeleteIngredient}
+                  moveCard={moveCard}
+                />
+              ),
+            )}
           </ul>
         ) : (
           <p className={`${styles.mainDefault} text text_type_main-default`}>
@@ -181,10 +201,6 @@ const BurgerConstructor = ({ onOrderOpen }) => {
       </div>
     </section>
   );
-};
-
-BurgerConstructor.propTypes = {
-  onOrderOpen: PropTypes.func.isRequired,
 };
 
 export default BurgerConstructor;
