@@ -7,7 +7,6 @@ import {
   Input,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import { login } from '../../services/actions/auth';
 
 function Login({ title }: { title: string }) {
@@ -72,9 +71,5 @@ function Login({ title }: { title: string }) {
     </section>
   );
 }
-
-Login.propTypes = {
-  title: PropTypes.string.isRequired,
-};
 
 export default Login;

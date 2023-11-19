@@ -7,7 +7,6 @@ import {
   Input,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import { register } from '../../services/actions/auth';
 
 function Register({ title }: { title: string }) {
@@ -78,9 +77,5 @@ function Register({ title }: { title: string }) {
     </section>
   );
 }
-
-Register.propTypes = {
-  title: PropTypes.string.isRequired,
-};
 
 export default Register;

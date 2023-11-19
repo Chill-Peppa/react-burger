@@ -167,7 +167,6 @@ export const authReducer = (state = initialState, action) => {
         resetPasswordRequest: true,
         resetPasswordFailed: false,
         isLoggedIn: false,
-        //isPasswordReset: false,
       };
     }
     case AUTH_RESET_PASSWORD_SUCCESS: {
@@ -175,8 +174,6 @@ export const authReducer = (state = initialState, action) => {
         ...state,
         resetPasswordRequest: false,
         resetPasswordFailed: false,
-        //isLoggedIn: true,
-        //isPasswordReset: true,
       };
     }
     case AUTH_RESET_PASSWORD_FAILED: {
@@ -184,7 +181,6 @@ export const authReducer = (state = initialState, action) => {
         ...state,
         resetPasswordRequest: false,
         resetPasswordFailed: true,
-        //isLoggedIn: false,
       };
     }
     case AUTH_GET_USER: {
