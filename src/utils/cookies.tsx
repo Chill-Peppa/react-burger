@@ -1,4 +1,4 @@
-export function setCookie(name: string, value: string, props: any) {
+export function setCookie(name: string, value: string, props?: any) {
   props = {
     path: '/',
     ...props,

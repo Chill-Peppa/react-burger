@@ -1,5 +1,6 @@
 import { BASE_URL } from './constants';
 import { getCookie } from './cookies';
+import { IUser, IUserLogin } from '../types/ingredientsTypes';
 
 type THeaders = {
   readonly 'Content-Type': string;
@@ -13,12 +14,6 @@ interface IConstructor {
 interface IApi<T> {
   readonly _url: string;
   readonly _headers: T;
-}
-
-interface IUser {
-  name: string;
-  email: string;
-  password: string;
 }
 
 interface IPasswordData {
@@ -68,7 +63,7 @@ export default class Api implements IApi<THeaders> {
   }
 
   //метод на регистрацию юзера
-  register(user: IUser) {
+  register(user: IUserLogin) {
     return this._request(`${this._url}/api/auth/register`, {
       headers: this._headers,
       method: 'POST',
