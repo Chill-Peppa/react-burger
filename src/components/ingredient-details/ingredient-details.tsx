@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './ingredient-details.module.css';
-import { useSelector } from 'react-redux';
+import { useSelector } from '../../services/types/hooks';
 import { useParams } from 'react-router-dom';
 import { IIngredient } from '../../types/ingredientsTypes';
 
@@ -8,7 +8,7 @@ const IngredientDetails: React.FC = () => {
   const { id } = useParams();
 
   const ingredient = useSelector(
-    (store: any) =>
+    (store) =>
       store.ingredients.ingredients.find(
         ({ _id }: IIngredient) => _id === id,
       ) ?? {},

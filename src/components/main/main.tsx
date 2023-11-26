@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './main.module.css';
-import { useSelector } from 'react-redux';
+import { useSelector } from '../../services/types/hooks';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 
@@ -14,7 +14,7 @@ interface IMainProps {
 
 const Main: React.FC<IMainProps> = ({ onOrderOpen }) => {
   const { ingredients, ingredientsRequest, ingredientsFailed } = useSelector(
-    (store: any) => store.ingredients,
+    (store) => store.ingredients,
   );
 
   return (

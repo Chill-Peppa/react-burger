@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './ingredient-card.module.css';
-import { useSelector } from 'react-redux';
+import { useSelector } from '../../services/types/hooks';
 import { useDrag } from 'react-dnd';
 import { tabs } from '../../utils/constants';
 import { Link, useLocation } from 'react-router-dom';
@@ -19,7 +19,7 @@ const IngredientCard: React.FC<IngredientCardProps> = ({ ingredient }) => {
   const location = useLocation();
 
   const { mainIngredientsData, bunIngredientsData } = useSelector(
-    (store: any) => store.addedIngredients,
+    (store) => store.addedIngredients,
   );
 
   const [counter, setCounter] = React.useState<number>(0);

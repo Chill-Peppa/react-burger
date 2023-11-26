@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './app.module.css';
-import { useDispatch } from 'react-redux';
+import { useDispatch } from '../../services/types/hooks';
 import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 
 import AppHeader from '../app-header/app-header';
@@ -32,9 +32,9 @@ const App: React.FC = () => {
   const navigate = useNavigate();
 
   React.useEffect(() => {
-    dispatch<any>(getIngredients());
+    dispatch(getIngredients());
     if (accessToken) {
-      dispatch<any>(getUserInfo());
+      dispatch(getUserInfo());
     }
   }, [dispatch, accessToken]);
 

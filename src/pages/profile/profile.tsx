@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './profile.module.css';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from '../../services/types/hooks';
 import { NavLink, useLocation } from 'react-router-dom';
 import {
   EmailInput,
@@ -12,7 +12,7 @@ import OrderHistory from '../order-history/order-history';
 import { logout, updateUserInfo } from '../../services/actions/auth';
 
 function Profile() {
-  const { user } = useSelector((store: any) => store.user);
+  const { user } = useSelector((store) => store.user);
 
   //для состояния инпутов
   const [disabled, setDisabled] = React.useState(true);
@@ -55,7 +55,7 @@ function Profile() {
 
   const handleUpdate = (e: React.SyntheticEvent) => {
     e.preventDefault();
-    dispatch<any>(updateUserInfo(form));
+    dispatch(updateUserInfo(form));
   };
 
   const returnLinkState = ({ isActive }: { isActive: boolean }) => {
@@ -63,7 +63,7 @@ function Profile() {
   };
 
   const handleLogout = () => {
-    dispatch<any>(logout());
+    dispatch(logout());
   };
 
   return (

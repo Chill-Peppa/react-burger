@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './register.module.css';
-import { useDispatch } from 'react-redux';
+import { useDispatch } from '../../services/types/hooks';
 import {
   PasswordInput,
   Button,
@@ -20,7 +20,7 @@ function Register({ title }: { title: string }) {
 
   const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch<any>(register(user));
+    dispatch(register(user));
     console.log(user);
   };
 

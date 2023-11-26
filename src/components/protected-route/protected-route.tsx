@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector } from '../../services/types/hooks';
 
 interface IProtectedRoute {
   onlyUnAuth: boolean;
@@ -15,9 +15,7 @@ export const ProtectedRoute: React.FC<IProtectedRoute> = ({
 }) => {
   const location = useLocation();
 
-  const { isLoggedIn, isPasswordReset } = useSelector(
-    (store: any) => store.user,
-  );
+  const { isLoggedIn, isPasswordReset } = useSelector((store) => store.user);
 
   React.useEffect(() => {
     console.log(location);

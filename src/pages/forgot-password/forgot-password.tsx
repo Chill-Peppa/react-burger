@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './forgot-password.module.css';
-import { useDispatch } from 'react-redux';
+import { useDispatch } from '../../services/types/hooks';
 import {
   Button,
   Input,
@@ -25,7 +25,7 @@ function ForgotPassword({ title }: { title: string }) {
 
   const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch<any>(forgotPassword(email, onResetNavigate));
+    dispatch(forgotPassword(email, onResetNavigate));
   };
 
   return (

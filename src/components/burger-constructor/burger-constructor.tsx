@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './burger-constructor.module.css';
 import { useDrop } from 'react-dnd';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from '../../services/types/hooks';
 import { v4 as uuidv4 } from 'uuid';
 import update from 'immutability-helper';
 import { useNavigate } from 'react-router-dom';
@@ -50,17 +50,15 @@ const BurgerConstructor: React.FC<IBurgerConstructor> = ({ onOrderOpen }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const ingredients = useSelector(
-    (store: any) => store.ingredients.ingredients,
-  );
+  const ingredients = useSelector((store) => store.ingredients.ingredients);
 
   console.log(ingredients);
 
   const { mainIngredientsData, bunIngredientsData } = useSelector(
-    (store: any) => store.addedIngredients,
+    (store) => store.addedIngredients,
   );
 
-  const { isLoggedIn } = useSelector((store: any) => store.user);
+  const { isLoggedIn } = useSelector((store) => store.user);
 
   const [totalPriceState, totalPriceDispatch] = React.useReducer(
     reducer,
@@ -83,7 +81,7 @@ const BurgerConstructor: React.FC<IBurgerConstructor> = ({ onOrderOpen }) => {
     );
     if (isLoggedIn) {
       onOrderOpen();
-      dispatch<any>(getOrderNumber(AddedIngredientsIds));
+      dispatch(getOrderNumber(AddedIngredientsIds));
     } else {
       navigate('/login', { replace: true });
     }

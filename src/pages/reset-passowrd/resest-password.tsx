@@ -6,7 +6,7 @@ import {
   Input,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Link, useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch } from '../../services/types/hooks';
 import { resetPassword } from '../../services/actions/auth';
 
 function ResetPassword({ title }: { title: string }) {
@@ -24,7 +24,7 @@ function ResetPassword({ title }: { title: string }) {
 
   const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch<any>(resetPassword(passwordData, onNavigateLogin));
+    dispatch(resetPassword(passwordData, onNavigateLogin));
     console.log(passwordData.newPassword);
   };
 
