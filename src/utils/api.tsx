@@ -59,7 +59,7 @@ export default class Api implements IApi<THeaders> {
   }
 
   //метод отправки заказа на сервер
-  sendOrder(id: string) {
+  sendOrder(id: string[]) {
     return this._request(`${this._url}/api/orders`, {
       headers: this._headers,
       method: 'POST',

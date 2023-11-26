@@ -4,14 +4,23 @@ import {
   DELETE_MAIN_INGREDIENT,
   SORT_INGREDIENTS,
 } from '../actions/burgerConstructor';
+import { IIngredient } from '../../types/ingredientsTypes';
+
+import {
+  TBurgerConstructorState,
+  TBurgerConstructorActions,
+} from '../types/burgerConstructorTypes';
 
 //исходное значение ингредиентов в конструкторе
-const initialState = {
-  bunIngredientsData: {},
+const initialState: TBurgerConstructorState = {
+  bunIngredientsData: {} as IIngredient,
   mainIngredientsData: [],
 };
 
-export const constructorReducer = (state = initialState, action) => {
+export const constructorReducer = (
+  state = initialState,
+  action: TBurgerConstructorActions,
+) => {
   switch (action.type) {
     case ADD_BUN_INGREDIENT: {
       return {

@@ -4,14 +4,19 @@ import {
   GET_ORDER_NUMBER_FAILED,
 } from '../actions/order';
 
+import { TOrderState, TOrderActions } from '../types/orderTypes';
+
 //исходное значение созданного заказа
-const initialState = {
+const initialState: TOrderState = {
   newOrderNumber: null,
   orderNumberRequest: false,
   orderNumberFailed: false,
 };
 
-export const orderNumberReducer = (state = initialState, action) => {
+export const orderNumberReducer = (
+  state = initialState,
+  action: TOrderActions,
+) => {
   switch (action.type) {
     case GET_ORDER_NUMBER:
       return {

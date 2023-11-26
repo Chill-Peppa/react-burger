@@ -1,11 +1,15 @@
 import { OPEN_INGREDIENT, CLOSE_INGREDIENT } from '../actions/ingredient';
+import { TIngredientState, TIngredientActions } from '../types/ingredientTypes';
 
 //исходное значение текущего просматриваемого ингредиента
-const initialState = {
+const initialState: TIngredientState = {
   selectedIngredient: null,
 };
 
-export const ingredientReducer = (state = initialState, action) => {
+export const ingredientReducer = (
+  state = initialState,
+  action: TIngredientActions,
+) => {
   switch (action.type) {
     case OPEN_INGREDIENT:
       return {
@@ -15,7 +19,7 @@ export const ingredientReducer = (state = initialState, action) => {
     case CLOSE_INGREDIENT:
       return {
         ...state,
-        selectedIngredient: action.ingredient,
+        selectedIngredient: action.selectedIngredient,
       };
     default:
       return state;

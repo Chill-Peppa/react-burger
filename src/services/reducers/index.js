@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
-import { getIngredientsReducer } from './burgerIngredients.js';
-import { constructorReducer } from './burgerConstructor.js';
-import { ingredientReducer } from './ingredient.js';
-import { orderNumberReducer } from './order.js';
+import { getIngredientsReducer } from './burgerIngredients.ts';
+import { constructorReducer } from './burgerConstructor.ts';
+import { ingredientReducer } from './ingredient.ts';
+import { orderNumberReducer } from './order.ts';
 import { authReducer } from './auth.js';
 
 export const rootReducer = combineReducers({
