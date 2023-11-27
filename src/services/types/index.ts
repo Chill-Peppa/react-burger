@@ -4,12 +4,20 @@ import { Action, ActionCreator } from 'redux';
 import { store } from '../store';
 import { TBurgerConstructorActions } from './burgerConstructorTypes';
 import { TIngredientActions } from './ingredientTypes';
+import { TAuthActions } from './authTypes';
+import { TBurgerIngredientsActions } from './burgerIngredientsTypes';
+import { TOrderActions } from './orderTypes';
 
 // ReturnType - вспомогательный тип (для описания thunk)
 export type RootState = ReturnType<typeof store.getState>;
 
 //типизация всех экшенов хранилища
-type TApplicationActions = TBurgerConstructorActions | TIngredientActions;
+type TApplicationActions =
+  | TBurgerConstructorActions
+  | TIngredientActions
+  | TAuthActions
+  | TBurgerIngredientsActions
+  | TOrderActions;
 
 // Типизация thunk'ов в нашем приложении
 export type AppThunk<TReturn = void> = ActionCreator<

@@ -15,7 +15,6 @@ const IngredientCardList = React.forwardRef<
   IngredientCardListProps
 >((props, ref) => {
   const { title, ingredientsArray, id } = props;
-  console.log(id);
 
   return (
     <>

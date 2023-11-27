@@ -23,7 +23,6 @@ import { getCookie } from '../../utils/cookies';
 
 const App: React.FC = () => {
   const accessToken = getCookie('accessToken');
-  console.log('accessToken:', accessToken);
 
   const [isOpenOrderModal, setIsOpenOrderModal] = React.useState(false);
 

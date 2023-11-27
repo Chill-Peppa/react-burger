@@ -159,7 +159,7 @@ export type TAuthState = {
   isPasswordReset: boolean;
 };
 
-export type TAuthTypes =
+export type TAuthActions =
   | IAuthRegister
   | IAuthRegisterSuccess
   | IAuthRegisterFailed
