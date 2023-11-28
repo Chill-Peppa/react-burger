@@ -15,8 +15,10 @@ import ForgotPassword from '../../pages/forgot-password/forgot-password';
 import ResetPassword from '../../pages/reset-passowrd/resest-password';
 import Profile from '../../pages/profile/profile';
 import IngredientPage from '../../pages/ingredient-page/ingredient-page';
-import { ProtectedRoute } from '../protected-route/protected-route';
+import Feed from '../../pages/feed/feed';
+import FeedDetailsSingle from '../../pages/feed-details-single/feed-details-single';
 
+import { ProtectedRoute } from '../protected-route/protected-route';
 import { getIngredients } from '../../services/actions/burgerIngredients';
 import { getUserInfo } from '../../services/actions/auth';
 import { getCookie } from '../../utils/cookies';
@@ -92,6 +94,7 @@ const App: React.FC = () => {
           }
         />
         <Route path="/" element={<Main onOrderOpen={handleOpenOrderModal} />} />
+        <Route path="/feed" element={<Feed />} />
 
         <Route
           path="/profile"
@@ -101,7 +104,9 @@ const App: React.FC = () => {
           path="/profile/orders"
           element={<ProtectedRoute onlyUnAuth={false} element={<Profile />} />}
         />
+        {/* Тут будут динамичные маршруты, test будет заменен на динамичный маршрут! */}
         <Route path="/ingredients/:id" element={<IngredientPage />} />
+        <Route path="/test" element={<FeedDetailsSingle />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
 

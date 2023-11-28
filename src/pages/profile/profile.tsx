@@ -8,7 +8,8 @@ import {
   Input,
   Button,
 } from '@ya.praktikum/react-developer-burger-ui-components';
-import OrderHistory from '../order-history/order-history';
+//import OrderHistory from '../order-history/order-history';
+import FeedOrders from '../feed-orders/feed-orders';
 import { logout, updateUserInfo } from '../../services/actions/auth';
 
 function Profile() {
@@ -87,14 +88,24 @@ function Profile() {
               </button>
             </li>
           </ul>
-          <p className="mt-20 text text_type_main-default text_color_inactive">
-            В этом разделе вы можете изменить&nbsp;свои&nbsp;персональные данные
-          </p>
+          {location.pathname === '/profile' ? (
+            <p className="mt-20 text text_type_main-default text_color_inactive">
+              В этом разделе вы можете
+              <br />
+              изменить&nbsp;свои&nbsp;персональные данные
+            </p>
+          ) : (
+            <p className="mt-20 text text_type_main-default text_color_inactive">
+              В этом разделе вы можете
+              <br />
+              просмотреть&nbsp;свою&nbsp;историю заказов
+            </p>
+          )}
         </nav>
         {location.pathname === '/profile/orders' ? (
-          <OrderHistory />
+          <FeedOrders title="" />
         ) : (
-          <form>
+          <form className={styles.form}>
             <Input
               name={'name'}
               placeholder={'Имя'}

@@ -1,0 +1,55 @@
+.feedDetails {
+  display: flex;
+  margin: 120px auto 0;
+  flex-direction: column;
+  max-width: 640px;
+  width: 100%;
+}
+
+.order {
+  text-align: center;
+}
+
+.done {
+  color: #00cccc;
+}
+
+.bottom {
+  display: flex;
+  justify-content: space-between;
+}
+
+.totalContainer {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+/*---------- Scrollbar ----------*/
+
+.ingredientsList {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  gap: 16px;
+  padding: 0;
+  margin: 0;
+  overflow-y: scroll;
+  scrollbar-width: 8px;
+  max-height: 312px;
+}
+
+.ingredientsList::-webkit-scrollbar {
+  width: 8px;
+  height: 312px;
+}
+
+.ingredientsList::-webkit-scrollbar-thumb {
+  height: 194px;
+  background: #8585ad;
+}
+
+.ingredientsList::-webkit-scrollbar-track {
+  height: 312px;
+  background: #2f2f37;
+}

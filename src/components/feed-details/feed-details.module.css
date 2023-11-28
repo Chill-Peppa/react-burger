@@ -1,0 +1,46 @@
+.feedDetails {
+  padding-top: 98px;
+  width: 580px;
+}
+
+.orderNumbersContainer {
+  gap: 36px;
+  display: flex;
+}
+
+.listDone {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  list-style: none;
+  padding: 0;
+  flex-wrap: wrap;
+  color: #00cccc;
+  max-height: 162px;
+  margin: 0;
+}
+
+.listInProgress {
+  gap: 8px;
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  padding: 0;
+  flex-wrap: wrap;
+  margin: 0;
+}
+
+.done {
+  max-width: 272px;
+  width: 100%;
+}
+
+.inProgress {
+  max-width: 272px;
+  width: 100%;
+}
+
+.digits {
+  text-shadow: 0 0 16px rgba(51, 51, 255, 0.25), 0 0 8px rgba(51, 51, 255, 0.25),
+    0 4px 32px rgba(51, 51, 255, 0.5);
+}

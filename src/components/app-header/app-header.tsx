@@ -8,7 +8,7 @@ import {
   ProfileIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 
-import { NavLink, Link, useLocation } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 
 const AppHeader: React.FC = () => {
   const location = useLocation();
@@ -31,12 +31,14 @@ const AppHeader: React.FC = () => {
               </NavLink>
             </li>
             <li>
-              <Link to="#" className={styles.menuLink}>
-                <ListIcon type="secondary" />
+              <NavLink to="/feed" className={returnLinkState}>
+                <ListIcon
+                  type={location.pathname === '/feed' ? 'primary' : 'secondary'}
+                />
                 <span className="text text_type_main-default">
                   Лента заказов
                 </span>
-              </Link>
+              </NavLink>
             </li>
           </ul>
           <NavLink to="/">
