@@ -12,7 +12,7 @@ import { TOrderActions } from './orderTypes';
 export type RootState = ReturnType<typeof store.getState>;
 
 //типизация всех экшенов хранилища
-type TApplicationActions =
+export type TApplicationActions =
   | TBurgerConstructorActions
   | TIngredientActions
   | TAuthActions

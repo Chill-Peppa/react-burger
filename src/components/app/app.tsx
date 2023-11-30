@@ -26,6 +26,18 @@ import { getCookie } from '../../utils/cookies';
 const App: React.FC = () => {
   const accessToken = getCookie('accessToken');
 
+  const ws = new WebSocket(
+    `wss://norma.nomoreparties.space/orders?token=${accessToken}`,
+  );
+
+  ws.onopen = (event: Event) => {
+    console.log('Соединение установлено');
+  };
+
+  ws.onmessage = (event: MessageEvent) => {
+    console.log(`Получены данные: ${event.data}`);
+  };
+
   const [isOpenOrderModal, setIsOpenOrderModal] = React.useState(false);
 
   const dispatch = useDispatch();

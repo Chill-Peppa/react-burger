@@ -56,7 +56,10 @@ export default class Api implements IApi<THeaders> {
   //метод отправки заказа на сервер
   sendOrder(id: string[]) {
     return this._request(`${this._url}/api/orders`, {
-      headers: this._headers,
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+        Authorization: `Bearer ${getCookie('accessToken')}`,
+      },
       method: 'POST',
       body: JSON.stringify({ ingredients: id }),
     });
@@ -177,6 +180,13 @@ export default class Api implements IApi<THeaders> {
       redirect: 'follow',
       referrerPolicy: 'no-referrer',
       body: JSON.stringify({ token: getCookie('refreshToken') }),
+    });
+  }
+
+  //получить заказ по его номеру
+  getOrder(orderNumber: string) {
+    return this._request(`${this._url}/api/orders/${orderNumber}`, {
+      headers: this._headers,
     });
   }
 }
