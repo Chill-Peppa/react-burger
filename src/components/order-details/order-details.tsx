@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './order-details.module.css';
-import done from '../../images/done.svg';
+import done from '../../images/done.png';
 import { useSelector } from '../../services/types/hooks';
 
 const OrderDetails: React.FC = () => {
@@ -24,7 +24,7 @@ const OrderDetails: React.FC = () => {
       <span className="text text_type_main-medium mb-15">
         идентификатор заказа
       </span>
-      <img src={done as unknown as string} alt="Заказ начали готовить" />
+      <img src={done} alt="Заказ начали готовить" />
       <p className="text text_type_main-small mt-15 mb-2">
         Ваш заказ начали готовить
       </p>

@@ -8,17 +8,20 @@ import {
   Input,
   Button,
 } from '@ya.praktikum/react-developer-burger-ui-components';
-//import OrderHistory from '../order-history/order-history';
 import FeedOrders from '../feed-orders/feed-orders';
+
 import { logout, updateUserInfo } from '../../services/actions/auth';
+import { IUser } from '../../types/ingredientsTypes';
 
 function Profile() {
   const { user } = useSelector((store) => store.user);
 
+  console.log(user)
+
   //для состояния инпутов
   const [disabled, setDisabled] = React.useState(true);
 
-  const [form, setForm] = React.useState({
+  const [form, setForm] = React.useState<IUser>({
     name: '',
     email: '',
     password: '',
@@ -51,7 +54,7 @@ function Profile() {
   };
 
   const handleCancel = () => {
-    setForm({ ...user });
+    setForm({ ...user };
   };
 
   const handleUpdate = (e: React.SyntheticEvent) => {
