@@ -7,6 +7,7 @@ import { TIngredientActions } from './ingredientTypes';
 import { TAuthActions } from './authTypes';
 import { TBurgerIngredientsActions } from './burgerIngredientsTypes';
 import { TOrderActions } from './orderTypes';
+import { TWSActions } from './feedTypes';
 
 // ReturnType - вспомогательный тип (для описания thunk)
 export type RootState = ReturnType<typeof store.getState>;
@@ -17,7 +18,8 @@ export type TApplicationActions =
   | TIngredientActions
   | TAuthActions
   | TBurgerIngredientsActions
-  | TOrderActions;
+  | TOrderActions
+  | TWSActions;
 
 // Типизация thunk'ов в нашем приложении
 export type AppThunk<TReturn = void> = ActionCreator<

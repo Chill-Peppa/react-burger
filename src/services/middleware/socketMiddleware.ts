@@ -1,27 +1,27 @@
-// import type { Middleware, MiddlewareAPI } from 'redux';
+import type { Middleware, MiddlewareAPI } from 'redux';
 
-// import type { TApplicationActions, AppDispatch, RootState } from '../types';
+import type { TApplicationActions, AppDispatch, RootState } from '../types';
+import { TWSActionsTypesStore } from '../types/feedTypes';
 
-// export const socketMiddleware = (wsUrl: string): Middleware => {
-//   return ((store: MiddlewareAPI<AppDispatch, RootState>) => {
+export const socketMiddleware = (
+  wsUrl: string,
+  wsActions: TWSActionsTypesStore,
+): Middleware => {
+  return (store: MiddlewareAPI<AppDispatch, RootState>) => {
+    let socket: WebSocket | null = null;
 
-//     let socket: WebSocket | null = null;
-//     // let url: string | undefined = '';
-//     // let token: string | undefined = undefined;
+    return (next) => (action: TApplicationActions) => {
+      const { dispatch, getState } = store;
+      const { wsConnectionStart } = wsActions;
 
-//     return next => (action: TApplicationActions) => {
-//         const { dispatch, getState } = store;
-//       const { type } = action;
+      const { type } = action;
 
-//       if (type === 'WS_CONNECTION_START') {
-//         socket = new WebSocket(wsUrl);
-//     }
+      if (type === wsConnectionStart) {
+        socket = new WebSocket(wsUrl + '/all');
+      }
 
-//     if(socket) {
-
-//     }
-
-//     }
-
-//   })
-// };
+      if (socket) {
+      }
+    };
+  };
+};

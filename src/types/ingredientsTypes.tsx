@@ -16,6 +16,18 @@ export interface IIngredient {
   index?: number;
 }
 
+export interface IOrder {
+  ingredients: string[];
+  _id: string;
+  status: string;
+  number: number;
+  createdAt: string;
+  updatedAt: string;
+  name: string;
+  owner?: string;
+  __v?: number;
+}
+
 export interface IUser {
   name: string;
   email: string;

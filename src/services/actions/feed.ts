@@ -5,7 +5,8 @@ import {
   IWsConnectionFeedSuccess,
   IWsConnectionFeedError,
   IWsConnectionFeedClosed,
-  //IWsConnectionFeedGetOrder,
+  IWsConnectionFeedGetOrder,
+  IWsConnectionFeedGetOrderType,
 } from '../types/feedTypes';
 
 export const WS_CONNECTION_FEED_START: 'WS_CONNECTION_FEED_START' =
@@ -36,7 +37,8 @@ export const wsConnectionFeedClosed = (): IWsConnectionFeedClosed => {
   return { type: WS_CONNECTION_FEED_CLOSED };
 };
 
-// export const wsConnectionFeedGetOrder = (orders): IWsConnectionFeedGetOrder => {
-//     return { type: WS_CONNECTION_FEED_CLOSED
-//         payload: orders };
-//   };
+export const wsConnectionFeedGetOrders = (
+  parsedOrders: IWsConnectionFeedGetOrderType,
+): IWsConnectionFeedGetOrder => {
+  return { type: WS_CONNECTION_FEED_GET_ORDERS, parsedOrders };
+};

@@ -1,4 +1,4 @@
-import { IIngredient } from '../../types/ingredientsTypes';
+import { IOrder } from '../../types/ingredientsTypes';
 import {
   WS_CONNECTION_FEED_START,
   WS_CONNECTION_FEED_SUCCESS,
@@ -23,17 +23,40 @@ export interface IWsConnectionFeedClosed {
   readonly type: typeof WS_CONNECTION_FEED_CLOSED;
 }
 
-//на получение надо отдельно делать. сделаю потом.
+//получение ВСЕХ заказов
+export interface IWsConnectionFeedGetOrder {
+  readonly type: typeof WS_CONNECTION_FEED_GET_ORDERS;
+  readonly parsedOrders: IWsConnectionFeedGetOrderType;
+}
 
+//стейт для редьюсера
 export type TWSState = {
-  wsConnected: false;
-  orders: IIngredient[];
+  wsConnected: boolean;
+  success: boolean;
+  orders: IOrder[];
+  total: number;
+  totalToday: number;
+};
 
-  //error?: Event;
+//для ВСЕХ заказов(ответ)
+export interface IWsConnectionFeedGetOrderType {
+  success: boolean;
+  orders: IOrder[];
+  total: number;
+  totalToday: number;
+}
+
+export type TWSActionsTypesStore = {
+  wsConnectionStart: typeof WS_CONNECTION_FEED_START;
+  wsConnectionSuccess: typeof WS_CONNECTION_FEED_SUCCESS;
+  wsConnectionError: typeof WS_CONNECTION_FEED_ERROR;
+  wsConnectionClosed: typeof WS_CONNECTION_FEED_CLOSED;
+  wsGetAllOrders: typeof WS_CONNECTION_FEED_GET_ORDERS;
 };
 
 export type TWSActions =
   | IWsConnectionFeedStart
   | IWsConnectionFeedSuccess
   | IWsConnectionFeedError
-  | IWsConnectionFeedClosed;
+  | IWsConnectionFeedClosed
+  | IWsConnectionFeedGetOrder;
