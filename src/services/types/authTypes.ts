@@ -46,7 +46,7 @@ export interface IAuthLogin {
 
 export interface IAuthLoginSuccess {
   readonly type: typeof AUTH_LOGIN_SUCCESS;
-  readonly user: IUserLogin;
+  readonly user: IUser;
 }
 
 export interface IAuthLoginFailed {

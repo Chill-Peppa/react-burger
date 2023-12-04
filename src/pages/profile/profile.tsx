@@ -16,7 +16,7 @@ import { IUser } from '../../types/ingredientsTypes';
 function Profile() {
   const { user } = useSelector((store) => store.user);
 
-  console.log(user)
+  console.log(user);
 
   //для состояния инпутов
   const [disabled, setDisabled] = React.useState(true);
@@ -54,7 +54,7 @@ function Profile() {
   };
 
   const handleCancel = () => {
-    setForm({ ...user };
+    setForm({ ...user });
   };
 
   const handleUpdate = (e: React.SyntheticEvent) => {
