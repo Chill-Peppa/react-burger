@@ -25,7 +25,7 @@ import {
   AUTH_UPDATE_TOKEN_FAILED,
 } from '../actions/auth';
 
-import { IUser, IUserLogin } from '../../types/ingredientsTypes';
+import { IUser } from '../../types/ingredientsTypes';
 
 export interface IAuthRegister {
   readonly type: typeof AUTH_REGISTER;
