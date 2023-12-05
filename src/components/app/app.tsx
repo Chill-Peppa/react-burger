@@ -30,15 +30,15 @@ const App: React.FC = () => {
   //   `wss://norma.nomoreparties.space/orders?token=${accessToken}`,
   // );
 
-  const ws = new WebSocket(`wss://norma.nomoreparties.space/orders/all`);
+  // const ws = new WebSocket(`wss://norma.nomoreparties.space/orders/all`);
 
-  ws.onopen = (event: Event) => {
-    console.log('Соединение установлено');
-  };
+  // ws.onopen = (event: Event) => {
+  //   console.log('Соединение установлено');
+  // };
 
-  ws.onmessage = (event: MessageEvent) => {
-    console.log(`Получены данные: ${event.data}`);
-  };
+  // ws.onmessage = (event: MessageEvent) => {
+  //   console.log(`Получены данные: ${event.data}`);
+  // };
 
   // ws.onclose = (event: CloseEvent) => {
   //   console.log(`Код закрытия - ${event.code}`);

@@ -1,5 +1,5 @@
 import { ThunkAction } from 'redux-thunk';
-import { Action, ActionCreator } from 'redux';
+import { Action, ActionCreator, Dispatch } from 'redux';
 
 import { store } from '../store';
 import { TBurgerConstructorActions } from './burgerConstructorTypes';
@@ -27,4 +27,4 @@ export type AppThunk<TReturn = void> = ActionCreator<
 >;
 
 // Типизация метода dispatch для проверки на валидность отправляемого экшена
-export type AppDispatch = typeof store.dispatch;
+export type AppDispatch = Dispatch<TApplicationActions>;
