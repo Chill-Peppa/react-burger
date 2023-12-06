@@ -25,12 +25,11 @@ import { getCookie } from '../../utils/cookies';
 
 const App: React.FC = () => {
   const accessToken = getCookie('accessToken');
+  console.log(accessToken);
 
   // const ws = new WebSocket(
   //   `wss://norma.nomoreparties.space/orders?token=${accessToken}`,
   // );
-
-  // const ws = new WebSocket(`wss://norma.nomoreparties.space/orders/all`);
 
   // ws.onopen = (event: Event) => {
   //   console.log('Соединение установлено');

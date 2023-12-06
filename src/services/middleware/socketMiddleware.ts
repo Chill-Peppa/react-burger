@@ -10,20 +10,22 @@ import {
 import { TWSActionsTypesStore } from '../types/feedTypes';
 
 export const socketMiddleware = (
-  wsUrl: string,
   wsActions: TWSActionsTypesStore,
 ): Middleware => {
   return (store: MiddlewareAPI<AppDispatch, RootState>) => {
     let socket: WebSocket | null = null;
+    let wsUrl = '';
 
     return (next) => (action: TApplicationActions) => {
-      const { dispatch, getState } = store;
+      const { dispatch } = store;
       const { wsConnectionStart, wsConnectionClosed } = wsActions;
 
       const { type } = action;
 
       if (type === wsConnectionStart) {
-        socket = new WebSocket(wsUrl + '/all');
+        wsUrl = action.wsUrl;
+        console.log(wsUrl);
+        socket = new WebSocket(wsUrl);
       }
 
       if (socket) {
@@ -43,22 +45,22 @@ export const socketMiddleware = (
         socket.onmessage = (event) => {
           const { data } = event;
           const parsedOrders = JSON.parse(data);
-          console.log(parsedOrders);
+          console.log('Данные', parsedOrders);
           dispatch(wsConnectionFeedGetOrders(parsedOrders));
         };
 
         //на закрытие соединения
         socket.onclose = (event) => {
           dispatch(wsConnectionFeedClosed());
-          console.log('соединение закрыто');
+          console.log(`Соединение закрыто с кодом -  ${event.code}`);
         };
       }
 
       if (type === wsConnectionClosed) {
         socket?.close(1000, 'Close Socket');
-        // dispatch(wsConnectionFeedClosed());
         console.log('соединение закрыто');
       }
+
       next(action);
     };
   };

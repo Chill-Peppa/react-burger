@@ -9,6 +9,7 @@ import {
 
 export interface IWsConnectionFeedStart {
   readonly type: typeof WS_CONNECTION_FEED_START;
+  readonly wsUrl: string;
 }
 
 export interface IWsConnectionFeedSuccess {

@@ -7,12 +7,13 @@ import {
   wsConnectionFeedClosed,
 } from '../../services/actions/feed';
 import { useDispatch } from '../../services/types/hooks';
+import { wsUrl } from '../../utils/constants';
 
 const Feed: React.FC = () => {
   const dispatch = useDispatch();
 
   React.useEffect(() => {
-    dispatch(wsConnectionFeedStart());
+    dispatch(wsConnectionFeedStart(wsUrl + '/all'));
     return () => {
       dispatch(wsConnectionFeedClosed());
     };

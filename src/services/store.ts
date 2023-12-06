@@ -2,7 +2,7 @@ import { compose, createStore, applyMiddleware } from 'redux';
 import { rootReducer } from './reducers';
 import { socketMiddleware } from './middleware/socketMiddleware';
 import thunk from 'redux-thunk';
-import { wsUrl } from '../utils/constants';
+//import { wsUrl } from '../utils/constants';
 import {
   WS_CONNECTION_FEED_START,
   WS_CONNECTION_FEED_SUCCESS,
@@ -28,7 +28,7 @@ const composeEnhancers =
     : compose;
 
 const enhancer = composeEnhancers(
-  applyMiddleware(thunk, socketMiddleware(wsUrl, wsActions)),
+  applyMiddleware(thunk, socketMiddleware(wsActions)),
 );
 
 export const store = createStore(rootReducer, enhancer);
