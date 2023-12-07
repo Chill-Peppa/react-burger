@@ -5,10 +5,7 @@ import { useLocation } from 'react-router-dom';
 import FeedOrdersCard from '../../components/feed-orders-card/feed-orders-card';
 
 import { useDispatch } from '../../services/types/hooks';
-import {
-  wsConnectionFeedStart,
-  wsConnectionFeedClosed,
-} from '../../services/actions/feed';
+import { wsAuthStart, wsAuthClosed } from '../../services/actions/feed';
 import { wsUrl } from '../../utils/constants';
 
 interface IFeedOrders {
@@ -21,9 +18,9 @@ const FeedOrders: React.FC<IFeedOrders> = ({ title }) => {
   const dispatch = useDispatch();
 
   React.useEffect(() => {
-    dispatch(wsConnectionFeedStart(wsUrl));
+    dispatch(wsAuthStart(wsUrl));
     return () => {
-      dispatch(wsConnectionFeedClosed());
+      dispatch(wsAuthClosed());
     };
   }, [dispatch]);
 
