@@ -5,6 +5,8 @@ import {
   IWsConnectionFeedClosed,
   IWsConnectionFeedGetOrder,
   IWsConnectionFeedGetOrderType,
+  IWsAuthStart,
+  IWsAuthClosed,
 } from '../types/feedTypes';
 
 /* Получение всех заказов */
@@ -54,13 +56,13 @@ export const wsConnectionFeedGetOrders = (
 
 // action creators 2
 
-// export const wsAuthStart = (wsUrl: string): /* ту написать тип */ => {
-//   return { type: WS_AUTH_START, wsUrl };
-// };
+export const wsAuthStart = (wsUrl: string): IWsAuthStart => {
+  return { type: WS_AUTH_START, wsUrl };
+};
 
-// export const wsAuthClosed = (): /* ту написать тип */ => {
-//   return { type: WS_AUTH_CLOSED };
-// };
+export const wsAuthClosed = (): IWsAuthClosed => {
+  return { type: WS_AUTH_CLOSED };
+};
 
 // export const wsAuthGetUserOrder = (
 //   parsedUserOrders: /* тут написать тип */,

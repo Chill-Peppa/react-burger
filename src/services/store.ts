@@ -9,8 +9,13 @@ import {
   WS_CONNECTION_FEED_ERROR,
   WS_CONNECTION_FEED_CLOSED,
   WS_CONNECTION_FEED_GET_ORDERS,
+  WS_AUTH_START,
+  WS_AUTH_CLOSED,
 } from './actions/feed';
-import { TWSActionsTypesStore } from './types/feedTypes';
+import {
+  TWSActionsTypesStore,
+  TWSActionsAuthTypeStore,
+} from './types/feedTypes';
 
 export const wsActions: TWSActionsTypesStore = {
   wsConnectionStart: WS_CONNECTION_FEED_START,
@@ -18,6 +23,13 @@ export const wsActions: TWSActionsTypesStore = {
   wsConnectionError: WS_CONNECTION_FEED_ERROR,
   wsConnectionClosed: WS_CONNECTION_FEED_CLOSED,
   wsGetAllOrders: WS_CONNECTION_FEED_GET_ORDERS,
+};
+
+export const wsAuthActions: TWSActionsAuthTypeStore = {
+  wsConnectionStart: WS_AUTH_START,
+  wsConnectionSuccess: WS_CONNECTION_FEED_SUCCESS,
+  wsConnectionError: WS_CONNECTION_FEED_ERROR,
+  wsConnectionClosed: WS_AUTH_CLOSED,
 };
 
 //Для знакомства кода с расширением Redux Devtools
@@ -28,7 +40,11 @@ const composeEnhancers =
     : compose;
 
 const enhancer = composeEnhancers(
-  applyMiddleware(thunk, socketMiddleware(wsActions)),
+  applyMiddleware(
+    thunk,
+    socketMiddleware(wsAuthActions),
+    socketMiddleware(wsActions),
+  ),
 );
 
 export const store = createStore(rootReducer, enhancer);

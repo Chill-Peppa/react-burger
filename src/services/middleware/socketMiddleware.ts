@@ -7,10 +7,13 @@ import {
   wsConnectionFeedGetOrders,
   wsConnectionFeedClosed,
 } from '../actions/feed';
-import { TWSActionsTypesStore } from '../types/feedTypes';
+import {
+  TWSActionsTypesStore,
+  TWSActionsAuthTypeStore,
+} from '../types/feedTypes';
 
 export const socketMiddleware = (
-  wsActions: TWSActionsTypesStore,
+  wsActions: TWSActionsTypesStore | TWSActionsAuthTypeStore,
 ): Middleware => {
   return (store: MiddlewareAPI<AppDispatch, RootState>) => {
     let socket: WebSocket | null = null;
@@ -52,7 +55,7 @@ export const socketMiddleware = (
         //на закрытие соединения
         socket.onclose = (event) => {
           dispatch(wsConnectionFeedClosed());
-          console.log(`Соединение закрыто с кодом -  ${event.code}`);
+          console.log(`Соединение закрыто с кодом: ${event.code}`);
         };
       }
 

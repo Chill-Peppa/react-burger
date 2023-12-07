@@ -2,22 +2,8 @@
 
 import React from 'react';
 import styles from './feed-details.module.css';
-import { useDispatch } from '../../services/types/hooks';
-import {
-  wsConnectionFeedStart,
-  wsConnectionFeedClosed,
-} from '../../services/actions/feed';
 
 const FeedDetails: React.FC = () => {
-  const dispatch = useDispatch();
-
-  // React.useEffect(() => {
-  //   dispatch(wsConnectionFeedStart());
-  //   return () => {
-  //     dispatch(wsConnectionFeedClosed());
-  //   };
-  // }, [dispatch]);
-
   return (
     <div className={styles.feedDetails}>
       <div className={styles.orderNumbersContainer}>

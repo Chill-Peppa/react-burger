@@ -13,7 +13,7 @@ const Feed: React.FC = () => {
   const dispatch = useDispatch();
 
   React.useEffect(() => {
-    dispatch(wsConnectionFeedStart(wsUrl + '/all'));
+    dispatch(wsConnectionFeedStart(`${wsUrl}/all`));
     return () => {
       dispatch(wsConnectionFeedClosed());
     };
