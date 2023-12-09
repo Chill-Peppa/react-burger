@@ -4,25 +4,12 @@ import styles from './feed-orders.module.css';
 import { useLocation } from 'react-router-dom';
 import FeedOrdersCard from '../../components/feed-orders-card/feed-orders-card';
 
-import { useDispatch } from '../../services/types/hooks';
-import { wsAuthStart, wsAuthClosed } from '../../services/actions/feed';
-import { wsUrl } from '../../utils/constants';
-
 interface IFeedOrders {
   title: string;
 }
 
 const FeedOrders: React.FC<IFeedOrders> = ({ title }) => {
   const location = useLocation();
-
-  const dispatch = useDispatch();
-
-  React.useEffect(() => {
-    dispatch(wsAuthStart(wsUrl));
-    return () => {
-      dispatch(wsAuthClosed());
-    };
-  }, [dispatch]);
 
   return (
     <div

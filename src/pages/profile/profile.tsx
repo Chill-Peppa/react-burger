@@ -8,7 +8,8 @@ import {
   Input,
   Button,
 } from '@ya.praktikum/react-developer-burger-ui-components';
-import FeedOrders from '../feed-orders/feed-orders';
+//import FeedOrders from '../feed-orders/feed-orders';
+import OrderHistory from '../../components/order-history/order-history';
 
 import { logout, updateUserInfo } from '../../services/actions/auth';
 import { IUser } from '../../types/ingredientsTypes';
@@ -106,7 +107,7 @@ function Profile() {
           )}
         </nav>
         {location.pathname === '/profile/orders' ? (
-          <FeedOrders title="" />
+          <OrderHistory />
         ) : (
           <form className={styles.form}>
             <Input

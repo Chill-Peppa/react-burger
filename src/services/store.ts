@@ -2,7 +2,6 @@ import { compose, createStore, applyMiddleware } from 'redux';
 import { rootReducer } from './reducers';
 import { socketMiddleware } from './middleware/socketMiddleware';
 import thunk from 'redux-thunk';
-//import { wsUrl } from '../utils/constants';
 import {
   WS_CONNECTION_FEED_START,
   WS_CONNECTION_FEED_SUCCESS,
