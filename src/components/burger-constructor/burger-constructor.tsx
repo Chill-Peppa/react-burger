@@ -91,7 +91,9 @@ const BurgerConstructor: React.FC<IBurgerConstructor> = ({ onOrderOpen }) => {
   const onDropHandler = (item: IIngredient) => {
     if (item.type === tabs.BUN) {
       dispatch(addBun(item));
+      console.log(item);
     } else if (item.type !== tabs.BUN) {
+      console.log(item);
       dispatch(addMain({ ...item, dropId: uuidv4() }));
     }
   };

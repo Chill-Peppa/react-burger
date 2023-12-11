@@ -1,13 +1,7 @@
 import type { Middleware, MiddlewareAPI } from 'redux';
 
 import type { TApplicationActions, AppDispatch, RootState } from '../types';
-import {
-  wsConnectionFeedSuccess,
-  wsConnectionFeedError,
-  wsConnectionFeedGetOrders,
-  wsConnectionFeedClosed,
-  wsAuthStart,
-} from '../actions/feed';
+import { wsAuthStart } from '../actions/feed';
 import {
   TWSActionsTypesStore,
   TWSActionsAuthTypeStore,
@@ -71,7 +65,7 @@ export const socketMiddleware = (
 
         //на закрытие соединения
         socket.onclose = (event) => {
-          dispatch(wsConnectionFeedClosed());
+          dispatch({ type: wsConnectionClosed });
           console.log(`Соединение закрыто с кодом: ${event.code}`);
 
           if (isConnected) {
@@ -83,6 +77,7 @@ export const socketMiddleware = (
       }
 
       if (type === wsConnectionClosed) {
+        clearTimeout(reconnectTimer);
         socket?.close(1000, 'Close Socket');
         console.log('соединение закрыто');
         isConnected = false;
