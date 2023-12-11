@@ -64,7 +64,7 @@ export type TWSActionsTypesStore = {
   wsConnectionSuccess: typeof WS_CONNECTION_FEED_SUCCESS;
   wsConnectionError: typeof WS_CONNECTION_FEED_ERROR;
   wsConnectionClosed: typeof WS_CONNECTION_FEED_CLOSED;
-  wsGetAllOrders: typeof WS_CONNECTION_FEED_GET_ORDERS;
+  wsGetOrders: typeof WS_CONNECTION_FEED_GET_ORDERS;
 };
 
 export type TWSActionsAuthTypeStore = {
@@ -72,6 +72,7 @@ export type TWSActionsAuthTypeStore = {
   wsConnectionSuccess: typeof WS_CONNECTION_FEED_SUCCESS;
   wsConnectionError: typeof WS_CONNECTION_FEED_ERROR;
   wsConnectionClosed: typeof WS_AUTH_CLOSED;
+  wsGetOrders: typeof WS_CONNECTION_FEED_GET_ORDERS;
 };
 
 /*--------- Для редьюсеров ---------*/

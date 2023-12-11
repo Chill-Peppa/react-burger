@@ -2,6 +2,7 @@ import { compose, createStore, applyMiddleware } from 'redux';
 import { rootReducer } from './reducers';
 import { socketMiddleware } from './middleware/socketMiddleware';
 import thunk from 'redux-thunk';
+//import { wsUrl } from '../utils/constants';
 import {
   WS_CONNECTION_FEED_START,
   WS_CONNECTION_FEED_SUCCESS,
@@ -21,7 +22,7 @@ export const wsActions: TWSActionsTypesStore = {
   wsConnectionSuccess: WS_CONNECTION_FEED_SUCCESS,
   wsConnectionError: WS_CONNECTION_FEED_ERROR,
   wsConnectionClosed: WS_CONNECTION_FEED_CLOSED,
-  wsGetAllOrders: WS_CONNECTION_FEED_GET_ORDERS,
+  wsGetOrders: WS_CONNECTION_FEED_GET_ORDERS,
 };
 
 export const wsAuthActions: TWSActionsAuthTypeStore = {
@@ -29,6 +30,7 @@ export const wsAuthActions: TWSActionsAuthTypeStore = {
   wsConnectionSuccess: WS_CONNECTION_FEED_SUCCESS,
   wsConnectionError: WS_CONNECTION_FEED_ERROR,
   wsConnectionClosed: WS_AUTH_CLOSED,
+  wsGetOrders: WS_CONNECTION_FEED_GET_ORDERS,
 };
 
 //Для знакомства кода с расширением Redux Devtools

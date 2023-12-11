@@ -23,11 +23,7 @@ export const WS_CONNECTION_FEED_GET_ORDERS: 'WS_CONNECTION_FEED_GET_ORDERS' =
 
 /* Тут сокеты с авторизацией */
 export const WS_AUTH_START: 'WS_AUTH_START' = 'WS_AUTH_START';
-// export const WS_AUTH_SUCCESS: 'WS_AUTH_SUCCESS' = 'WS_AUTH_SUCCESS';
-// export const WS_AUTH_ERROR: 'WS_AUTH_ERROR' = 'WS_AUTH_ERROR';
 export const WS_AUTH_CLOSED: 'WS_AUTH_CLOSED' = 'WS_AUTH_CLOSED';
-export const WS_AUTH_GET_USER_ORDERS: 'WS_AUTH_START_GET_USER_ORDERS' =
-  'WS_AUTH_START_GET_USER_ORDERS';
 
 // action creators 1
 export const wsConnectionFeedStart = (
@@ -63,9 +59,3 @@ export const wsAuthStart = (wsUrl: string): IWsAuthStart => {
 export const wsAuthClosed = (): IWsAuthClosed => {
   return { type: WS_AUTH_CLOSED };
 };
-
-// export const wsAuthGetUserOrder = (
-//   parsedUserOrders: /* тут написать тип */,
-// ): /* тут написать тип */ => {
-//   return { type: WS_CONNECTION_FEED_GET_ORDERS, parsedUserOrders };
-// };

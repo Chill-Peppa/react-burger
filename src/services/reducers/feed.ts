@@ -29,10 +29,18 @@ export const wsReducer = (
     case WS_CONNECTION_FEED_CLOSED:
       return { ...state, wsConnected: false };
     case WS_CONNECTION_FEED_GET_ORDERS:
-      return { ...state, orders: [...action.parsedOrders.orders] };
+      return {
+        ...state,
+        orders: [...action.parsedOrders.orders],
+        total: action.parsedOrders.total,
+        totalToday: action.parsedOrders.totalToday,
+      };
     case WS_AUTH_START:
       return { ...state, wsConnected: true };
     case WS_AUTH_CLOSED:
       return { ...state, wsConnected: false };
+    default: {
+      return state;
+    }
   }
 };
