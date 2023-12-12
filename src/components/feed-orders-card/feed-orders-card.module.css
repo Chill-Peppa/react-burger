@@ -34,8 +34,32 @@
 }
 
 .ingredientsIcons {
+  display: flex;
+  position: relative;
+  flex-wrap: wrap;
   width: 436px;
   padding: 0;
+  margin: 0;
+}
+
+.point {
+  list-style: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: -15px;
+}
+
+.imageIngredient {
+  border-radius: 50%;
+  border: 2px solid #4c4cff;
+  width: 60px;
+  height: 60px;
+  background: #131316;
+  object-fit: cover;
+  object-position: center;
+  box-sizing: border-box;
 }
 
 .containerPrice {

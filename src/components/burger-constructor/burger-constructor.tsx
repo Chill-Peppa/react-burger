@@ -76,9 +76,13 @@ const BurgerConstructor: React.FC<IBurgerConstructor> = ({ onOrderOpen }) => {
   }, [totalPrice]);
 
   const onClickOrderSubmit = () => {
-    const AddedIngredientsIds = ingredients.map(
-      (ingredient: IIngredient) => ingredient._id,
-    );
+    const AddedIngredientsIds = [
+      ...mainIngredientsData,
+      ...[bunIngredientsData],
+    ].map((ingredient: IIngredient) => ingredient._id);
+
+    console.log('test ingredients', AddedIngredientsIds);
+
     if (isLoggedIn) {
       onOrderOpen();
       dispatch(getOrderNumber(AddedIngredientsIds));

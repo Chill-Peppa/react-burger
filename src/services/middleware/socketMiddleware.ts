@@ -6,6 +6,7 @@ import {
   TWSActionsTypesStore,
   TWSActionsAuthTypeStore,
 } from '../types/feedTypes';
+import { updateToken } from '../actions/auth';
 
 export const socketMiddleware = (
   wsActions: TWSActionsTypesStore | TWSActionsAuthTypeStore,
@@ -43,7 +44,6 @@ export const socketMiddleware = (
 
         //ошибка с соединением сервера
         socket.onerror = (event) => {
-          console.log('ошибка при соединении');
           dispatch({ type: wsConnectionError });
         };
 
@@ -52,10 +52,9 @@ export const socketMiddleware = (
           const { data } = event;
           const parsedOrders = JSON.parse(data);
           if (parsedOrders.message === 'Invalid or missing token') {
-            console.log('1', parsedOrders);
+            dispatch(updateToken());
             reconnectTimer = window.setTimeout(() => {
               dispatch({ type: wsConnectionStart, wsUrl });
-              console.log('wsConnectionStart', wsUrl);
             }, 3000);
           } else {
             console.log('Данные', parsedOrders);

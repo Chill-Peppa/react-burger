@@ -1,12 +1,12 @@
 import React from 'react';
 import styles from './feed-orders-card.module.css';
 import { useLocation } from 'react-router-dom';
-import bun from '../../images/test.svg';
 import {
   CurrencyIcon,
   FormattedDate,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import { IOrder } from '../../types/ingredientsTypes';
+import { useSelector } from '../../services/types/hooks';
 
 interface IFeedOrdersCard {
   order: IOrder;
@@ -14,6 +14,8 @@ interface IFeedOrdersCard {
 
 const FeedOrdersCard: React.FC<IFeedOrdersCard> = ({ order }) => {
   const location = useLocation();
+  const { ingredients } = useSelector((store) => store.ingredients);
+  console.log(ingredients);
 
   //статус заказа
   const getStatus = (): string | undefined => {
@@ -54,9 +56,15 @@ const FeedOrdersCard: React.FC<IFeedOrdersCard> = ({ order }) => {
       )}
       <div className={styles.containerBottom}>
         <ul className={styles.ingredientsIcons}>
-          <img src={bun as unknown as string} alt="блаблабла" />
-          <img src={bun as unknown as string} alt="блаблабла" />
-          <img src={bun as unknown as string} alt="блаблабла" />
+          {ingredients.map((ingredient) => (
+            <li className={styles.point}>
+              <img
+                src={ingredient.image}
+                alt={ingredient.name}
+                className={styles.imageIngredient}
+              />
+            </li>
+          ))}
         </ul>
         <div className={styles.containerPrice}>
           <span className="text text_type_digits-default">480</span>
