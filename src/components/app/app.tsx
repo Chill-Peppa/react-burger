@@ -27,22 +27,6 @@ const App: React.FC = () => {
   const accessToken = getCookie('accessToken');
   console.log(accessToken);
 
-  // const ws = new WebSocket(
-  //   `wss://norma.nomoreparties.space/orders?token=${accessToken}`,
-  // );
-
-  // ws.onopen = (event: Event) => {
-  //   console.log('Соединение установлено');
-  // };
-
-  // ws.onmessage = (event: MessageEvent) => {
-  //   console.log(`Получены данные: ${event.data}`);
-  // };
-
-  // ws.onclose = (event: CloseEvent) => {
-  //   console.log(`Код закрытия - ${event.code}`);
-  // };
-
   const [isOpenOrderModal, setIsOpenOrderModal] = React.useState(false);
 
   const dispatch = useDispatch();
@@ -141,6 +125,10 @@ const App: React.FC = () => {
           />
         </Routes>
       )}
+
+      {/* <Modal onClose={handleCloseModalIngredient} title="">
+        <FeedDetailsSingle />
+      </Modal> */}
 
       {isOpenOrderModal && (
         <Modal onClose={handleCloseModalOrder} title="">

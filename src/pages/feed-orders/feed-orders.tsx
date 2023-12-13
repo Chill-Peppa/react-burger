@@ -22,9 +22,13 @@ const FeedOrders: React.FC<IFeedOrders> = ({ title }) => {
       }>
       <h1 className="text text_type_main-large mt-10 mb-5">{title}</h1>
       <ul className={styles.feedList}>
-        {orders.map((order) => (
-          <FeedOrdersCard key={order._id} order={order} />
-        ))}
+        {location.pathname === '/feed'
+          ? orders.map((order) => (
+              <FeedOrdersCard key={order._id} order={order} />
+            ))
+          : orders
+              .map((order) => <FeedOrdersCard key={order._id} order={order} />)
+              .reverse()}
       </ul>
     </div>
   );

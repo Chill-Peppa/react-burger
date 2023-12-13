@@ -49,6 +49,27 @@
   align-items: center;
   justify-content: center;
   margin-right: -15px;
+  position: relative;
+}
+
+.point:nth-child(1) {
+  z-index: 5;
+}
+.point:nth-child(2) {
+  z-index: 4;
+}
+.point:nth-child(3) {
+  z-index: 3;
+}
+.point:nth-child(4) {
+  z-index: 2;
+}
+.point:nth-child(5) {
+  z-index: 1;
+}
+
+.count {
+  position: absolute;
 }
 
 .imageIngredient {
@@ -60,6 +81,18 @@
   object-fit: cover;
   object-position: center;
   box-sizing: border-box;
+}
+
+.lastIngredient {
+  border-radius: 50%;
+  border: 2px solid #4c4cff;
+  width: 60px;
+  height: 60px;
+  background: #131316;
+  object-fit: cover;
+  object-position: center;
+  box-sizing: border-box;
+  opacity: 0.5;
 }
 
 .containerPrice {

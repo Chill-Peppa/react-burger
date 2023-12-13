@@ -56,15 +56,30 @@ const FeedOrdersCard: React.FC<IFeedOrdersCard> = ({ order }) => {
       )}
       <div className={styles.containerBottom}>
         <ul className={styles.ingredientsIcons}>
-          {ingredients.map((ingredient) => (
-            <li className={styles.point}>
-              <img
-                src={ingredient.image}
-                alt={ingredient.name}
-                className={styles.imageIngredient}
-              />
-            </li>
-          ))}
+          {ingredients.slice(0, 6).map((ingredient, index) => {
+            if (index < 5) {
+              return (
+                <li className={styles.point}>
+                  <img
+                    src={ingredient.image}
+                    alt={ingredient.name}
+                    className={styles.imageIngredient}
+                  />
+                </li>
+              );
+            } else {
+              return (
+                <li className={styles.point}>
+                  <img
+                    src={ingredient.image}
+                    alt={ingredient.name}
+                    className={styles.lastIngredient}
+                  />
+                  <span className={styles.count}>+1</span>
+                </li>
+              );
+            }
+          })}
         </ul>
         <div className={styles.containerPrice}>
           <span className="text text_type_digits-default">480</span>
