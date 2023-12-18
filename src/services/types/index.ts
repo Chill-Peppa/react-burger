@@ -7,6 +7,7 @@ import { TIngredientActions } from './ingredientTypes';
 import { TAuthActions } from './authTypes';
 import { TBurgerIngredientsActions } from './burgerIngredientsTypes';
 import { TOrderActions } from './orderTypes';
+import { TSelectedOrderActions } from './selectedOrderTypes';
 import { TWSActions, TWSAuthActions } from './feedTypes';
 
 // ReturnType - вспомогательный тип (для описания thunk)
@@ -20,6 +21,7 @@ export type TApplicationActions =
   | TBurgerIngredientsActions
   | TOrderActions
   | TWSActions
+  | TSelectedOrderActions
   | TWSAuthActions;
 
 // Типизация thunk'ов в нашем приложении

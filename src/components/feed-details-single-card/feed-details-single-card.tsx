@@ -2,6 +2,7 @@ import React from 'react';
 import style from './feed-details-single-card.module.css';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import bun from '../../images/test.svg';
+import { Link, useLocation } from 'react-router-dom';
 
 const FeedDetailsSingleCard: React.FC = () => {
   return (

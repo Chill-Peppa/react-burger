@@ -17,7 +17,6 @@ const IngredientDetails: React.FC = () => {
 
   return (
     <>
-      (
       <div className={styles.ingredientDetails}>
         <img
           className={styles.image}
@@ -63,7 +62,6 @@ const IngredientDetails: React.FC = () => {
           </li>
         </ul>
       </div>
-      )
     </>
   );
 };

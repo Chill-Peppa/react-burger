@@ -1,6 +1,6 @@
 .feedDetails {
   display: flex;
-  margin: 120px auto 0;
+  margin: 0 auto;
   flex-direction: column;
   max-width: 640px;
   width: 100%;
@@ -10,6 +10,11 @@
   text-align: center;
 }
 
+.order-modal {
+  position: absolute;
+  top: 40px;
+}
+
 .done {
   color: #00cccc;
 }
@@ -17,6 +22,7 @@
 .bottom {
   display: flex;
   justify-content: space-between;
+  margin-top: 40px;
 }
 
 .totalContainer {

@@ -59,7 +59,7 @@ const FeedOrdersCard: React.FC<IFeedOrdersCard> = ({ order }) => {
           {ingredients.slice(0, 6).map((ingredient, index) => {
             if (index < 5) {
               return (
-                <li className={styles.point}>
+                <li className={styles.point} key={index}>
                   <img
                     src={ingredient.image}
                     alt={ingredient.name}
@@ -69,7 +69,7 @@ const FeedOrdersCard: React.FC<IFeedOrdersCard> = ({ order }) => {
               );
             } else {
               return (
-                <li className={styles.point}>
+                <li className={styles.point} key={index}>
                   <img
                     src={ingredient.image}
                     alt={ingredient.name}

@@ -16,6 +16,7 @@ import ResetPassword from '../../pages/reset-passowrd/resest-password';
 import Profile from '../../pages/profile/profile';
 import IngredientPage from '../../pages/ingredient-page/ingredient-page';
 import Feed from '../../pages/feed/feed';
+import FeedDetailsSingleBg from '../../pages/feed-details-single-bg/feed-details-single-bg';
 import FeedDetailsSingle from '../../pages/feed-details-single/feed-details-single';
 
 import { ProtectedRoute } from '../protected-route/protected-route';
@@ -95,7 +96,6 @@ const App: React.FC = () => {
           }
         />
         <Route path="/" element={<Main onOrderOpen={handleOpenOrderModal} />} />
-        <Route path="/feed" element={<Feed />} />
 
         <Route
           path="/profile"
@@ -105,11 +105,14 @@ const App: React.FC = () => {
           path="/profile/orders"
           element={<ProtectedRoute onlyUnAuth={false} element={<Profile />} />}
         />
+        <Route path="/feed" element={<Feed />} />
         {/* Тут будут динамичные маршруты, test будет заменен на динамичный маршрут! */}
         <Route path="/ingredients/:id" element={<IngredientPage />} />
-        <Route path="/test" element={<FeedDetailsSingle />} />
+        <Route path="/ingredients/:number" element={<FeedDetailsSingleBg />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
+
+      {/* МОДАЛКИ */}
 
       {location.state?.backgroundLocation && (
         <Routes>
@@ -126,7 +129,7 @@ const App: React.FC = () => {
         </Routes>
       )}
 
-      {/* <Modal onClose={handleCloseModalIngredient} title="">
+      {/* <Modal title="" onClose={handleCloseModalOrder}>
         <FeedDetailsSingle />
       </Modal> */}
 
