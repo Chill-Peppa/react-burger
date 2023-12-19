@@ -14,8 +14,24 @@ interface IFeedOrdersCard {
 
 const FeedOrdersCard: React.FC<IFeedOrdersCard> = ({ order }) => {
   const location = useLocation();
+  //все ингредиенты
   const { ingredients } = useSelector((store) => store.ingredients);
-  console.log(ingredients);
+  console.log('INGRS', ingredients);
+
+  /*------------------ Тут получаю массив для отрисовки ингредиентов -----------------*/
+
+  const arrWithIngredients = React.useMemo(() => {
+    const chosenIngredients = order.ingredients.filter((id) => id !== null);
+
+    const uniqueChosenIngredients = Array.from(new Set(chosenIngredients));
+
+    // достанем элементы из массива ВСЕХ ингредиентов
+    const newChosenIngredients = uniqueChosenIngredients.map((ingredient) => {
+      return ingredients.find((ingr) => ingr._id === ingredient);
+    });
+
+    return newChosenIngredients;
+  }, [order.ingredients, ingredients]);
 
   //статус заказа
   const getStatus = (): string | undefined => {
@@ -56,13 +72,13 @@ const FeedOrdersCard: React.FC<IFeedOrdersCard> = ({ order }) => {
       )}
       <div className={styles.containerBottom}>
         <ul className={styles.ingredientsIcons}>
-          {ingredients.slice(0, 6).map((ingredient, index) => {
+          {arrWithIngredients.slice(0, 6).map((ingredient, index) => {
             if (index < 5) {
               return (
                 <li className={styles.point} key={index}>
                   <img
-                    src={ingredient.image}
-                    alt={ingredient.name}
+                    src={ingredient!.image}
+                    alt={ingredient!.name}
                     className={styles.imageIngredient}
                   />
                 </li>
@@ -71,8 +87,8 @@ const FeedOrdersCard: React.FC<IFeedOrdersCard> = ({ order }) => {
               return (
                 <li className={styles.point} key={index}>
                   <img
-                    src={ingredient.image}
-                    alt={ingredient.name}
+                    src={ingredient!.image}
+                    alt={ingredient!.name}
                     className={styles.lastIngredient}
                   />
                   <span className={styles.count}>+1</span>

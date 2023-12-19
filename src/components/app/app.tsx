@@ -24,6 +24,8 @@ import { getIngredients } from '../../services/actions/burgerIngredients';
 import { getUserInfo } from '../../services/actions/auth';
 import { getCookie } from '../../utils/cookies';
 
+//ВАЖНО!
+// feed-details-single, feed-details-single-card и app. убери ворнинги!!!
 const App: React.FC = () => {
   const accessToken = getCookie('accessToken');
   console.log(accessToken);

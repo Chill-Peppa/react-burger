@@ -50,6 +50,7 @@ export const socketMiddleware = (
         //получение всех заказов с сервера
         socket.onmessage = (event) => {
           const { data } = event;
+          console.log(JSON.parse(data));
           const parsedOrders = JSON.parse(data);
           if (parsedOrders.message === 'Invalid or missing token') {
             dispatch(updateToken());
@@ -57,7 +58,6 @@ export const socketMiddleware = (
               dispatch({ type: wsConnectionStart, wsUrl });
             }, 3000);
           } else {
-            console.log('Данные', parsedOrders);
             dispatch({ type: wsGetOrders, parsedOrders });
           }
         };
