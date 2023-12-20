@@ -15,12 +15,10 @@ export const getOrderNumber: AppThunk =
     api
       .sendOrder(id)
       .then((res) => {
-        setTimeout(() => {
-          dispatch({
-            type: GET_ORDER_NUMBER_SUCCESS,
-            newOrderNumber: res.order.number,
-          });
-        }, 1000);
+        dispatch({
+          type: GET_ORDER_NUMBER_SUCCESS,
+          newOrderNumber: res.order.number,
+        });
       })
       .catch((err) => {
         dispatch({

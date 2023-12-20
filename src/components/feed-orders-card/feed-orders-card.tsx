@@ -16,14 +16,11 @@ const FeedOrdersCard: React.FC<IFeedOrdersCard> = ({ order }) => {
   const location = useLocation();
   //все ингредиенты
   const { ingredients } = useSelector((store) => store.ingredients);
-  console.log('INGRS', ingredients);
 
   /*------------------ Тут получаю массив для отрисовки ингредиентов -----------------*/
 
   const arrWithIngredients = React.useMemo(() => {
-    const chosenIngredients = order.ingredients.filter((id) => id !== null);
-
-    const uniqueChosenIngredients = Array.from(new Set(chosenIngredients));
+    const uniqueChosenIngredients = Array.from(new Set(order.ingredients));
 
     // достанем элементы из массива ВСЕХ ингредиентов
     const newChosenIngredients = uniqueChosenIngredients.map((ingredient) => {
@@ -31,6 +28,20 @@ const FeedOrdersCard: React.FC<IFeedOrdersCard> = ({ order }) => {
     });
 
     return newChosenIngredients;
+  }, [order.ingredients, ingredients]);
+
+  /*--------- Считаем сумму заказов ---------*/
+  const totalPrice = React.useMemo(() => {
+    const totalPriceArrays = order.ingredients.map((ingredient) => {
+      return ingredients.find((ingr) => ingr._id === ingredient)?.price || 0;
+    });
+
+    const total = totalPriceArrays.reduce((prevItem: number, price: number) => {
+      return prevItem + price;
+    }, 0);
+    console.log('массив:', totalPriceArrays, 'цена:', total);
+
+    return total;
   }, [order.ingredients, ingredients]);
 
   //статус заказа
@@ -73,32 +84,36 @@ const FeedOrdersCard: React.FC<IFeedOrdersCard> = ({ order }) => {
       <div className={styles.containerBottom}>
         <ul className={styles.ingredientsIcons}>
           {arrWithIngredients.slice(0, 6).map((ingredient, index) => {
-            if (index < 5) {
-              return (
-                <li className={styles.point} key={index}>
-                  <img
-                    src={ingredient!.image}
-                    alt={ingredient!.name}
-                    className={styles.imageIngredient}
-                  />
-                </li>
-              );
+            if (ingredient !== undefined) {
+              if (index < 5) {
+                return (
+                  <li className={styles.point} key={index}>
+                    <img
+                      src={ingredient!.image}
+                      alt={ingredient!.name}
+                      className={styles.imageIngredient}
+                    />
+                  </li>
+                );
+              } else {
+                return (
+                  <li className={styles.point} key={index}>
+                    <img
+                      src={ingredient!.image}
+                      alt={ingredient!.name}
+                      className={styles.lastIngredient}
+                    />
+                    <span className={styles.count}>+1</span>
+                  </li>
+                );
+              }
             } else {
-              return (
-                <li className={styles.point} key={index}>
-                  <img
-                    src={ingredient!.image}
-                    alt={ingredient!.name}
-                    className={styles.lastIngredient}
-                  />
-                  <span className={styles.count}>+1</span>
-                </li>
-              );
+              return <div>loading</div>;
             }
           })}
         </ul>
         <div className={styles.containerPrice}>
-          <span className="text text_type_digits-default">480</span>
+          <span className="text text_type_digits-default">{totalPrice}</span>
           <CurrencyIcon type="primary" />
         </div>
       </div>
