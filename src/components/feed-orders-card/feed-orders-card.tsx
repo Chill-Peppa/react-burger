@@ -5,7 +5,7 @@ import {
   CurrencyIcon,
   FormattedDate,
 } from '@ya.praktikum/react-developer-burger-ui-components';
-import { IOrder } from '../../types/ingredientsTypes';
+import { IOrder, IIngredient } from '../../types/ingredientsTypes';
 import { useSelector } from '../../services/types/hooks';
 
 interface IFeedOrdersCard {
@@ -14,8 +14,8 @@ interface IFeedOrdersCard {
 
 const FeedOrdersCard: React.FC<IFeedOrdersCard> = ({ order }) => {
   const location = useLocation();
-  //все ингредиенты
   const { ingredients } = useSelector((store) => store.ingredients);
+  const [plusArray, setPlusArray] = React.useState<IIngredient[]>([]);
 
   /*------------------ Тут получаю массив для отрисовки ингредиентов -----------------*/
 
@@ -26,22 +26,37 @@ const FeedOrdersCard: React.FC<IFeedOrdersCard> = ({ order }) => {
     const newChosenIngredients = uniqueChosenIngredients.map((ingredient) => {
       return ingredients.find((ingr) => ingr._id === ingredient);
     });
+    setPlusArray(newChosenIngredients as IIngredient[]);
 
     return newChosenIngredients;
   }, [order.ingredients, ingredients]);
 
+  const plusIngredients = plusArray.length - 5;
+
   /*--------- Считаем сумму заказов ---------*/
   const totalPrice = React.useMemo(() => {
     const totalPriceArrays = order.ingredients.map((ingredient) => {
-      return ingredients.find((ingr) => ingr._id === ingredient)?.price || 0;
+      return ingredients.find((ingr) => ingr._id === ingredient);
     });
 
-    const total = totalPriceArrays.reduce((prevItem: number, price: number) => {
-      return prevItem + price;
-    }, 0);
+    const mainTotal = totalPriceArrays.filter((main) => main?.type !== 'bun');
+    const bunsTotal = totalPriceArrays.filter((bun) => bun?.type === 'bun');
+
+    const total =
+      (mainTotal as IIngredient[]).reduce((prevItem: number, ingredient) => {
+        return prevItem + ingredient?.price;
+      }, 0) +
+      (bunsTotal as IIngredient[]).reduce((prevItem: number, ingredient) => {
+        return prevItem + ingredient?.price;
+      }, 0) *
+        2;
     console.log('массив:', totalPriceArrays, 'цена:', total);
 
-    return total;
+    if (isNaN(total)) {
+      return 0;
+    } else {
+      return total;
+    }
   }, [order.ingredients, ingredients]);
 
   //статус заказа
@@ -103,12 +118,12 @@ const FeedOrdersCard: React.FC<IFeedOrdersCard> = ({ order }) => {
                       alt={ingredient!.name}
                       className={styles.lastIngredient}
                     />
-                    <span className={styles.count}>+1</span>
+                    <span className={styles.count}>+{plusIngredients}</span>
                   </li>
                 );
               }
             } else {
-              return <div>loading</div>;
+              return <div key={index}>loading</div>;
             }
           })}
         </ul>
