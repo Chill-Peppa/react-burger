@@ -110,7 +110,7 @@ const App: React.FC = () => {
         <Route path="/feed" element={<Feed />} />
         {/* Тут будут динамичные маршруты, test будет заменен на динамичный маршрут! */}
         <Route path="/ingredients/:id" element={<IngredientPage />} />
-        <Route path="/ingredients/:number" element={<FeedDetailsSingleBg />} />
+        <Route path="/feed/:number" element={<FeedDetailsSingleBg />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
 
@@ -131,9 +131,18 @@ const App: React.FC = () => {
         </Routes>
       )}
 
-      {/* <Modal title="" onClose={handleCloseModalOrder}>
-        <FeedDetailsSingle />
-      </Modal> */}
+      {location.state?.backgroundLocation && (
+        <Routes>
+          <Route
+            path="/feed/:number"
+            element={
+              <Modal title="" onClose={handleCloseModalIngredient}>
+                <FeedDetailsSingle />
+              </Modal>
+            }
+          />
+        </Routes>
+      )}
 
       {isOpenOrderModal && (
         <Modal onClose={handleCloseModalOrder} title="">

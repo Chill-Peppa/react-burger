@@ -7,7 +7,6 @@ import { IOrder } from '../../types/ingredientsTypes';
 
 const FeedDetails: React.FC = () => {
   const { orders, total, totalToday } = useSelector((store) => store.ws);
-  console.log(total);
 
   const getOrdersByStatus = (orders: IOrder[], status: string) => {
     const sortedOrders = orders.filter((item) => item.status === status);

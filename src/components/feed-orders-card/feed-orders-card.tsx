@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './feed-orders-card.module.css';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import {
   CurrencyIcon,
   FormattedDate,
@@ -17,7 +17,7 @@ const FeedOrdersCard: React.FC<IFeedOrdersCard> = ({ order }) => {
   const { ingredients } = useSelector((store) => store.ingredients);
   const [plusArray, setPlusArray] = React.useState<IIngredient[]>([]);
 
-  /*------------------ Тут получаю массив для отрисовки ингредиентов -----------------*/
+  /*---- Тут получаю массив для отрисовки ингредиентов ----*/
 
   const arrWithIngredients = React.useMemo(() => {
     const uniqueChosenIngredients = Array.from(new Set(order.ingredients));
@@ -50,7 +50,7 @@ const FeedOrdersCard: React.FC<IFeedOrdersCard> = ({ order }) => {
         return prevItem + ingredient?.price;
       }, 0) *
         2;
-    console.log('массив:', totalPriceArrays, 'цена:', total);
+    //console.log('массив:', totalPriceArrays, 'цена:', total);
 
     if (isNaN(total)) {
       return 0;
@@ -73,66 +73,71 @@ const FeedOrdersCard: React.FC<IFeedOrdersCard> = ({ order }) => {
   };
 
   return (
-    <li
-      className={
-        location.pathname === '/feed' ? styles.card : styles.cardSecondary
-      }>
-      <div className={styles.containerHeader}>
-        <span className="text text_type_digits-default">
-          {`#${order.number}`}
-        </span>
-        <span className="text text_type_main-default text_color_inactive">
-          <FormattedDate date={new Date(order.createdAt)} />
-        </span>
-      </div>
-      <h2 className="text text_type_main-medium mt-6 mb-6">{order.name}</h2>
-      {location.pathname === '/feed' ? (
-        ''
-      ) : (
-        <span
-          className={`text text_type_main-small mb-6 ${
-            order.status === 'done' ? styles.status : ''
-          }`}>
-          {getStatus()}
-        </span>
-      )}
-      <div className={styles.containerBottom}>
-        <ul className={styles.ingredientsIcons}>
-          {arrWithIngredients.slice(0, 6).map((ingredient, index) => {
-            if (ingredient !== undefined) {
-              if (index < 5) {
-                return (
-                  <li className={styles.point} key={index}>
-                    <img
-                      src={ingredient!.image}
-                      alt={ingredient!.name}
-                      className={styles.imageIngredient}
-                    />
-                  </li>
-                );
-              } else {
-                return (
-                  <li className={styles.point} key={index}>
-                    <img
-                      src={ingredient!.image}
-                      alt={ingredient!.name}
-                      className={styles.lastIngredient}
-                    />
-                    <span className={styles.count}>+{plusIngredients}</span>
-                  </li>
-                );
-              }
-            } else {
-              return <div key={index}>loading</div>;
-            }
-          })}
-        </ul>
-        <div className={styles.containerPrice}>
-          <span className="text text_type_digits-default">{totalPrice}</span>
-          <CurrencyIcon type="primary" />
+    <Link
+      to={`/feed/${order.number}`}
+      className={styles.link}
+      state={{ backgroundLocation: location }}>
+      <li
+        className={
+          location.pathname === '/feed' ? styles.card : styles.cardSecondary
+        }>
+        <div className={styles.containerHeader}>
+          <span className="text text_type_digits-default">
+            {`#${order.number}`}
+          </span>
+          <span className="text text_type_main-default text_color_inactive">
+            <FormattedDate date={new Date(order.createdAt)} />
+          </span>
         </div>
-      </div>
-    </li>
+        <h2 className="text text_type_main-medium mt-6 mb-6">{order.name}</h2>
+        {location.pathname === '/feed' ? (
+          ''
+        ) : (
+          <span
+            className={`text text_type_main-small mb-6 ${
+              order.status === 'done' ? styles.status : ''
+            }`}>
+            {getStatus()}
+          </span>
+        )}
+        <div className={styles.containerBottom}>
+          <ul className={styles.ingredientsIcons}>
+            {arrWithIngredients.slice(0, 6).map((ingredient, index) => {
+              if (ingredient !== undefined) {
+                if (index < 5) {
+                  return (
+                    <li className={styles.point} key={index}>
+                      <img
+                        src={ingredient!.image}
+                        alt={ingredient!.name}
+                        className={styles.imageIngredient}
+                      />
+                    </li>
+                  );
+                } else {
+                  return (
+                    <li className={styles.point} key={index}>
+                      <img
+                        src={ingredient!.image}
+                        alt={ingredient!.name}
+                        className={styles.lastIngredient}
+                      />
+                      <span className={styles.count}>+{plusIngredients}</span>
+                    </li>
+                  );
+                }
+              } else {
+                return <div key={index}>loading</div>;
+              }
+            })}
+          </ul>
+          <div className={styles.containerPrice}>
+            <span className="text text_type_digits-default">{totalPrice}</span>
+            <CurrencyIcon type="primary" />
+          </div>
+        </div>
+      </li>
+    </Link>
   );
 };
 

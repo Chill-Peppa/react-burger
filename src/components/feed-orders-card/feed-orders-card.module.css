@@ -1,3 +1,8 @@
+.link {
+  text-decoration: none;
+  color: #f2f2f3;
+}
+
 .card {
   background: #1c1c21;
   max-width: 536px;
