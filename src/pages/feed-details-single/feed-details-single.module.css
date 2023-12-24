@@ -60,3 +60,32 @@
   height: 312px;
   background: #2f2f37;
 }
+
+.card {
+  display: flex;
+  gap: 16px;
+}
+
+.img {
+  border-radius: 50%;
+  border: 2px solid #4c4cff;
+  width: 60px;
+  height: 60px;
+  background: #131316;
+  object-fit: cover;
+  object-position: center;
+  box-sizing: border-box;
+}
+
+.container {
+  width: 528px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.totalContainer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}

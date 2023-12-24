@@ -2,9 +2,15 @@ import React from 'react';
 import style from './feed-details-single-card.module.css';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import bun from '../../images/test.svg';
-import { Link, useLocation } from 'react-router-dom';
+import { IIngredient } from '../../types/ingredientsTypes';
 
-const FeedDetailsSingleCard: React.FC = () => {
+interface IFeedDetailsSingleCard {
+  arrWithIngredients: IIngredient[];
+}
+
+const FeedDetailsSingleCard: React.FC<IFeedDetailsSingleCard> = ({
+  arrWithIngredients,
+}) => {
   return (
     <li className={style.card}>
       <img src={bun as unknown as string} alt="blablabla" />

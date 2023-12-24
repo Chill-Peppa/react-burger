@@ -17,7 +17,7 @@ export const getOrder: AppThunk =
         setTimeout(() => {
           dispatch({
             type: GET_SELECTED_ORDER_SUCCESS,
-            order: res.orders.order,
+            order: res.orders[0],
           });
         }, 1000);
       })
