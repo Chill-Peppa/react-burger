@@ -57,6 +57,10 @@ const FeedDetailsSingle: React.FC = () => {
 
   /*--------- Считаем сумму заказов ---------*/
   const totalPrice = React.useMemo(() => {
+    if (!order.ingredients || !ingredients) {
+      return 0;
+    }
+
     const totalPriceArrays = order.ingredients.map((ingredient) => {
       return ingredients.find((ingr) => ingr._id === ingredient);
     });
@@ -72,7 +76,6 @@ const FeedDetailsSingle: React.FC = () => {
         return prevItem + ingredient?.price;
       }, 0) *
         2;
-    //console.log('массив:', totalPriceArrays, 'цена:', total);
 
     if (isNaN(total)) {
       return 0;
@@ -128,7 +131,7 @@ const FeedDetailsSingle: React.FC = () => {
                   </li>
                 );
               } else {
-                return <>Загрузка</>;
+                return <div key={index}>Загрузка</div>;
               }
             })}
           </ul>
