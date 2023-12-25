@@ -21,6 +21,7 @@ export const socketMiddleware = (
       const { dispatch } = store;
       const {
         wsConnectionStart,
+        wsConnectionEnd,
         wsConnectionClosed,
         wsConnectionSuccess,
         wsConnectionError,
@@ -73,7 +74,7 @@ export const socketMiddleware = (
         };
       }
 
-      if (type === wsConnectionClosed) {
+      if (type === wsConnectionEnd) {
         clearTimeout(reconnectTimer);
         socket?.close(1000, 'Close Socket');
         isConnected = false;

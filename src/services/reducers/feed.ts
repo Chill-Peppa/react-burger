@@ -1,5 +1,6 @@
 import {
   WS_CONNECTION_FEED_START,
+  WS_CONNECTION_FEED_END,
   WS_CONNECTION_FEED_SUCCESS,
   WS_CONNECTION_FEED_CLOSED,
   WS_CONNECTION_FEED_GET_ORDERS,
@@ -24,6 +25,8 @@ export const wsReducer = (
   switch (action.type) {
     case WS_CONNECTION_FEED_START:
       return { ...state, wsConnected: true };
+    case WS_CONNECTION_FEED_END:
+      return { ...state };
     case WS_CONNECTION_FEED_SUCCESS:
       return { ...state, wsConnected: true };
     case WS_CONNECTION_FEED_CLOSED:

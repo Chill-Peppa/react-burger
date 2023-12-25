@@ -1,6 +1,7 @@
 import { IOrder } from '../../types/ingredientsTypes';
 import {
   WS_CONNECTION_FEED_START,
+  WS_CONNECTION_FEED_END,
   WS_CONNECTION_FEED_SUCCESS,
   WS_CONNECTION_FEED_ERROR,
   WS_CONNECTION_FEED_CLOSED,
@@ -12,6 +13,10 @@ import {
 export interface IWsConnectionFeedStart {
   readonly type: typeof WS_CONNECTION_FEED_START;
   readonly wsUrl: string;
+}
+
+export interface IWsConnectionFeedEnd {
+  readonly type: typeof WS_CONNECTION_FEED_END;
 }
 
 export interface IWsConnectionFeedSuccess {
@@ -61,6 +66,7 @@ export interface IWsConnectionFeedGetOrderType {
 /*-------- Для стора --------*/
 export type TWSActionsTypesStore = {
   wsConnectionStart: typeof WS_CONNECTION_FEED_START;
+  wsConnectionEnd: typeof WS_CONNECTION_FEED_END;
   wsConnectionSuccess: typeof WS_CONNECTION_FEED_SUCCESS;
   wsConnectionError: typeof WS_CONNECTION_FEED_ERROR;
   wsConnectionClosed: typeof WS_CONNECTION_FEED_CLOSED;
@@ -69,6 +75,7 @@ export type TWSActionsTypesStore = {
 
 export type TWSActionsAuthTypeStore = {
   wsConnectionStart: typeof WS_AUTH_START;
+  wsConnectionEnd: typeof WS_CONNECTION_FEED_END;
   wsConnectionSuccess: typeof WS_CONNECTION_FEED_SUCCESS;
   wsConnectionError: typeof WS_CONNECTION_FEED_ERROR;
   wsConnectionClosed: typeof WS_AUTH_CLOSED;
@@ -81,7 +88,8 @@ export type TWSActions =
   | IWsConnectionFeedSuccess
   | IWsConnectionFeedError
   | IWsConnectionFeedClosed
-  | IWsConnectionFeedGetOrder;
+  | IWsConnectionFeedGetOrder
+  | IWsConnectionFeedEnd;
 
 export type TWSAuthActions =
   | IWsAuthStart

@@ -1,5 +1,6 @@
 import {
   IWsConnectionFeedStart,
+  IWsConnectionFeedEnd,
   IWsConnectionFeedSuccess,
   IWsConnectionFeedError,
   IWsConnectionFeedClosed,
@@ -12,6 +13,9 @@ import {
 /* Получение всех заказов */
 export const WS_CONNECTION_FEED_START: 'WS_CONNECTION_FEED_START' =
   'WS_CONNECTION_FEED_START';
+export const WS_CONNECTION_FEED_END: 'WS_CONNECTION_FEED_END' =
+  'WS_CONNECTION_FEED_END';
+
 export const WS_CONNECTION_FEED_SUCCESS: 'WS_CONNECTION_FEED_SUCCESS' =
   'WS_CONNECTION_FEED_SUCCESS';
 export const WS_CONNECTION_FEED_ERROR: 'WS_CONNECTION_FEED_ERROR' =
@@ -30,6 +34,10 @@ export const wsConnectionFeedStart = (
   wsUrl: string,
 ): IWsConnectionFeedStart => {
   return { type: WS_CONNECTION_FEED_START, wsUrl };
+};
+
+export const wsConnectionFeedEnd = (): IWsConnectionFeedEnd => {
+  return { type: WS_CONNECTION_FEED_END };
 };
 
 export const wsConnectionFeedSuccess = (): IWsConnectionFeedSuccess => {

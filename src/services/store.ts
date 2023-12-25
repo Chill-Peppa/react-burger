@@ -5,6 +5,7 @@ import thunk from 'redux-thunk';
 //import { wsUrl } from '../utils/constants';
 import {
   WS_CONNECTION_FEED_START,
+  WS_CONNECTION_FEED_END,
   WS_CONNECTION_FEED_SUCCESS,
   WS_CONNECTION_FEED_ERROR,
   WS_CONNECTION_FEED_CLOSED,
@@ -19,6 +20,7 @@ import {
 
 export const wsActions: TWSActionsTypesStore = {
   wsConnectionStart: WS_CONNECTION_FEED_START,
+  wsConnectionEnd: WS_CONNECTION_FEED_END,
   wsConnectionSuccess: WS_CONNECTION_FEED_SUCCESS,
   wsConnectionError: WS_CONNECTION_FEED_ERROR,
   wsConnectionClosed: WS_CONNECTION_FEED_CLOSED,
@@ -27,6 +29,7 @@ export const wsActions: TWSActionsTypesStore = {
 
 export const wsAuthActions: TWSActionsAuthTypeStore = {
   wsConnectionStart: WS_AUTH_START,
+  wsConnectionEnd: WS_CONNECTION_FEED_END,
   wsConnectionSuccess: WS_CONNECTION_FEED_SUCCESS,
   wsConnectionError: WS_CONNECTION_FEED_ERROR,
   wsConnectionClosed: WS_AUTH_CLOSED,
