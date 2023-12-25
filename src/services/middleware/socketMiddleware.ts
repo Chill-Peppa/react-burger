@@ -38,7 +38,6 @@ export const socketMiddleware = (
       if (socket) {
         //открытие сокета
         socket.onopen = (event) => {
-          console.log('Соединение установлено');
           dispatch({ type: wsConnectionSuccess });
         };
 
@@ -65,7 +64,6 @@ export const socketMiddleware = (
         //на закрытие соединения
         socket.onclose = (event) => {
           dispatch({ type: wsConnectionClosed });
-          console.log(`Соединение закрыто с кодом: ${event.code}`);
 
           if (isConnected) {
             reconnectTimer = window.setTimeout(() => {
@@ -78,7 +76,6 @@ export const socketMiddleware = (
       if (type === wsConnectionClosed) {
         clearTimeout(reconnectTimer);
         socket?.close(1000, 'Close Socket');
-        console.log('соединение закрыто');
         isConnected = false;
         reconnectTimer = 0;
       }

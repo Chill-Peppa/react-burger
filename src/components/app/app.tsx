@@ -111,6 +111,15 @@ const App: React.FC = () => {
         {/* Тут будут динамичные маршруты, test будет заменен на динамичный маршрут! */}
         <Route path="/ingredients/:id" element={<IngredientPage />} />
         <Route path="/feed/:number" element={<FeedDetailsSingleBg />} />
+        <Route
+          path="/profile/orders/:number"
+          element={
+            <ProtectedRoute
+              onlyUnAuth={false}
+              element={<FeedDetailsSingleBg />}
+            />
+          }
+        />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
 
@@ -139,6 +148,24 @@ const App: React.FC = () => {
               <Modal title="" onClose={handleCloseModalIngredient}>
                 <FeedDetailsSingle />
               </Modal>
+            }
+          />
+        </Routes>
+      )}
+
+      {location.state?.backgroundLocation && (
+        <Routes>
+          <Route
+            path="/profile/orders/:number"
+            element={
+              <ProtectedRoute
+                onlyUnAuth={false}
+                element={
+                  <Modal title="" onClose={handleCloseModalIngredient}>
+                    <FeedDetailsSingle />
+                  </Modal>
+                }
+              />
             }
           />
         </Routes>

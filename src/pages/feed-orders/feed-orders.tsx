@@ -12,6 +12,8 @@ interface IFeedOrders {
 const FeedOrders: React.FC<IFeedOrders> = ({ title }) => {
   const location = useLocation();
   const { orders } = useSelector((store) => store.ws);
+  const url = location.pathname;
+  console.log(url);
 
   return (
     <div
@@ -24,10 +26,12 @@ const FeedOrders: React.FC<IFeedOrders> = ({ title }) => {
       <ul className={styles.feedList}>
         {location.pathname === '/feed'
           ? orders.map((order) => (
-              <FeedOrdersCard key={order._id} order={order} />
+              <FeedOrdersCard key={order._id} order={order} url={url} />
             ))
           : orders
-              .map((order) => <FeedOrdersCard key={order._id} order={order} />)
+              .map((order) => (
+                <FeedOrdersCard url={url} key={order._id} order={order} />
+              ))
               .reverse()}
       </ul>
     </div>

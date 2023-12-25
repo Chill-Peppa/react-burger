@@ -10,9 +10,10 @@ import { useSelector } from '../../services/types/hooks';
 
 interface IFeedOrdersCard {
   order: IOrder;
+  url: string;
 }
 
-const FeedOrdersCard: React.FC<IFeedOrdersCard> = ({ order }) => {
+const FeedOrdersCard: React.FC<IFeedOrdersCard> = ({ order, url }) => {
   const location = useLocation();
   const { ingredients } = useSelector((store) => store.ingredients);
   const [plusArray, setPlusArray] = React.useState<IIngredient[]>([]);
@@ -74,7 +75,7 @@ const FeedOrdersCard: React.FC<IFeedOrdersCard> = ({ order }) => {
 
   return (
     <Link
-      to={`/feed/${order.number}`}
+      to={`${url}/${order.number}`}
       className={styles.link}
       state={{ backgroundLocation: location }}>
       <li
