@@ -9,7 +9,7 @@ https://react-burger-one-psi.vercel.app/
 # Технологии, используемые для написания проекта
 
 - ReactJS
-- React Router (навигация)
+- React Router, (навигация)
 - React Hooks (хуки)
 - Prettier (форматирование кода)
 - CSS-modules
@@ -18,4 +18,6 @@ https://react-burger-one-psi.vercel.app/
 - Redux
 - Intersectional Observer API
 - React-DND, uuid
+- JWT Token, Cookie, REST API
+- TypeScript
   (...будут дополняться)

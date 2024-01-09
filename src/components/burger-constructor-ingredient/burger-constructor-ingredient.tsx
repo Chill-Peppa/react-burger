@@ -23,7 +23,7 @@ const BurgerConstructorIngredient: React.FC<IBurgerConstructorIngredient> = ({
   /*------------------ SORT ----------------------*/
   const { _id } = ingredient;
   const ingredientItemRef = React.useRef<HTMLLIElement>(null);
-  console.log(ingredient);
+  //console.log(ingredient);
 
   const [{ handlerId }, drop] = useDrop({
     accept: 'constructor-item',

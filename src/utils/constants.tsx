@@ -36,3 +36,5 @@ export const headerLocations = [
   '/profile',
   '/profile/orders',
 ];
+
+export const wsUrl = 'wss://norma.nomoreparties.space/orders';

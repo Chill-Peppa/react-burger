@@ -4,15 +4,23 @@ import {
   GET_INGREDIENTS_FAILED,
 } from '../actions/burgerIngredients';
 
+import {
+  TBurgerIngredientsState,
+  TBurgerIngredientsActions,
+} from '../types/burgerIngredientsTypes';
+
 //исходное значение всех ингредиентов
-const initialState = {
+const initialState: TBurgerIngredientsState = {
   ingredients: [],
   ingredientsRequest: false,
   ingredientsFailed: false,
 };
 
 //редьюсер
-export const getIngredientsReducer = (state = initialState, action) => {
+export const getIngredientsReducer = (
+  state = initialState,
+  action: TBurgerIngredientsActions,
+) => {
   switch (action.type) {
     case GET_INGREDIENTS: {
       return {

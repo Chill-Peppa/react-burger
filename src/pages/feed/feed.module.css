@@ -1,0 +1,6 @@
+.feed {
+  max-width: 1240px;
+  margin: 0 auto;
+  display: flex;
+  gap: 60px;
+}

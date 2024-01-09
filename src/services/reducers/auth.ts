@@ -25,7 +25,9 @@ import {
   AUTH_UPDATE_TOKEN_FAILED,
 } from '../actions/auth';
 
-const initialState = {
+import { TAuthActions, TAuthState } from '../types/authTypes';
+
+const initialState: TAuthState = {
   user: {
     name: '',
     email: '',
@@ -60,7 +62,7 @@ const initialState = {
   isPasswordReset: false,
 };
 
-export const authReducer = (state = initialState, action) => {
+export const authReducer = (state = initialState, action: TAuthActions) => {
   switch (action.type) {
     case AUTH_REGISTER: {
       return {

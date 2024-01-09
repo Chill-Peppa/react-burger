@@ -2,14 +2,14 @@ import React from 'react';
 import styles from './burger-ingredients.module.css';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import { tabs } from '../../utils/constants';
-import { useSelector } from 'react-redux';
+import { useSelector } from '../../services/types/hooks';
 import { useInView } from 'react-intersection-observer';
 import { IIngredient } from '../../types/ingredientsTypes';
 
 import IngredientCardList from '../ingredient-card-list/ingredient-card-list';
 
 const BurgerIngredients: React.FC = () => {
-  const { ingredients } = useSelector((store: any) => store.ingredients);
+  const { ingredients } = useSelector((store) => store.ingredients);
 
   const [current, setCurrent] = React.useState<string>('bun');
   const containerRef = React.useRef<HTMLDivElement>(null);

@@ -1,0 +1,112 @@
+.link {
+  text-decoration: none;
+  color: #f2f2f3;
+}
+
+.card {
+  background: #1c1c21;
+  max-width: 536px;
+  width: 100%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.04), 0 0 2px rgba(0, 0, 0, 0.06),
+    0 0 1px rgba(0, 0, 0, 0.04);
+  border-radius: 40px;
+  list-style: none;
+  padding: 24px;
+  cursor: pointer;
+}
+
+/*Тут стили для широкого формана карточек*/
+.cardSecondary {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.04), 0 0 2px rgba(0, 0, 0, 0.06),
+    0 0 1px rgba(0, 0, 0, 0.04);
+  background: #1c1c21;
+  max-width: 749px;
+  border-radius: 40px;
+  list-style: none;
+  padding: 24px;
+}
+
+.containerHeader {
+  display: flex;
+  justify-content: space-between;
+}
+
+.containerBottom {
+  display: flex;
+  gap: 24px;
+  justify-content: space-between;
+  margin-top: 24px;
+}
+
+.ingredientsIcons {
+  display: flex;
+  position: relative;
+  flex-wrap: wrap;
+  width: 436px;
+  padding: 0;
+  margin: 0;
+}
+
+.point {
+  list-style: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: -15px;
+  position: relative;
+}
+
+.point:nth-child(1) {
+  z-index: 5;
+}
+.point:nth-child(2) {
+  z-index: 4;
+}
+.point:nth-child(3) {
+  z-index: 3;
+}
+.point:nth-child(4) {
+  z-index: 2;
+}
+.point:nth-child(5) {
+  z-index: 1;
+}
+
+.count {
+  position: absolute;
+}
+
+.imageIngredient {
+  border-radius: 50%;
+  border: 2px solid #4c4cff;
+  width: 60px;
+  height: 60px;
+  background: #131316;
+  object-fit: cover;
+  object-position: center;
+  box-sizing: border-box;
+}
+
+.lastIngredient {
+  border-radius: 50%;
+  border: 2px solid #4c4cff;
+  width: 60px;
+  height: 60px;
+  background: #131316;
+  object-fit: cover;
+  object-position: center;
+  box-sizing: border-box;
+  opacity: 0.5;
+}
+
+.containerPrice {
+  display: flex;
+  /* width: 76px; */
+  gap: 10px;
+  padding: 20px 0 20px 0;
+}
+
+.status {
+  color: #00cccc;
+}

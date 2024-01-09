@@ -1,5 +1,6 @@
 import { BASE_URL } from './constants';
 import { getCookie } from './cookies';
+import { IUser, IUserLogin } from '../types/ingredientsTypes';
 
 type THeaders = {
   readonly 'Content-Type': string;
@@ -13,12 +14,6 @@ interface IConstructor {
 interface IApi<T> {
   readonly _url: string;
   readonly _headers: T;
-}
-
-interface IUser {
-  name: string;
-  email: string;
-  password: string;
 }
 
 interface IPasswordData {
@@ -59,16 +54,19 @@ export default class Api implements IApi<THeaders> {
   }
 
   //метод отправки заказа на сервер
-  sendOrder(id: string) {
+  sendOrder(id: string[]) {
     return this._request(`${this._url}/api/orders`, {
-      headers: this._headers,
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+        Authorization: `Bearer ${getCookie('accessToken')}`,
+      },
       method: 'POST',
       body: JSON.stringify({ ingredients: id }),
     });
   }
 
   //метод на регистрацию юзера
-  register(user: IUser) {
+  register(user: IUserLogin) {
     return this._request(`${this._url}/api/auth/register`, {
       headers: this._headers,
       method: 'POST',
@@ -182,6 +180,13 @@ export default class Api implements IApi<THeaders> {
       redirect: 'follow',
       referrerPolicy: 'no-referrer',
       body: JSON.stringify({ token: getCookie('refreshToken') }),
+    });
+  }
+
+  //получить заказ по его номеру
+  getOrder(orderNumber: string) {
+    return this._request(`${this._url}/api/orders/${orderNumber}`, {
+      headers: this._headers,
     });
   }
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './profile.module.css';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from '../../services/types/hooks';
 import { NavLink, useLocation } from 'react-router-dom';
 import {
   EmailInput,
@@ -8,16 +8,21 @@ import {
   Input,
   Button,
 } from '@ya.praktikum/react-developer-burger-ui-components';
-import OrderHistory from '../order-history/order-history';
+//import FeedOrders from '../feed-orders/feed-orders';
+import OrderHistory from '../../components/order-history/order-history';
+
 import { logout, updateUserInfo } from '../../services/actions/auth';
+import { IUser } from '../../types/ingredientsTypes';
 
 function Profile() {
-  const { user } = useSelector((store: any) => store.user);
+  const { user } = useSelector((store) => store.user);
+
+  console.log(user);
 
   //для состояния инпутов
   const [disabled, setDisabled] = React.useState(true);
 
-  const [form, setForm] = React.useState({
+  const [form, setForm] = React.useState<IUser>({
     name: '',
     email: '',
     password: '',
@@ -55,7 +60,7 @@ function Profile() {
 
   const handleUpdate = (e: React.SyntheticEvent) => {
     e.preventDefault();
-    dispatch<any>(updateUserInfo(form));
+    dispatch(updateUserInfo(form));
   };
 
   const returnLinkState = ({ isActive }: { isActive: boolean }) => {
@@ -63,7 +68,7 @@ function Profile() {
   };
 
   const handleLogout = () => {
-    dispatch<any>(logout());
+    dispatch(logout());
   };
 
   return (
@@ -87,14 +92,24 @@ function Profile() {
               </button>
             </li>
           </ul>
-          <p className="mt-20 text text_type_main-default text_color_inactive">
-            В этом разделе вы можете изменить&nbsp;свои&nbsp;персональные данные
-          </p>
+          {location.pathname === '/profile' ? (
+            <p className="mt-20 text text_type_main-default text_color_inactive">
+              В этом разделе вы можете
+              <br />
+              изменить&nbsp;свои&nbsp;персональные данные
+            </p>
+          ) : (
+            <p className="mt-20 text text_type_main-default text_color_inactive">
+              В этом разделе вы можете
+              <br />
+              просмотреть&nbsp;свою&nbsp;историю заказов
+            </p>
+          )}
         </nav>
         {location.pathname === '/profile/orders' ? (
           <OrderHistory />
         ) : (
-          <form>
+          <form className={styles.form}>
             <Input
               name={'name'}
               placeholder={'Имя'}

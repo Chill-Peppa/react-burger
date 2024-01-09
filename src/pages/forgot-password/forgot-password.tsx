@@ -1,12 +1,11 @@
 import React from 'react';
 import styles from './forgot-password.module.css';
-import { useDispatch } from 'react-redux';
+import { useDispatch } from '../../services/types/hooks';
 import {
   Button,
   Input,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Link, useNavigate } from 'react-router-dom';
-import PropTypes from 'prop-types';
 
 import { forgotPassword } from '../../services/actions/auth';
 
@@ -26,7 +25,7 @@ function ForgotPassword({ title }: { title: string }) {
 
   const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch<any>(forgotPassword(email, onResetNavigate));
+    dispatch(forgotPassword(email, onResetNavigate));
   };
 
   return (
@@ -64,9 +63,5 @@ function ForgotPassword({ title }: { title: string }) {
     </section>
   );
 }
-
-ForgotPassword.propTypes = {
-  title: PropTypes.string.isRequired,
-};
 
 export default ForgotPassword;

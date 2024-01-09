@@ -15,3 +15,31 @@ export interface IIngredient {
   dropId?: string;
   index?: number;
 }
+
+export interface IOrder {
+  ingredients: string[];
+  _id: string;
+  status: string;
+  number: number;
+  createdAt: string;
+  updatedAt: string;
+  name: string;
+  owner?: string;
+  __v?: number;
+}
+
+export interface IUser {
+  name: string;
+  email: string;
+  password: string;
+}
+
+export interface IUserLogin {
+  email: string;
+  password: string;
+}
+
+export interface IPasswordData {
+  newPassword: string;
+  token: string;
+}

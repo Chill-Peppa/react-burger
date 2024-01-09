@@ -1,0 +1,17 @@
+.card {
+  display: flex;
+  gap: 16px;
+}
+
+.container {
+  width: 528px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.totalContainer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}

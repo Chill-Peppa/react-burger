@@ -1,0 +1,91 @@
+.feedDetails {
+  display: flex;
+  margin: 0 auto;
+  flex-direction: column;
+  max-width: 640px;
+  width: 100%;
+  padding-bottom: 40px;
+}
+
+.order {
+  text-align: center;
+}
+
+.order-modal {
+  position: absolute;
+  top: 40px;
+}
+
+.done {
+  color: #00cccc;
+}
+
+.bottom {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 40px;
+}
+
+.totalContainer {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+/*---------- Scrollbar ----------*/
+
+.ingredientsList {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  gap: 16px;
+  padding: 0;
+  margin: 0;
+  overflow-y: scroll;
+  scrollbar-width: 8px;
+  max-height: 312px;
+}
+
+.ingredientsList::-webkit-scrollbar {
+  width: 8px;
+  height: 312px;
+}
+
+.ingredientsList::-webkit-scrollbar-thumb {
+  height: 194px;
+  background: #8585ad;
+}
+
+.ingredientsList::-webkit-scrollbar-track {
+  height: 312px;
+  background: #2f2f37;
+}
+
+.card {
+  display: flex;
+  gap: 16px;
+}
+
+.img {
+  border-radius: 50%;
+  border: 2px solid #4c4cff;
+  width: 60px;
+  height: 60px;
+  background: #131316;
+  object-fit: cover;
+  object-position: center;
+  box-sizing: border-box;
+}
+
+.container {
+  width: 528px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.totalContainer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}

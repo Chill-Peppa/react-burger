@@ -1,11 +1,11 @@
 import React from 'react';
 import styles from './order-details.module.css';
 import done from '../../images/done.svg';
-import { useSelector } from 'react-redux';
+import { useSelector } from '../../services/types/hooks';
 
 const OrderDetails: React.FC = () => {
   const { newOrderNumber, orderNumberRequest, orderNumberFailed } = useSelector(
-    (store: any) => store.order,
+    (store) => store.order,
   );
 
   return (
