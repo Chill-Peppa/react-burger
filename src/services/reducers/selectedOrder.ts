@@ -10,7 +10,7 @@ import {
 } from '../types/selectedOrderTypes';
 import { IOrder } from '../../types/ingredientsTypes';
 
-const initialState: TSelectedOrderState = {
+export const initialState: TSelectedOrderState = {
   order: {} as IOrder,
   orderNumberRequest: false,
   orderNumberFailed: false,
