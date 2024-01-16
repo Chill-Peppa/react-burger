@@ -10,7 +10,7 @@ import {
 
 import { TWSState, TWSActions, TWSAuthActions } from '../types/feedTypes';
 
-const initialState: TWSState = {
+export const initialState: TWSState = {
   wsConnected: false,
   success: false,
   orders: [],

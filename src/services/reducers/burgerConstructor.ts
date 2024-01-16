@@ -12,7 +12,7 @@ import {
 } from '../types/burgerConstructorTypes';
 
 //исходное значение ингредиентов в конструкторе
-const initialState: TBurgerConstructorState = {
+export const initialState: TBurgerConstructorState = {
   bunIngredientsData: {} as IIngredient,
   mainIngredientsData: [],
 };

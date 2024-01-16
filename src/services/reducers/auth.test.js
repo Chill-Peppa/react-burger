@@ -344,20 +344,20 @@ describe('auth reducer', () => {
     expect(testData).toEqual(expected);
   });
 
-  //   it('should handle AUTH_UPDATE_TOKEN_SUCCESS', () => {
-  //     const testData = authReducer(initialState, {
-  //       type: AUTH_UPDATE_TOKEN_SUCCESS,
-  //       user: { name: '', email: '', password: '' },
-  //     });
-  //     const expected = {
-  //       ...initialState,
-  //       user: { name: '', email: '', password: '' },
-  //       getUserRequest: false,
-  //       getUserFailed: false,
-  //     };
+  it('should handle AUTH_UPDATE_TOKEN_SUCCESS', () => {
+    const testData = authReducer(initialState, {
+      type: AUTH_UPDATE_TOKEN_SUCCESS,
+      tokenData: { tokenData: '' },
+    });
+    const expected = {
+      ...initialState,
+      tokenData: { tokenData: '' },
+      getUserRequest: false,
+      getUserFailed: false,
+    };
 
-  //     expect(testData).toEqual(expected);
-  //   });
+    expect(testData).toEqual(expected);
+  });
 
   it('should handle AUTH_UPDATE_TOKEN_FAILED', () => {
     const testData = authReducer(initialState, {
