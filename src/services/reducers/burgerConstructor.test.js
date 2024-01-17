@@ -29,6 +29,13 @@ const id = 'test';
 const dragIndex = 12345;
 const hoverIndex = 12345;
 
+const sortMain = update(initialState.mainIngredientsData, {
+  $splice: [
+    [dragIndex, 1],
+    [hoverIndex, 0, initialState.mainIngredientsData[dragIndex]],
+  ],
+});
+
 describe('auth reducer', () => {
   it('should return the initial state', () => {
     const testData = constructorReducer(undefined, {});
@@ -84,21 +91,17 @@ describe('auth reducer', () => {
     expect(testData).toEqual(expected);
   });
 
-  //   it('should handle SORT_INGREDIENTS', () => {
-  //     const testData = constructorReducer(initialState, {
-  //       type: SORT_INGREDIENTS,
-  //     });
+  it('should handle SORT_INGREDIENTS', () => {
+    const testData = constructorReducer(initialState, {
+      type: SORT_INGREDIENTS,
+      sortMain: sortMain,
+    });
 
-  //     const expected = {
-  //       ...initialState,
-  //       mainIngredientsData: update(initialState.mainIngredientsData, {
-  //         $splice: [
-  //           [dragIndex, 1],
-  //           [hoverIndex, 0, initialState.mainIngredientsData[dragIndex]],
-  //         ],
-  //       }),
-  //     };
+    const expected = {
+      ...initialState,
+      mainIngredientsData: sortMain,
+    };
 
-  //     expect(testData).toEqual(expected);
-  //   });
+    expect(testData).toEqual(expected);
+  });
 });
