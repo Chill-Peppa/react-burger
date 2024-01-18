@@ -55,11 +55,11 @@ describe('auth reducer', () => {
   it('should handle AUTH_REGISTER_SUCCESS', () => {
     const testData = authReducer(initialState, {
       type: AUTH_REGISTER_SUCCESS,
-      user: { name: '', email: '', password: '' },
+      user: { name: 'test', email: 'test', password: 'test' },
     });
     const expected = {
       ...initialState,
-      user: { name: '', email: '', password: '' },
+      user: { name: 'test', email: 'test', password: 'test' },
       registerRequest: false,
       isLoggedIn: true,
     };
@@ -96,11 +96,11 @@ describe('auth reducer', () => {
   it('should handle AUTH_LOGIN_SUCCESS', () => {
     const testData = authReducer(initialState, {
       type: AUTH_LOGIN_SUCCESS,
-      user: { name: '', email: '', password: '' },
+      user: { name: 'test', email: 'test', password: 'test' },
     });
     const expected = {
       ...initialState,
-      user: { name: '', email: '', password: '' },
+      user: { name: 'test', email: 'test', password: 'test' },
       registerRequest: false,
       isLoggedIn: true,
     };
@@ -347,11 +347,11 @@ describe('auth reducer', () => {
   it('should handle AUTH_UPDATE_TOKEN_SUCCESS', () => {
     const testData = authReducer(initialState, {
       type: AUTH_UPDATE_TOKEN_SUCCESS,
-      tokenData: { tokenData: '' },
+      tokenData: { tokenData: 'test' },
     });
     const expected = {
       ...initialState,
-      tokenData: { tokenData: '' },
+      tokenData: { tokenData: 'test' },
       getUserRequest: false,
       getUserFailed: false,
     };
