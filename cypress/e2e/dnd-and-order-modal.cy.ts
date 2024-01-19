@@ -2,16 +2,14 @@ import '@4tw/cypress-drag-drop';
 
 describe('service is available', () => {
   beforeEach(() => {
-    let email = 'test@test.ru';
-    let password = 'test12345';
     cy.visit('http://localhost:3000');
 
-    /* Тут перехватываются запросы с мокнутыми данными */
-    cy.get('[data-test="email-input"]').type(`${email}`);
-    cy.get('[data-test="password-input"]').type(`${password}{enter}`);
-    cy.intercept('POST', 'auth/login', { fixture: 'user.json' }).as(
-      'postLogin',
-    );
+    cy.get('span').contains('Личный кабинет').click();
+    cy.get('input').first().type('www.nastya97@yandex.ru');
+    cy.get('input').last().type('nastyanastya19977');
+    cy.get('button').contains('Войти').click();
+    cy.get('span').contains('Конструктор').click();
+
     cy.intercept('POST', 'api/orders', { fixture: 'order.json' }).as(
       'postOrder',
     );
@@ -53,6 +51,11 @@ describe('service is available', () => {
       .contains('Соус Spicy-X')
       .drag('@droppableContainer');
 
-    cy.get('[class^=button').contains('Оформить заказ').click();
+    cy.get('[class^=button]').contains('Оформить заказ').click();
+    cy.wait('@postOrder');
+    cy.get('[class^=order-details_orderDetails__]')
+      .contains('идентификатор заказа')
+      .should('exist');
+    cy.get('[class^=modal_close__9WVfX]').click();
   });
 });
