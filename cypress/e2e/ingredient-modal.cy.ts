@@ -5,7 +5,7 @@ describe('service is available', () => {
     cy.get('h1').contains('Соберите бургер');
   });
 
-  /* открытие и закрытие модалок */
+  /* открытие и закрытие модалки ингредиента */
   it('should be open and close ingredient modal', () => {
     cy.visit('http://localhost:3000');
     cy.get('[class^=ingredient-card_card__]')
@@ -16,12 +16,4 @@ describe('service is available', () => {
       .should('exist');
     cy.get('[class^=modal_close__9WVfX]').click();
   });
-
-  // it('should be open and close order modal', () => {
-  //   cy.visit('http://localhost:3000');
-  //   cy.get('[class^=ingredient-card_card__aYKje]')
-  //     .contains('Краторная булка N-200i')
-  //     .click();
-  //   cy.get('[class^=modal_close__9WVfX]').click();
-  // });
 });
