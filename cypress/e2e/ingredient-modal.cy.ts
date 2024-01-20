@@ -14,6 +14,6 @@ describe('service is available', () => {
     cy.get('[class^=modal_container__m7HCT]')
       .contains('Краторная булка N-200i')
       .should('exist');
-    cy.get('[class^=modal_close__9WVfX]').click();
+    cy.get('[data-testid=close]').as('close').click();
   });
 });
