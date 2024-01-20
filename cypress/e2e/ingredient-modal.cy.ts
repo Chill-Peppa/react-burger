@@ -11,7 +11,7 @@ describe('service is available', () => {
     cy.get('[class^=ingredient-card_card__]')
       .contains('Краторная булка N-200i')
       .click();
-    cy.get('[class^=modal_container__m7HCT]')
+    cy.get('[class^=modal_container__]')
       .contains('Краторная булка N-200i')
       .should('exist');
     cy.get('[data-testid=close]').as('close').click();
