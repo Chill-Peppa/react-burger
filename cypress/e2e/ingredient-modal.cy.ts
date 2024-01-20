@@ -1,7 +1,7 @@
 describe('service is available', () => {
   /* Приложение запускается на localhost */
   it('should be available on localhost:3000', () => {
-    cy.visit('http://localhost:3000');
+    cy.visit('/');
     cy.get('h1').contains('Соберите бургер');
   });
 

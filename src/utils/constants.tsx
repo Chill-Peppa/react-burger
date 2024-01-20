@@ -38,3 +38,4 @@ export const headerLocations = [
 ];
 
 export const wsUrl = 'wss://norma.nomoreparties.space/orders';
+export const mainUrl = 'http://localhost:3000';

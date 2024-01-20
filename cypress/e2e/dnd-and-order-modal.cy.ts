@@ -2,7 +2,7 @@ import '@4tw/cypress-drag-drop';
 
 describe('service is available', () => {
   beforeEach(() => {
-    cy.visit('http://localhost:3000');
+    cy.visit('/');
 
     cy.get('span').contains('Личный кабинет').click();
     cy.get('input').first().type('www.nastya97@yandex.ru');
@@ -56,6 +56,6 @@ describe('service is available', () => {
     cy.get('[class^=order-details_orderDetails__]')
       .contains('идентификатор заказа')
       .should('exist');
-    cy.get('[class^=modal_close__9WVfX]').click();
+    cy.get('[data-testid=close]').as('close').click();
   });
 });
