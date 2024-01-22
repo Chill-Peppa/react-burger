@@ -31,6 +31,7 @@ function Login({ title }: { title: string }) {
       </h2>
       <form className={styles.form} onSubmit={handleSubmit}>
         <Input
+          data-testid="email_input"
           name="email"
           value={user.email}
           placeholder="E-mail"
@@ -43,6 +44,7 @@ function Login({ title }: { title: string }) {
           required
         />
         <PasswordInput
+          data-testid="password_input"
           name={'password'}
           value={user.password}
           extraClass={styles.input}

@@ -7,7 +7,7 @@ import {
 import { TOrderState, TOrderActions } from '../types/orderTypes';
 
 //исходное значение созданного заказа
-const initialState: TOrderState = {
+export const initialState: TOrderState = {
   newOrderNumber: null,
   orderNumberRequest: false,
   orderNumberFailed: false,

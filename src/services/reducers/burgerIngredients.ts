@@ -10,7 +10,7 @@ import {
 } from '../types/burgerIngredientsTypes';
 
 //исходное значение всех ингредиентов
-const initialState: TBurgerIngredientsState = {
+export const initialState: TBurgerIngredientsState = {
   ingredients: [],
   ingredientsRequest: false,
   ingredientsFailed: false,

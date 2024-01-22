@@ -32,7 +32,11 @@ const Modal: React.FC<IModalProps> = ({ title, children, onClose }) => {
       <div className={styles.container}>
         <div className={styles.headerContainer}>
           <h2 className="text text_type_main-large">{title}</h2>
-          <button type="button" className={styles.close} onClick={onClose}>
+          <button
+            data-testid="close"
+            type="button"
+            className={styles.close}
+            onClick={onClose}>
             <CloseIcon type="primary" />
           </button>
         </div>

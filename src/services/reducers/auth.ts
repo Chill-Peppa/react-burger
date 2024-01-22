@@ -27,7 +27,7 @@ import {
 
 import { TAuthActions, TAuthState } from '../types/authTypes';
 
-const initialState: TAuthState = {
+export const initialState: TAuthState = {
   user: {
     name: '',
     email: '',

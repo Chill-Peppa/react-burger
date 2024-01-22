@@ -2,7 +2,7 @@ import { OPEN_INGREDIENT, CLOSE_INGREDIENT } from '../actions/ingredient';
 import { TIngredientState, TIngredientActions } from '../types/ingredientTypes';
 
 //исходное значение текущего просматриваемого ингредиента
-const initialState: TIngredientState = {
+export const initialState: TIngredientState = {
   selectedIngredient: null,
 };
 
